@@ -1,6 +1,7 @@
+import { cn } from '@/helpers/utils';
+
 import { TabItem } from '@/components/common/tab-item';
 import { TabsGroup } from '@/components/common/tabs-group';
-import { cn } from '@/helpers/utils';
 
 export const Tabs = ({ className }) => {
     return (
