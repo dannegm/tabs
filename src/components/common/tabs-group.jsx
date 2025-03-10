@@ -5,11 +5,15 @@ import { cn } from '@/helpers/utils';
 import { Button } from '@/components/shadcn/button';
 import { Separator } from '@/components/shadcn/separator';
 
-export const TabsGroup = ({ className, children }) => {
+export const TabsGroup = ({ className, id, index, children }) => {
     const [open, setOpen] = useState(true);
 
     const handleToggle = () => {
         setOpen(!open);
+    };
+
+    const handleClose = () => {
+        chrome?.windows?.remove?.(+id);
     };
 
     return (
@@ -22,7 +26,7 @@ export const TabsGroup = ({ className, children }) => {
                         size='xs'
                         onClick={handleToggle}
                     >
-                        <span>Window 1</span>
+                        <span>Window {index + 1}</span>
                         {open ? <ChevronDown /> : <ChevronRight />}
                     </Button>
                 </div>
@@ -30,7 +34,7 @@ export const TabsGroup = ({ className, children }) => {
                     <Button size='icon-xs' variant='ghost'>
                         <Download />
                     </Button>
-                    <Button size='icon-xs' variant='ghost'>
+                    <Button size='icon-xs' variant='ghost' onClick={handleClose}>
                         <X />
                     </Button>
                 </div>

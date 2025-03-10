@@ -9,6 +9,7 @@ export default defineManifest(async env => ({
     name: env.mode === 'staging' ? '[INTERNAL] Tabs.' : 'Tabs.',
     version: `${major}.${minor}.${patch}.${label}`,
     version_name: version,
+    permissions: ['tabs', 'windows'],
 
     chrome_url_overrides: {
         newtab: 'index.html',
