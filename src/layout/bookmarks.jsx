@@ -209,6 +209,7 @@ export const Bookmarks = ({ className }) => {
                         <BookmarksGroup
                             key={group.id}
                             {...group}
+                            className='last:mb-16'
                             empty={!iterableTabs.length}
                             expanded={group.expanded}
                             onAttach={handleAttachTab}
