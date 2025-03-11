@@ -32,7 +32,7 @@ export const Tabs = ({ className }) => {
 
     const getChromeTabs = () => {
         chrome?.tabs?.query({}, tabs => {
-            const filteredTabs = tabs.filter(tab => !tab?.url?.includes('chrome://newtab'));
+            const filteredTabs = tabs.filter(tab => !tab?.url?.includes('://newtab'));
             const groups = groupBy(filteredTabs, item => item.windowId);
             console.log({ tabs });
             setGroups(Object.entries(groups));
