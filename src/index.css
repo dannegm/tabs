@@ -127,3 +127,11 @@
         user-select: none;
     }
 }
+
+/* Customs */
+
+@utility flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

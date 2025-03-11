@@ -76,3 +76,5 @@ export const groupBy = (elements = [], sentence) => {
         return groups;
     }, {});
 };
+
+export const reverse = (arr = []) => [...arr].reverse();

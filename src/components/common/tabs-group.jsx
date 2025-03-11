@@ -2,10 +2,17 @@ import { useState } from 'react';
 import { ChevronDown, ChevronRight, Download, X } from 'lucide-react';
 
 import { cn } from '@/helpers/utils';
+import { useTabsCollection } from '@/hooks/use-tabs-collection';
+
 import { Button } from '@/components/shadcn/button';
 import { Separator } from '@/components/shadcn/separator';
+import { nanoid } from 'nanoid';
+import { formatDate } from 'date-fns';
+import { fromArray } from '@/helpers/objects';
 
-export const TabsGroup = ({ className, id, index, children }) => {
+export const TabsGroup = ({ className, id, index, tabs, children }) => {
+    const { addGroup } = useTabsCollection();
+
     const [open, setOpen] = useState(true);
 
     const handleToggle = () => {
@@ -16,12 +23,37 @@ export const TabsGroup = ({ className, id, index, children }) => {
         chrome?.windows?.remove?.(+id);
     };
 
+    const closeTabsByWindow = windowId => {
+        chrome?.tabs?.query?.({ windowId }, tabs => {
+            const currentTabId = tabs.find(tab => tab.active).id;
+            tabs.forEach(tab => {
+                if (tab.id !== currentTabId) {
+                    chrome?.tabs?.remove?.(tab.id);
+                }
+            });
+        });
+    };
+
+    const handleSaveSession = () => {
+        const groupId = nanoid();
+        const dateLabel = formatDate(new Date(), "MMM do, ''yy - HH:mm");
+        const tabsCollection = fromArray(tabs, 'id');
+
+        addGroup({
+            id: groupId,
+            name: `Session ${dateLabel}`,
+            tabs: tabsCollection,
+        });
+
+        closeTabsByWindow(+id);
+    };
+
     return (
         <div className={cn('flex flex-col gap-4 rounded-sm', className)}>
             <div className='flex flex-row items-center justify-between'>
                 <div className='flex flex-row items-center gap-1'>
                     <Button
-                        className='leading-1'
+                        className='leading-1 dark:bg-neutral-700'
                         variant='secondary'
                         size='xs'
                         onClick={handleToggle}
@@ -31,10 +63,20 @@ export const TabsGroup = ({ className, id, index, children }) => {
                     </Button>
                 </div>
                 <div className='flex flex-row items-center gap-1'>
-                    <Button size='icon-xs' variant='ghost'>
+                    <Button
+                        className='dark:hover:bg-neutral-700'
+                        size='icon-xs'
+                        variant='ghost'
+                        onClick={handleSaveSession}
+                    >
                         <Download />
                     </Button>
-                    <Button size='icon-xs' variant='ghost' onClick={handleClose}>
+                    <Button
+                        className='dark:hover:bg-neutral-700'
+                        size='icon-xs'
+                        variant='ghost'
+                        onClick={handleClose}
+                    >
                         <X />
                     </Button>
                 </div>
@@ -42,7 +84,7 @@ export const TabsGroup = ({ className, id, index, children }) => {
 
             {open && <div className='flex flex-col gap-2'>{children}</div>}
 
-            <Separator />
+            <Separator className='dark:bg-neutral-700' />
         </div>
     );
 };
