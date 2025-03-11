@@ -95,6 +95,7 @@ export const Bookmarks = ({ className }) => {
             )}
         >
             <div
+                data-layer='header'
                 className={cn(
                     'flex flex-row items-center h-12 p-4 border-b border-b-neutral-200',
                     'dark:border-b-neutral-700',
@@ -154,8 +155,9 @@ export const Bookmarks = ({ className }) => {
             </div>
 
             <div
+                data-layer='actions'
                 className={cn(
-                    'flex flex-row items-center gap-2 h-16 p-4 border-b border-b-neutral-200',
+                    'flex flex-row items-center gap-2 h-16 p-4 border-b border-b-neutral-200 shadow-lg',
                     'dark:border-b-neutral-700',
                 )}
             >
@@ -176,13 +178,18 @@ export const Bookmarks = ({ className }) => {
 
             {debug && (
                 <div
-                    className={cn('p-4 border-b border-b-neutral-200', 'dark:border-b-neutral-700')}
+                    data-layer='state-debuger'
+                    className={cn(
+                        'p-4 border-b border-b-neutral-200 shadow-lg',
+                        'dark:border-b-neutral-700',
+                    )}
                 >
                     <JsonViewer name='groups' data={groups} />
                 </div>
             )}
 
             <ScrollArea
+                data-layer='collections'
                 className='flex-1 overflow-scroll flex flex-col'
                 classNames={{ thumb: 'dark:bg-neutral-600' }}
                 type='always'
