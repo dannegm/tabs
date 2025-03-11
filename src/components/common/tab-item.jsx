@@ -40,29 +40,13 @@ export const TabItem = ({ className, item }) => {
     });
 
     return (
-        <div ref={setNodeRef} style={style} className={cn({ 'relative z-10': isDragging })}>
-            <div
-                className={cn(
-                    'group flex flex-row gap-2 px-3 py-2 pr-1 items-center bg-white text-sm border border-neutral-200 rounded-sm select-none',
-                    'dark:bg-neutral-800 dark:border-neutral-600',
-                    'cursor-grab touch-none transition-all duration-150',
-                    { 'cursor-grabbing shadow-md': isDragging },
-                    className,
-                )}
-                {...listeners}
-                {...attributes}
-            >
-                {item?.favIconUrl ? (
-                    <img className='size-4' src={item.favIconUrl} />
-                ) : (
-                    <File className='size-4' />
-                )}
-                <span className='flex-1 line-clamp-1'>{item.title}</span>
+        <div ref={setNodeRef} style={style}>
+            <div className='relative group'>
                 <TooltipProvider>
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Button
-                                className='invisible group-hover:visible'
+                                className='hidden absolute right-2 top-1/2 transform -translate-y-1/2 group-hover:flex'
                                 size='icon-xs'
                                 variant='ghost'
                                 onClick={handleClose}
@@ -75,6 +59,25 @@ export const TabItem = ({ className, item }) => {
                         </TooltipContent>
                     </Tooltip>
                 </TooltipProvider>
+
+                <div
+                    className={cn(
+                        'flex flex-row gap-2 px-3 py-2 pr-1 items-center bg-white text-sm border border-neutral-200 rounded-sm select-none',
+                        'dark:bg-neutral-800 dark:border-neutral-600',
+                        'cursor-grab touch-none transition-all duration-150',
+                        { 'cursor-grabbing shadow-md': isDragging },
+                        className,
+                    )}
+                    {...listeners}
+                    {...attributes}
+                >
+                    {item?.favIconUrl ? (
+                        <img className='size-4' src={item.favIconUrl} />
+                    ) : (
+                        <File className='size-4' />
+                    )}
+                    <span className='flex-1 line-clamp-1'>{item.title}</span>
+                </div>
             </div>
         </div>
     );
