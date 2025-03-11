@@ -92,14 +92,6 @@ export const Tabs = ({ className }) => {
                         ))}
                     </TabsGroup>
                 ))}
-
-                {!Boolean(groups.length) && (
-                    <TabsGroup index={0} tabs={sampleTabs}>
-                        {sampleTabs.map(tab => (
-                            <TabItem key={`sample-tab-${tab.id}`} item={tab} />
-                        ))}
-                    </TabsGroup>
-                )}
             </div>
         </aside>
     );
