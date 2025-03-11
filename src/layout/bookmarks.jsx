@@ -11,9 +11,11 @@ import { useSettings } from '@/hooks/use-settings';
 
 import { Button } from '@/components/shadcn/button';
 import { Input } from '@/components/shadcn/input';
+import { ScrollArea } from '@/components/shadcn/scroll-area';
 
 import { DarkModeToggle } from '@/components/common/dark-mode-toggle';
 import { DebugModeToggle } from '@/components/common/debug-mode-toggle';
+import { ImportBookmarks } from '@/components/common/import-bookmarks';
 import { JsonViewer } from '@/components/common/json-viewer';
 import { BookmarksGroup } from '@/components/common/bookmarks-group';
 import { BookmarkItem } from '@/components/common/bookmark-item';
@@ -31,7 +33,8 @@ export const Bookmarks = ({ className }) => {
     const [debug] = useSettings('settings:debug', false);
 
     const groups = useGroups();
-    const { addGroup, removeGroup, addTab, moveTab, removeTab, clear } = useGroupsActions();
+    const { addGroup, toggleGroup, removeGroup, addTab, moveTab, removeTab, clear } =
+        useGroupsActions();
 
     const [search, setSearch] = useState('');
     const iterableGroups = reverse(Object.values(groups));
@@ -40,12 +43,20 @@ export const Bookmarks = ({ className }) => {
         const payload = {
             id: nanoid(),
             name: getRandomName(),
+            expanded: true,
         };
         addGroup(payload);
     };
 
+    const handleToggleGroup = ({ id }) => {
+        toggleGroup({ id });
+    };
+
+    const handleRemoveGroup = ({ id }) => {
+        removeGroup({ id });
+    };
+
     const handleAttachTab = payload => {
-        console.log(payload);
         addTab(payload);
     };
 
@@ -55,10 +66,6 @@ export const Bookmarks = ({ className }) => {
 
     const handleRemoveTab = (groupId, { id }) => {
         removeTab({ groupId, id });
-    };
-
-    const handleRemoveGroup = ({ id }) => {
-        removeGroup({ id });
     };
 
     const handleOpenEverything = tabs => {
@@ -76,7 +83,7 @@ export const Bookmarks = ({ className }) => {
     return (
         <section
             className={cn(
-                'w-full h-full flex flex-col border-l-8 border-l-rose-300',
+                'w-full h-full max-h-screen flex flex-col border-l-8 border-l-rose-300',
                 'dark:bg-neutral-800 dark:text-neutral-50 dark:border-l-rose-500',
                 className,
             )}
@@ -97,18 +104,23 @@ export const Bookmarks = ({ className }) => {
                         Tabs.
                     </h1>
                 </div>
-                <div className='flex flex-row gap-2 items-center'>
+                <div className='flex flex-row gap-1 items-center'>
+                    <DebugModeToggle />
                     <Button
-                        className='dark:text-neutral-50'
-                        size='icon-xs'
+                        className='dark:text-neutral-50 dark:hover:bg-neutral-700'
+                        size='icon'
                         variant='ghost'
                         onClick={clear}
                     >
                         <Trash2 />
                     </Button>
-                    <DebugModeToggle />
+                    <ImportBookmarks />
                     <DarkModeToggle />
-                    <Button className='dark:text-neutral-50' size='icon-xs' variant='ghost'>
+                    <Button
+                        className='dark:text-neutral-50 dark:hover:bg-neutral-700'
+                        size='icon'
+                        variant='ghost'
+                    >
                         <Bolt />
                     </Button>
                 </div>
@@ -143,7 +155,11 @@ export const Bookmarks = ({ className }) => {
                 </div>
             )}
 
-            <div className='flex flex-col'>
+            <ScrollArea
+                className='flex-1 overflow-scroll flex flex-col'
+                classNames={{ thumb: 'dark:bg-neutral-600' }}
+                type='always'
+            >
                 {iterableGroups.map(group => {
                     const iterableTabs = Object.values(group?.tabs) || [];
                     return (
@@ -151,11 +167,13 @@ export const Bookmarks = ({ className }) => {
                             key={group.id}
                             {...group}
                             empty={!iterableTabs.length}
+                            expanded={group.expanded}
                             onAttach={handleAttachTab}
                             onMove={payload => handleMoveTab(group.id, payload)}
                             onRemove={handleRemoveGroup}
                             onOpenEverything={() => handleOpenEverything(iterableTabs)}
                             onSaveHere={handleSaveHere}
+                            onToggleExpanded={handleToggleGroup}
                         >
                             {iterableTabs.map(tab => (
                                 <BookmarkItem
@@ -167,7 +185,7 @@ export const Bookmarks = ({ className }) => {
                         </BookmarksGroup>
                     );
                 })}
-            </div>
+            </ScrollArea>
         </section>
     );
 };

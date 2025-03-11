@@ -8,10 +8,11 @@ const tabsSlice = createSlice({
     initialState,
     reducers: {
         addGroup: (state, action) => {
-            const { id, name, tabs = {} } = action.payload;
+            const { id, name, expanded, tabs = {} } = action.payload;
             state[id] = {
                 id,
                 name,
+                expanded,
                 created_at: Date.now(),
                 index: Object.keys(state).length,
                 tabs,
@@ -20,6 +21,10 @@ const tabsSlice = createSlice({
         removeGroup: (state, action) => {
             const { id } = action.payload;
             delete state[id];
+        },
+        toggleGroup: (state, action) => {
+            const { id } = action.payload;
+            state[id].expanded = !state[id].expanded;
         },
         addTab: (state, action) => {
             const { groupId, id, payload } = action.payload;
@@ -53,10 +58,18 @@ const tabsSlice = createSlice({
         clear: () => {
             return {};
         },
+        importGroups: (state, action) => {
+            const { groups } = action.payload;
+            return {
+                ...groups,
+                ...state,
+            };
+        },
     },
 });
 
-const { addGroup, removeGroup, addTab, moveTab, removeTab, clear } = tabsSlice.actions;
+const { addGroup, removeGroup, toggleGroup, addTab, moveTab, removeTab, clear, importGroups } =
+    tabsSlice.actions;
 
 export default tabsSlice.reducer;
 
@@ -68,12 +81,15 @@ export const useGroupsActions = () => {
     const dispatch = useDispatch();
 
     return {
-        addGroup: ({ id, name, tabs = {} }) => dispatch(addGroup({ id, name, tabs })),
-        removeGroup: id => dispatch(removeGroup(id)),
+        addGroup: ({ id, name, expanded, tabs = {} }) =>
+            dispatch(addGroup({ id, name, expanded, tabs })),
+        toggleGroup: ({ id }) => dispatch(toggleGroup({ id })),
+        removeGroup: ({ id }) => dispatch(removeGroup({ id })),
         addTab: ({ groupId, id, payload }) => dispatch(addTab({ groupId, id, payload })),
         moveTab: ({ id, originalGroupId, targetGroupId }) =>
             dispatch(moveTab({ id, originalGroupId, targetGroupId })),
         removeTab: ({ groupId, id }) => dispatch(removeTab({ groupId, id })),
         clear: () => dispatch(clear()),
+        importGroups: ({ groups }) => dispatch(importGroups({ groups })),
     };
 };

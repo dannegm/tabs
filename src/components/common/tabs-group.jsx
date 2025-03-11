@@ -1,14 +1,14 @@
 import { useState } from 'react';
+import { nanoid } from 'nanoid';
+import { formatDate } from 'date-fns';
 import { ChevronDown, ChevronRight, Download, X } from 'lucide-react';
 
 import { cn } from '@/helpers/utils';
+import { fromArray } from '@/helpers/objects';
 import { useGroupsActions } from '@/store/tabs';
 
 import { Button } from '@/components/shadcn/button';
 import { Separator } from '@/components/shadcn/separator';
-import { nanoid } from 'nanoid';
-import { formatDate } from 'date-fns';
-import { fromArray } from '@/helpers/objects';
 
 export const TabsGroup = ({ className, id, index, tabs, children }) => {
     const { addGroup } = useGroupsActions();
@@ -36,12 +36,12 @@ export const TabsGroup = ({ className, id, index, tabs, children }) => {
 
     const handleSaveSession = () => {
         const groupId = nanoid();
-        const dateLabel = formatDate(new Date(), "MMM do, ''yy - HH:mm");
+        const dateLabel = formatDate(new Date(), "MMM d, ''yy at HH:mm");
         const tabsCollection = fromArray(tabs, 'id');
 
         addGroup({
             id: groupId,
-            name: `Session ${dateLabel}`,
+            name: dateLabel,
             tabs: tabsCollection,
         });
 

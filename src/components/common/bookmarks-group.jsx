@@ -9,6 +9,7 @@ export const BookmarksGroup = ({
     className,
     id,
     name,
+    expanded,
     empty,
     children,
     onAttach,
@@ -16,6 +17,7 @@ export const BookmarksGroup = ({
     onOpenEverything,
     onSaveHere,
     onRemove,
+    onToggleExpanded,
 }) => {
     const { setNodeRef, isOver } = useDroppable({
         id: `group-${id}`,
@@ -25,10 +27,9 @@ export const BookmarksGroup = ({
             type: 'group',
         },
     });
-    const [open, setOpen] = useState(true);
 
     const handleToggle = () => {
-        setOpen(!open);
+        onToggleExpanded?.({ id });
     };
 
     const handleRemove = () => {
@@ -78,7 +79,7 @@ export const BookmarksGroup = ({
                         onClick={handleToggle}
                     >
                         <span>{name}</span>
-                        {open ? <ChevronDown /> : <ChevronRight />}
+                        {expanded ? <ChevronDown /> : <ChevronRight />}
                     </Button>
                 </div>
                 <div className='flex flex-row gap-2'>
@@ -109,7 +110,7 @@ export const BookmarksGroup = ({
                 </div>
             </div>
 
-            {open && (
+            {expanded && (
                 <div className='flex flex-row flex-wrap gap-4'>
                     {!empty ? (
                         children
