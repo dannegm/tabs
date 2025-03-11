@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ChevronDown, ChevronRight, Download, X } from 'lucide-react';
 
 import { cn } from '@/helpers/utils';
-import { useTabsCollection } from '@/hooks/use-tabs-collection';
+import { useGroupsActions } from '@/store/tabs';
 
 import { Button } from '@/components/shadcn/button';
 import { Separator } from '@/components/shadcn/separator';
@@ -11,7 +11,7 @@ import { formatDate } from 'date-fns';
 import { fromArray } from '@/helpers/objects';
 
 export const TabsGroup = ({ className, id, index, tabs, children }) => {
-    const { addGroup } = useTabsCollection();
+    const { addGroup } = useGroupsActions();
 
     const [open, setOpen] = useState(true);
 

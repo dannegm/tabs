@@ -33,12 +33,9 @@ export const useTabsCollection = (storageKey = DEFAULT_KEY) => {
     };
 
     const addTab = ({ groupId, id, payload }) => {
-        console.log('asdasd');
         setGroups(prev => {
-            console.log('qweqe');
             if (!prev[groupId]) return prev;
-            console.log('zxczc');
-            const pp = {
+            return {
                 ...prev,
                 [groupId]: {
                     ...prev[groupId],
@@ -53,8 +50,6 @@ export const useTabsCollection = (storageKey = DEFAULT_KEY) => {
                     },
                 },
             };
-            console.log('update', pp);
-            return payload;
         });
     };
 

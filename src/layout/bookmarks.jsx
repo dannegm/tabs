@@ -6,8 +6,8 @@ import { Bolt, Plus, Search, Trash2 } from 'lucide-react';
 import { cn } from '@/helpers/utils';
 import { reverse } from '@/helpers/arrays';
 
+import { useGroups, useGroupsActions } from '@/store/tabs';
 import { useSettings } from '@/hooks/use-settings';
-import { useTabsCollection } from '@/hooks/use-tabs-collection';
 
 import { Button } from '@/components/shadcn/button';
 import { Input } from '@/components/shadcn/input';
@@ -29,8 +29,9 @@ const getRandomName = () => {
 
 export const Bookmarks = ({ className }) => {
     const [debug] = useSettings('settings:debug', false);
-    const { groups, addGroup, removeGroup, addTab, moveTab, removeTab, clear } =
-        useTabsCollection();
+
+    const groups = useGroups();
+    const { addGroup, removeGroup, addTab, moveTab, removeTab, clear } = useGroupsActions();
 
     const [search, setSearch] = useState('');
     const iterableGroups = reverse(Object.values(groups));
