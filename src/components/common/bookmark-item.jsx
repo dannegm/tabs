@@ -106,7 +106,7 @@ export const BookmarkItem = ({ className, item, onRemove }) => {
                                 <TooltipTrigger asChild>
                                     <div
                                         className={cn(
-                                            'px-2 py-1.5 bg-neutral-100 text-xs line-clamp-1',
+                                            'px-2 py-1.5 bg-neutral-100 text-xs text-ellipsis truncate',
                                             'dark:bg-neutral-700',
                                         )}
                                     >
