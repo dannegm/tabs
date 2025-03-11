@@ -157,7 +157,7 @@ export const Bookmarks = ({ className }) => {
             <div
                 data-layer='actions'
                 className={cn(
-                    'flex flex-row items-center gap-2 h-16 p-4 border-b border-b-neutral-200 shadow-lg',
+                    'flex flex-row items-center gap-2 h-16 p-4 border-b border-b-neutral-200 shadow-sm',
                     'dark:border-b-neutral-700',
                 )}
             >
@@ -180,7 +180,7 @@ export const Bookmarks = ({ className }) => {
                 <div
                     data-layer='state-debuger'
                     className={cn(
-                        'p-4 border-b border-b-neutral-200 shadow-lg',
+                        'p-4 border-b border-b-neutral-200 shadow-sm',
                         'dark:border-b-neutral-700',
                     )}
                 >
@@ -194,6 +194,15 @@ export const Bookmarks = ({ className }) => {
                 classNames={{ thumb: 'dark:bg-neutral-600' }}
                 type='always'
             >
+                {!iterableGroups.length && (
+                    <div className='flex-center flex-col gap-4 p-16 m-4 bg-rose-200 text-rose-500 dark:bg-rose-500/40 dark:text-rose-400 rounded-lg'>
+                        <h2 className='text-xl'>Let's start adding some new collection.</h2>
+
+                        <Button size='lg' onClick={handleAddGroup}>
+                            <Plus /> Add Collection
+                        </Button>
+                    </div>
+                )}
                 {iterableGroups.map(group => {
                     const iterableTabs = Object.values(group?.tabs) || [];
                     return (

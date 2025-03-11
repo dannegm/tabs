@@ -109,6 +109,8 @@ export const TabsGroup = ({ className, id, index, tabs, children }) => {
 
             {open && <div className='flex flex-col gap-2'>{children}</div>}
 
+            {!tabs.length && <div className='text-sm'>No tabs</div>}
+
             <Separator className='dark:bg-neutral-700' />
         </div>
     );

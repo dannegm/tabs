@@ -149,7 +149,7 @@ export const BookmarksGroup = ({
                     ) : (
                         <div
                             className={cn(
-                                'flex-center w-full h-28 bg-neutral-100 text-neutral-500 text-md rounded-md',
+                                'flex-center w-full h-28 bg-neutral-100 text-neutral-500 text-sm rounded-md',
                                 'dark:bg-neutral-700 dark:text-neutral-400',
                                 {
                                     'bg-rose-200 text-rose-500 dark:bg-rose-500/40 dark:text-rose-400 ':
@@ -157,7 +157,7 @@ export const BookmarksGroup = ({
                                 },
                             )}
                         >
-                            Drag any tab here.
+                            Drag tabs here.
                         </div>
                     )}
                 </div>
