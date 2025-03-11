@@ -9,6 +9,12 @@ import { useGroupsActions } from '@/store/tabs';
 
 import { Button } from '@/components/shadcn/button';
 import { Separator } from '@/components/shadcn/separator';
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from '@/components/shadcn/tooltip';
 
 export const TabsGroup = ({ className, id, index, tabs, children }) => {
     const { addGroup } = useGroupsActions();
@@ -36,12 +42,13 @@ export const TabsGroup = ({ className, id, index, tabs, children }) => {
 
     const handleSaveSession = () => {
         const groupId = nanoid();
-        const dateLabel = formatDate(new Date(), "MMM d, ''yy at HH:mm");
+        const dateLabel = formatDate(new Date(), "MMM d, ''yy 'at' HH:mm");
         const tabsCollection = fromArray(tabs, 'id');
 
         addGroup({
             id: groupId,
             name: dateLabel,
+            expanded: true,
             tabs: tabsCollection,
         });
 
@@ -63,22 +70,40 @@ export const TabsGroup = ({ className, id, index, tabs, children }) => {
                     </Button>
                 </div>
                 <div className='flex flex-row items-center gap-1'>
-                    <Button
-                        className='dark:hover:bg-neutral-700'
-                        size='icon-xs'
-                        variant='ghost'
-                        onClick={handleSaveSession}
-                    >
-                        <Download />
-                    </Button>
-                    <Button
-                        className='dark:hover:bg-neutral-700'
-                        size='icon-xs'
-                        variant='ghost'
-                        onClick={handleClose}
-                    >
-                        <X />
-                    </Button>
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Button
+                                    className='dark:hover:bg-neutral-700'
+                                    size='icon-xs'
+                                    variant='ghost'
+                                    onClick={handleSaveSession}
+                                >
+                                    <Download />
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent side='bottom'>
+                                <p>Save session</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Button
+                                    className='dark:hover:bg-neutral-700'
+                                    size='icon-xs'
+                                    variant='ghost'
+                                    onClick={handleClose}
+                                >
+                                    <X />
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent side='bottom'>
+                                <p>Close window</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
                 </div>
             </div>
 

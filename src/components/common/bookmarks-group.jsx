@@ -1,9 +1,14 @@
-import { useState } from 'react';
 import { useDndMonitor, useDroppable } from '@dnd-kit/core';
 import { X, ArrowUpRight, ChevronDown, ChevronRight, Download, Ellipsis } from 'lucide-react';
 
 import { cn } from '@/helpers/utils';
 import { Button } from '@/components/shadcn/button';
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from '@/components/shadcn/tooltip';
 
 export const BookmarksGroup = ({
     className,
@@ -83,30 +88,57 @@ export const BookmarksGroup = ({
                     </Button>
                 </div>
                 <div className='flex flex-row gap-2'>
-                    <Button
-                        className='dark:hover:bg-neutral-700'
-                        size='icon-xs'
-                        variant='ghost'
-                        onClick={onOpenEverything}
-                    >
-                        <ArrowUpRight />
-                    </Button>
-                    <Button
-                        className='dark:hover:bg-neutral-700'
-                        size='icon-xs'
-                        variant='ghost'
-                        onClick={onSaveHere}
-                    >
-                        <Download />
-                    </Button>
-                    <Button
-                        className='dark:hover:bg-neutral-700'
-                        size='icon-xs'
-                        variant='ghost'
-                        onClick={handleRemove}
-                    >
-                        <X />
-                    </Button>
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Button
+                                    className='dark:hover:bg-neutral-700'
+                                    size='icon-xs'
+                                    variant='ghost'
+                                    onClick={onOpenEverything}
+                                >
+                                    <ArrowUpRight />
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent side='bottom'>
+                                <p>Open tabs</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Button
+                                    className='dark:hover:bg-neutral-700'
+                                    size='icon-xs'
+                                    variant='ghost'
+                                    onClick={onSaveHere}
+                                >
+                                    <Download />
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent side='bottom'>
+                                <p>Save session to collection</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Button
+                                    className='dark:hover:bg-neutral-700'
+                                    size='icon-xs'
+                                    variant='ghost'
+                                    onClick={handleRemove}
+                                >
+                                    <X />
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent side='bottom'>
+                                <p>Delete collection</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
                 </div>
             </div>
 

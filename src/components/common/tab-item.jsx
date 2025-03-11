@@ -4,6 +4,12 @@ import { X, File } from 'lucide-react';
 
 import { cn } from '@/helpers/utils';
 import { Button } from '@/components/shadcn/button';
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from '@/components/shadcn/tooltip';
 
 export const TabItem = ({ className, item }) => {
     const { setNodeRef, attributes, listeners, transform, isDragging } = useDraggable({
@@ -52,14 +58,23 @@ export const TabItem = ({ className, item }) => {
                     <File className='size-4' />
                 )}
                 <span className='flex-1 line-clamp-1'>{item.title}</span>
-                <Button
-                    className='invisible group-hover:visible'
-                    size='icon-xs'
-                    variant='ghost'
-                    onClick={handleClose}
-                >
-                    <X />
-                </Button>
+                <TooltipProvider>
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <Button
+                                className='invisible group-hover:visible'
+                                size='icon-xs'
+                                variant='ghost'
+                                onClick={handleClose}
+                            >
+                                <X />
+                            </Button>
+                        </TooltipTrigger>
+                        <TooltipContent side='left'>
+                            <p>Close tab</p>
+                        </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
             </div>
         </div>
     );

@@ -12,6 +12,12 @@ import { useSettings } from '@/hooks/use-settings';
 import { Button } from '@/components/shadcn/button';
 import { Input } from '@/components/shadcn/input';
 import { ScrollArea } from '@/components/shadcn/scroll-area';
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from '@/components/shadcn/tooltip';
 
 import { DarkModeToggle } from '@/components/common/dark-mode-toggle';
 import { DebugModeToggle } from '@/components/common/debug-mode-toggle';
@@ -106,23 +112,44 @@ export const Bookmarks = ({ className }) => {
                 </div>
                 <div className='flex flex-row gap-1 items-center'>
                     <DebugModeToggle />
-                    <Button
-                        className='dark:text-neutral-50 dark:hover:bg-neutral-700'
-                        size='icon'
-                        variant='ghost'
-                        onClick={clear}
-                    >
-                        <Trash2 />
-                    </Button>
+
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Button
+                                    className='dark:text-neutral-50 dark:hover:bg-neutral-700'
+                                    size='icon'
+                                    variant='ghost'
+                                    onClick={clear}
+                                >
+                                    <Trash2 />
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent side='bottom'>
+                                <p>Clear collections</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+
                     <ImportBookmarks />
                     <DarkModeToggle />
-                    <Button
-                        className='dark:text-neutral-50 dark:hover:bg-neutral-700'
-                        size='icon'
-                        variant='ghost'
-                    >
-                        <Bolt />
-                    </Button>
+
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Button
+                                    className='dark:text-neutral-50 dark:hover:bg-neutral-700'
+                                    size='icon'
+                                    variant='ghost'
+                                >
+                                    <Bolt />
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent side='bottom'>
+                                <p>Settings</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
                 </div>
             </div>
 
