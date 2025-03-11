@@ -43,7 +43,7 @@ export const TabItem = ({ className, item }) => {
         <div ref={setNodeRef} style={style} className={cn({ 'relative z-10': isDragging })}>
             <div
                 className={cn(
-                    'group flex flex-row gap-2 px-3 py-2 pr-1 items-center bg-white text-sm border border-neutral-200 rounded-sm',
+                    'group flex flex-row gap-2 px-3 py-2 pr-1 items-center bg-white text-sm border border-neutral-200 rounded-sm select-none',
                     'dark:bg-neutral-800 dark:border-neutral-600',
                     'cursor-grab touch-none transition-all duration-150',
                     { 'cursor-grabbing shadow-md': isDragging },

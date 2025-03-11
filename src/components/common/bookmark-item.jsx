@@ -66,7 +66,7 @@ export const BookmarkItem = ({ className, item, onRemove }) => {
 
                 <div
                     className={cn(
-                        'relative cursor-grab transition-all duration-150 rounded-sm',
+                        'relative cursor-grab transition-all duration-150 rounded-sm select-none',
                         { 'cursor-grabbing shadow-md': isDragging },
                         className,
                     )}
