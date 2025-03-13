@@ -1,20 +1,24 @@
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import { DndContext } from '@dnd-kit/core';
+import { cn } from '@/modules/common/helpers/utils';
+import { useDarkMode } from '@/modules/common/hooks/use-dark-mode';
 
-import { store, persistor } from './store/store';
-import { useDocumentTitle } from './hooks/use-document-title';
-import { Main } from './layout/main';
+import { Providers } from '@/modules/common/providers/providers';
+import { Tabs } from '@/modules/tabs/tabs';
+import { Main } from '@/modules/main/main';
 
 export const App = () => {
-    useDocumentTitle('Tabs.');
+    const [theme] = useDarkMode();
+
     return (
-        <Provider store={store}>
-            <PersistGate persistor={persistor}>
-                <DndContext>
-                    <Main />
-                </DndContext>
-            </PersistGate>
-        </Provider>
+        <Providers>
+            <main
+                className={cn(
+                    theme,
+                    'grid grid-cols-[1fr_260px] grid-rows-[1fr] [grid-template-areas:"main_side"] w-full h-screen overflow-hidden',
+                )}
+            >
+                <Main className='[grid-area:main]' />
+                <Tabs className='[grid-area:side]' />
+            </main>
+        </Providers>
     );
 };
