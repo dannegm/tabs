@@ -1,71 +1,27 @@
 import { useEffect, useState } from 'react';
-import { cn } from '@/modules/common/helpers/utils';
 
+import { cn } from '@/modules/common/helpers/utils';
+import { bindTabsEvents, getAllTabs, unbindTabsEvents } from '@/modules/common/helpers/chrome';
 import { groupBy } from '@/modules/common/helpers/arrays';
 
 import { TabsGroup } from '@/modules/tabs/components/tabs-group';
-
-const IS_DEV = process.env.NODE_ENV === 'development';
-
-const sampleTabs = [
-    {
-        id: 1,
-        title: 'Google',
-        url: 'https://www.google.com/',
-        favIconUrl: 'https://www.google.com/s2/favicons?domain=google.com&sz=256',
-        incognito: true,
-    },
-    {
-        id: 2,
-        title: 'Inicio / X',
-        url: 'https://x.com/home',
-        favIconUrl: 'https://www.google.com/s2/favicons?domain=x.com&sz=256',
-    },
-    {
-        id: 3,
-        title: 'Youtube',
-        url: 'https://www.youtube.com/',
-        favIconUrl: 'https://www.google.com/s2/favicons?domain=youtube.com&sz=256',
-        audible: true,
-    },
-];
 
 export const Tabs = ({ className }) => {
     const [groups, setGroups] = useState([]);
 
     const getChromeTabs = () => {
-        chrome?.tabs?.query({}, tabs => {
-            const filteredTabs = tabs.filter(tab => !tab?.url?.includes('://newtab'));
-            const groups = groupBy(filteredTabs, item => item.windowId);
+        getAllTabs(tabs => {
+            const groups = groupBy(tabs, item => item.windowId);
             setGroups(Object.entries(groups));
         });
     };
 
     useEffect(() => {
         getChromeTabs();
-
-        chrome?.tabs?.onCreated.addListener(getChromeTabs);
-        chrome?.tabs?.onUpdated.addListener(getChromeTabs);
-        chrome?.tabs?.onRemoved.addListener(getChromeTabs);
-        chrome?.tabs?.onAttached.addListener(getChromeTabs);
-        chrome?.tabs?.onDetached.addListener(getChromeTabs);
-        chrome?.tabs?.onMoved.addListener(getChromeTabs);
-        chrome?.tabs?.onActivated.addListener(getChromeTabs);
-        chrome?.tabs?.onHighlighted.addListener(getChromeTabs);
-        chrome?.tabs?.onReplaced.addListener(getChromeTabs);
-        chrome?.tabs?.onZoomChange.addListener(getChromeTabs);
+        bindTabsEvents(getChromeTabs);
 
         return () => {
-            chrome?.tabs?.onCreated.removeListener(getChromeTabs);
-            chrome?.tabs?.onUpdated.removeListener(getChromeTabs);
-            chrome?.tabs?.onRemoved.removeListener(getChromeTabs);
-            chrome?.tabs?.onAttached.removeListener(getChromeTabs);
-            chrome?.tabs?.onDetached.removeListener(getChromeTabs);
-            chrome?.tabs?.onMoved.removeListener(getChromeTabs);
-            chrome?.tabs?.onActivated.removeListener(getChromeTabs);
-            chrome?.tabs?.onHighlighted.removeListener(getChromeTabs);
-            chrome?.tabs?.onReplaced.removeListener(getChromeTabs);
-            chrome?.tabs?.onZoomChange.removeListener(getChromeTabs);
+            unbindTabsEvents(getChromeTabs);
         };
     }, []);
 
@@ -93,8 +49,6 @@ export const Tabs = ({ className }) => {
                 {groups.map(([id, tabs], index) => (
                     <TabsGroup key={id} id={id} index={index} tabs={tabs} />
                 ))}
-
-                {IS_DEV && <TabsGroup id={0} index={0} tabs={sampleTabs} />}
             </div>
         </aside>
     );

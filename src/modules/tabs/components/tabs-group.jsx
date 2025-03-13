@@ -4,6 +4,7 @@ import { formatDate } from 'date-fns';
 import { ChevronDown, ChevronRight, Download, X } from 'lucide-react';
 
 import { cn } from '@/modules/common/helpers/utils';
+import { closeTabsByWindow, closeWindow } from '@/modules/common/helpers/chrome';
 import { newItem } from '@/modules/common/helpers/mappers';
 import { fromArray } from '@/modules/common/helpers/objects';
 import { useCollectionsActions } from '@/store/collections';
@@ -23,18 +24,7 @@ export const TabsGroup = ({ className, id, index, tabs }) => {
     };
 
     const handleClose = () => {
-        chrome?.windows?.remove?.(+id);
-    };
-
-    const closeTabsByWindow = windowId => {
-        chrome?.tabs?.query?.({ windowId }, tabs => {
-            const currentTabId = tabs.find(tab => tab.active).id;
-            tabs.forEach(tab => {
-                if (tab.id !== currentTabId) {
-                    chrome?.tabs?.remove?.(tab.id);
-                }
-            });
-        });
+        closeWindow(id);
     };
 
     const handleSaveSession = () => {

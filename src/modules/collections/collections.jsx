@@ -1,6 +1,13 @@
 import { nanoid } from 'nanoid';
 import { Plus } from 'lucide-react';
+
 import { reverse, sortBy } from '@/modules/common/helpers/arrays';
+import { newItem } from '@/modules/common/helpers/mappers';
+import {
+    closeTabsCurrentWindow,
+    createTab,
+    getCurrentWindowTabs,
+} from '@/modules/common/helpers/chrome';
 
 import { useCollections, useCollectionsActions } from '@/store/collections';
 
@@ -8,7 +15,6 @@ import { Button } from '@/modules/shadcn/components/button';
 import { ScrollArea } from '@/modules/shadcn/components/scroll-area';
 
 import { CreateCollectionDialog } from '@/modules/collections/components/create-collection-dialog';
-
 import { CollectionItem } from '@/modules/collections/components/collection-item';
 
 export const Collections = () => {
@@ -22,6 +28,7 @@ export const Collections = () => {
         removeCollection,
 
         //* Items
+        appendItems,
         addItem,
         moveItem,
         removeItem,
@@ -67,13 +74,19 @@ export const Collections = () => {
     //* Actions
     const handleOpenEverything = items => {
         items.forEach(item => {
-            chrome?.tabs?.create?.({ url: item?.url });
+            createTab({ url: item?.url });
         });
     };
 
-    const handleSaveHere = () => {
-        chrome?.tabs?.query?.({ currentWindow: true }, tabs => {
-            console.log(tabs);
+    const handleSaveHere = ({ id }) => {
+        getCurrentWindowTabs(tabs => {
+            const items = tabs.map(newItem);
+            appendItems({
+                collectionId: id,
+                items,
+            });
+
+            closeTabsCurrentWindow();
         });
     };
 

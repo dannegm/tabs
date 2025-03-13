@@ -1,3 +1,4 @@
+import { fromArray } from '@/modules/common/helpers/objects';
 import { createSlice } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -40,6 +41,23 @@ const collectionsSlice = createSlice({
         },
 
         //* Items
+        appendItems: (state, action) => {
+            const { collectionId, items = {} } = action.payload;
+            const existingItems = state[collectionId].items;
+            const currentIndex = Object.keys(state[collectionId].items).length;
+
+            const mappedItems = items.map((item, index) => ({
+                ...item,
+                index: currentIndex + index,
+            }));
+
+            const appendedItems = fromArray(mappedItems, 'id');
+
+            state[collectionId].items = {
+                ...existingItems,
+                ...appendedItems,
+            };
+        },
         addItem: (state, action) => {
             const { collectionId, id, payload } = action.payload;
             if (!state[collectionId]) return;
@@ -82,6 +100,7 @@ const {
     importCollection,
 
     //* Items
+    appendItems,
     addItem,
     moveItem,
     removeItem,
@@ -107,6 +126,7 @@ export const useCollectionsActions = () => {
         importCollection: ({ collections }) => dispatch(importCollection({ collections })),
 
         //* Items
+        appendItems: ({ collectionId, items }) => dispatch(appendItems({ collectionId, items })),
         addItem: ({ collectionId, id, payload }) =>
             dispatch(addItem({ collectionId, id, payload })),
         moveItem: ({ id, originalCollectionId, targetCollectionId }) =>

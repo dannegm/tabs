@@ -72,6 +72,10 @@ export const CollectionItem = ({
         onOpenEverything?.(iterableItems);
     };
 
+    const handleSaveHere = () => {
+        onSaveHere?.({ id });
+    };
+
     useDndMonitor({
         onDragEnd: event => {
             const self = event.over?.data?.current;
@@ -188,7 +192,7 @@ export const CollectionItem = ({
                             className='dark:hover:bg-neutral-700'
                             size='icon-xs'
                             variant='ghost'
-                            onClick={onSaveHere}
+                            onClick={handleSaveHere}
                         >
                             <Download />
                         </Button>

@@ -7,6 +7,7 @@ import { sanitizeItem } from '@/modules/common/helpers/mappers';
 
 import { Button } from '@/modules/shadcn/components/button';
 import { Tooltip } from '@/modules/shadcn/components/tooltip-simple';
+import { closeTab } from '@/modules/common/helpers/chrome';
 
 export const TabItem = ({ className, item }) => {
     const { setNodeRef, attributes, listeners, transform, isDragging } = useDraggable({
@@ -22,7 +23,7 @@ export const TabItem = ({ className, item }) => {
     };
 
     const handleClose = () => {
-        chrome?.tabs?.remove?.(item?.id);
+        closeTab(item?.id);
     };
 
     useDndMonitor({
