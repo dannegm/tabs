@@ -14,6 +14,7 @@ const sampleTabs = [
         title: 'Google',
         url: 'https://www.google.com/',
         favIconUrl: 'https://www.google.com/s2/favicons?domain=google.com&sz=256',
+        incognito: true,
     },
     {
         id: 2,
@@ -26,6 +27,7 @@ const sampleTabs = [
         title: 'Youtube',
         url: 'https://www.youtube.com/',
         favIconUrl: 'https://www.google.com/s2/favicons?domain=youtube.com&sz=256',
+        audible: true,
     },
 ];
 
