@@ -37,7 +37,6 @@ export const Tabs = ({ className }) => {
         chrome?.tabs?.query({}, tabs => {
             const filteredTabs = tabs.filter(tab => !tab?.url?.includes('://newtab'));
             const groups = groupBy(filteredTabs, item => item.windowId);
-            console.log({ tabs });
             setGroups(Object.entries(groups));
         });
     };

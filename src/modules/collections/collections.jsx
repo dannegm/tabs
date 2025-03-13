@@ -57,7 +57,6 @@ export const Collections = () => {
     };
 
     const handleMoveItem = (originalCollectionId, payload) => {
-        console.log('handleMoveItem', { originalCollectionId, ...payload });
         moveItem({ originalCollectionId, ...payload });
     };
 
@@ -73,7 +72,7 @@ export const Collections = () => {
     };
 
     const handleSaveHere = () => {
-        chrome?.tabs?.query?.({ active: true, currentWindow: true }, tabs => {
+        chrome?.tabs?.query?.({ currentWindow: true }, tabs => {
             console.log(tabs);
         });
     };
