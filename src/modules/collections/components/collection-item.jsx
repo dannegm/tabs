@@ -230,10 +230,11 @@ export const CollectionItem = ({
                         </div>
                     )}
 
-                    {sortBy(iterableItems, 'index').map(item => (
+                    {sortBy(iterableItems, 'index').map((item, index) => (
                         <CardItem
                             key={item.id}
                             item={item}
+                            index={index}
                             onRemove={item => onRemoveItem?.(id, item)}
                         />
                     ))}

@@ -9,7 +9,7 @@ import { Button } from '@/modules/shadcn/components/button';
 import { Tooltip } from '@/modules/shadcn/components/tooltip-simple';
 import { ConfirmPopover } from '@/modules/common/components/confirm-popover';
 
-export const CardItem = ({ className, item, onRemove }) => {
+export const CardItem = ({ className, item, index, onRemove }) => {
     const { setNodeRef, attributes, listeners, transform, isDragging } = useDraggable({
         id: `card-${item?.id}`,
         data: {
@@ -45,7 +45,7 @@ export const CardItem = ({ className, item, onRemove }) => {
                 <ConfirmPopover
                     title='Remove card'
                     description='This action is permanent and cannot be undone.'
-                    align='end'
+                    align={index === 0 ? 'start' : 'end'}
                     onAccept={handleRemove}
                 >
                     <div>

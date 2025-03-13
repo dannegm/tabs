@@ -31,7 +31,7 @@ export const TabItem = ({ className, item }) => {
             const self = event.active?.data?.current;
             const target = event.over?.data?.current;
 
-            if (self?.id === item?.id && self?.type === 'tab' && target?.type === 'group') {
+            if (self?.id === item?.id && self?.type === 'tab' && target?.type === 'collection') {
                 handleClose();
             }
         },
