@@ -1,14 +1,17 @@
 import { useDndMonitor, useDroppable } from '@dnd-kit/core';
-import { X, ArrowUpRight, ChevronDown, ChevronRight, Download, Ellipsis } from 'lucide-react';
+import {
+    X,
+    ArrowUpRight,
+    ChevronDown,
+    ChevronRight,
+    Download,
+    Ellipsis,
+    SquarePen,
+} from 'lucide-react';
 
 import { cn } from '@/helpers/utils';
 import { Button } from '@/components/shadcn/button';
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from '@/components/shadcn/tooltip';
+import { Tooltip } from '@/components/shadcn/tooltip-simple';
 
 export const BookmarksGroup = ({
     className,
@@ -77,68 +80,56 @@ export const BookmarksGroup = ({
             />
 
             <div className='flex flex-row items-center justify-between'>
-                <div className='text-base'>
+                <div className='flex flex-row items-center gap-1'>
                     <Button
-                        className='leading-1 dark:bg-neutral-700'
+                        className='text-base leading-1 dark:bg-neutral-700'
                         variant='secondary'
                         onClick={handleToggle}
                     >
                         <span>{name}</span>
                         {expanded ? <ChevronDown /> : <ChevronRight />}
                     </Button>
+
+                    <Tooltip content='Edit Collection'>
+                        <Button className='dark:hover:bg-neutral-700' variant='secondary'>
+                            <SquarePen />
+                        </Button>
+                    </Tooltip>
                 </div>
+
                 <div className='flex flex-row gap-2'>
-                    <TooltipProvider>
-                        <Tooltip>
-                            <TooltipTrigger asChild>
-                                <Button
-                                    className='dark:hover:bg-neutral-700'
-                                    size='icon-xs'
-                                    variant='ghost'
-                                    onClick={onOpenEverything}
-                                >
-                                    <ArrowUpRight />
-                                </Button>
-                            </TooltipTrigger>
-                            <TooltipContent side='bottom'>
-                                <p>Open tabs</p>
-                            </TooltipContent>
-                        </Tooltip>
-                    </TooltipProvider>
-                    <TooltipProvider>
-                        <Tooltip>
-                            <TooltipTrigger asChild>
-                                <Button
-                                    className='dark:hover:bg-neutral-700'
-                                    size='icon-xs'
-                                    variant='ghost'
-                                    onClick={onSaveHere}
-                                >
-                                    <Download />
-                                </Button>
-                            </TooltipTrigger>
-                            <TooltipContent side='bottom'>
-                                <p>Save session to collection</p>
-                            </TooltipContent>
-                        </Tooltip>
-                    </TooltipProvider>
-                    <TooltipProvider>
-                        <Tooltip>
-                            <TooltipTrigger asChild>
-                                <Button
-                                    className='dark:hover:bg-neutral-700'
-                                    size='icon-xs'
-                                    variant='ghost'
-                                    onClick={handleRemove}
-                                >
-                                    <X />
-                                </Button>
-                            </TooltipTrigger>
-                            <TooltipContent side='bottom'>
-                                <p>Delete collection</p>
-                            </TooltipContent>
-                        </Tooltip>
-                    </TooltipProvider>
+                    <Tooltip content='Open tabs'>
+                        <Button
+                            className='dark:hover:bg-neutral-700'
+                            size='icon-xs'
+                            variant='ghost'
+                            onClick={onOpenEverything}
+                        >
+                            <ArrowUpRight />
+                        </Button>
+                    </Tooltip>
+
+                    <Tooltip content='Save session to collection'>
+                        <Button
+                            className='dark:hover:bg-neutral-700'
+                            size='icon-xs'
+                            variant='ghost'
+                            onClick={onSaveHere}
+                        >
+                            <Download />
+                        </Button>
+                    </Tooltip>
+
+                    <Tooltip content='Delete collection'>
+                        <Button
+                            className='dark:hover:bg-neutral-700'
+                            size='icon-xs'
+                            variant='ghost'
+                            onClick={handleRemove}
+                        >
+                            <X />
+                        </Button>
+                    </Tooltip>
                 </div>
             </div>
 

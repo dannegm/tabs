@@ -9,12 +9,7 @@ import { fromArray } from '@/helpers/objects';
 import { useGroupsActions } from '@/store/tabs';
 
 import { Button } from '@/components/shadcn/button';
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from '@/components/shadcn/tooltip';
+import { Tooltip } from '@/components/shadcn/tooltip-simple';
 
 const cardSchema = z.object({
     title: z.string(),
@@ -117,23 +112,16 @@ export const ImportBookmarks = () => {
 
     return (
         <>
-            <TooltipProvider>
-                <Tooltip>
-                    <TooltipTrigger asChild>
-                        <Button
-                            className='dark:text-neutral-50 dark:hover:bg-neutral-700'
-                            size='icon'
-                            variant='ghost'
-                            onClick={handleOpen}
-                        >
-                            <FolderInput />
-                        </Button>
-                    </TooltipTrigger>
-                    <TooltipContent side='bottom'>
-                        <p>Import Bookmarks</p>
-                    </TooltipContent>
-                </Tooltip>
-            </TooltipProvider>
+            <Tooltip content='Import Bookmarks'>
+                <Button
+                    className='dark:text-neutral-50 dark:hover:bg-neutral-700'
+                    size='icon'
+                    variant='ghost'
+                    onClick={handleOpen}
+                >
+                    <FolderInput />
+                </Button>
+            </Tooltip>
             <input
                 ref={$picker}
                 className='hidden'

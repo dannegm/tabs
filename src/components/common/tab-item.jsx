@@ -4,12 +4,7 @@ import { X, File } from 'lucide-react';
 
 import { cn } from '@/helpers/utils';
 import { Button } from '@/components/shadcn/button';
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from '@/components/shadcn/tooltip';
+import { Tooltip } from '@/components/shadcn/tooltip-simple';
 
 export const TabItem = ({ className, item }) => {
     const { setNodeRef, attributes, listeners, transform, isDragging } = useDraggable({
@@ -42,23 +37,16 @@ export const TabItem = ({ className, item }) => {
     return (
         <div ref={setNodeRef} style={style}>
             <div className='relative group'>
-                <TooltipProvider>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <Button
-                                className='hidden absolute right-2 top-1/2 transform -translate-y-1/2 group-hover:flex'
-                                size='icon-xs'
-                                variant='ghost'
-                                onClick={handleClose}
-                            >
-                                <X />
-                            </Button>
-                        </TooltipTrigger>
-                        <TooltipContent side='left'>
-                            <p>Close tab</p>
-                        </TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
+                <Tooltip content='Close tab'>
+                    <Button
+                        className='hidden absolute right-2 top-1/2 transform -translate-y-1/2 group-hover:flex'
+                        size='icon-xs'
+                        variant='ghost'
+                        onClick={handleClose}
+                    >
+                        <X />
+                    </Button>
+                </Tooltip>
 
                 <div
                     className={cn(

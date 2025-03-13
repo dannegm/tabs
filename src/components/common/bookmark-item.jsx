@@ -6,12 +6,7 @@ import { X, File } from 'lucide-react';
 import { cn } from '@/helpers/utils';
 import { Button } from '@/components/shadcn/button';
 
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from '@/components/shadcn/tooltip';
+import { Tooltip } from '@/components/shadcn/tooltip-simple';
 
 export const BookmarkItem = ({ className, item, onRemove }) => {
     const { setNodeRef, attributes, listeners, transform, isDragging } = useDraggable({
@@ -46,23 +41,16 @@ export const BookmarkItem = ({ className, item, onRemove }) => {
     return (
         <div ref={setNodeRef} style={style}>
             <div className='relative group'>
-                <TooltipProvider>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <Button
-                                className='hidden group-hover:flex absolute z-20 top-2 right-2 dark:hover:bg-neutral-700'
-                                size='icon-xs'
-                                variant='ghost'
-                                onClick={handleRemove}
-                            >
-                                <X />
-                            </Button>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                            <p>Remove bookmark</p>
-                        </TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
+                <Tooltip content='Remove bookmark'>
+                    <Button
+                        className='hidden group-hover:flex absolute z-20 top-2 right-2 dark:hover:bg-neutral-700'
+                        size='icon-xs'
+                        variant='ghost'
+                        onClick={handleRemove}
+                    >
+                        <X />
+                    </Button>
+                </Tooltip>
 
                 <div
                     className={cn(
@@ -89,35 +77,22 @@ export const BookmarkItem = ({ className, item, onRemove }) => {
                             ) : (
                                 <File className='size-6' />
                             )}
-                            <TooltipProvider>
-                                <Tooltip>
-                                    <TooltipTrigger asChild>
-                                        <span className='text-sm line-clamp-1'>{item?.title}</span>
-                                    </TooltipTrigger>
-                                    <TooltipContent>
-                                        <p>{item?.title}</p>
-                                    </TooltipContent>
-                                </Tooltip>
-                            </TooltipProvider>
+
+                            <Tooltip side='top' content={item?.title}>
+                                <span className='text-sm line-clamp-1'>{item?.title}</span>
+                            </Tooltip>
                         </div>
 
-                        <TooltipProvider>
-                            <Tooltip>
-                                <TooltipTrigger asChild>
-                                    <div
-                                        className={cn(
-                                            'px-2 py-1.5 bg-neutral-100 text-xs text-ellipsis truncate',
-                                            'dark:bg-neutral-700',
-                                        )}
-                                    >
-                                        {item?.url}
-                                    </div>
-                                </TooltipTrigger>
-                                <TooltipContent side='bottom'>
-                                    <p>{item?.url}</p>
-                                </TooltipContent>
-                            </Tooltip>
-                        </TooltipProvider>
+                        <Tooltip content={item?.url}>
+                            <div
+                                className={cn(
+                                    'px-2 py-1.5 bg-neutral-100 text-xs text-ellipsis truncate',
+                                    'dark:bg-neutral-700',
+                                )}
+                            >
+                                {item?.url}
+                            </div>
+                        </Tooltip>
                     </a>
                 </div>
             </div>

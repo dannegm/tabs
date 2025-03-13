@@ -6,6 +6,8 @@ import { groupBy } from '@/helpers/arrays';
 import { TabItem } from '@/components/common/tab-item';
 import { TabsGroup } from '@/components/common/tabs-group';
 
+const IS_DEV = process.env.NODE_ENV === 'development';
+
 const sampleTabs = [
     {
         id: 1,
@@ -92,6 +94,14 @@ export const Tabs = ({ className }) => {
                         ))}
                     </TabsGroup>
                 ))}
+
+                {IS_DEV && (
+                    <TabsGroup id={0} index={0} tabs={sampleTabs}>
+                        {sampleTabs.map(tab => (
+                            <TabItem key={tab.id} item={tab} />
+                        ))}
+                    </TabsGroup>
+                )}
             </div>
         </aside>
     );
