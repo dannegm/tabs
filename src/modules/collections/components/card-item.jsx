@@ -7,6 +7,7 @@ import { cn } from '@/modules/common/helpers/utils';
 
 import { Button } from '@/modules/shadcn/components/button';
 import { Tooltip } from '@/modules/shadcn/components/tooltip-simple';
+import { ConfirmPopover } from '@/modules/common/components/confirm-popover';
 
 export const CardItem = ({ className, item, onRemove }) => {
     const { setNodeRef, attributes, listeners, transform, isDragging } = useDraggable({
@@ -41,16 +42,24 @@ export const CardItem = ({ className, item, onRemove }) => {
     return (
         <div ref={setNodeRef} style={style}>
             <div className='relative group'>
-                <Tooltip content='Remove card'>
-                    <Button
-                        className='hidden group-hover:flex absolute z-20 top-2 right-2 dark:hover:bg-neutral-700'
-                        size='icon-xs'
-                        variant='ghost'
-                        onClick={handleRemove}
-                    >
-                        <X />
-                    </Button>
-                </Tooltip>
+                <ConfirmPopover
+                    title='Remove card'
+                    description='This action is permanent and cannot be undone.'
+                    align='end'
+                    onAccept={handleRemove}
+                >
+                    <div>
+                        <Tooltip content='Remove card'>
+                            <Button
+                                className='hidden group-hover:flex absolute z-20 top-2 right-2 dark:hover:bg-neutral-700'
+                                size='icon-xs'
+                                variant='ghost'
+                            >
+                                <X />
+                            </Button>
+                        </Tooltip>
+                    </div>
+                </ConfirmPopover>
 
                 <div
                     className={cn(
