@@ -145,33 +145,25 @@ export const CollectionItem = ({
                         onSubmit={handleEditSave}
                     >
                         <Input
-                            className='min-w-96'
+                            className='min-w-96 dark:border-neutral-700'
                             placeholder='Type a new collection name...'
                             value={newName}
                             onChange={ev => setNewName(ev.target.value)}
                         />
 
-                        <Tooltip content='Edit Collection'>
-                            <Button
-                                type='button'
-                                className='dark:hover:bg-neutral-700'
-                                variant='secondary'
-                                size='icon'
-                                onClick={handleEditCancel}
-                            >
-                                <X />
-                            </Button>
-                        </Tooltip>
+                        <Button
+                            type='button'
+                            className='dark:bg-neutral-700'
+                            variant='secondary'
+                            size='icon'
+                            onClick={handleEditCancel}
+                        >
+                            <X />
+                        </Button>
 
-                        <Tooltip content='Edit Collection'>
-                            <Button
-                                type='submit'
-                                className='dark:hover:bg-neutral-700'
-                                variant='secondary'
-                            >
-                                <Save /> Save
-                            </Button>
-                        </Tooltip>
+                        <Button type='submit' className='dark:bg-neutral-700' variant='secondary'>
+                            <Save /> Save
+                        </Button>
                     </form>
                 )}
 
