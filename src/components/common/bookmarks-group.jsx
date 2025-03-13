@@ -97,7 +97,7 @@ export const BookmarksGroup = ({
                 )}
             />
 
-            <div className='flex flex-row items-center gap-2'>
+            <div className='group flex flex-row items-center gap-2'>
                 {!editting ? (
                     <div className='flex flex-row items-center gap-1'>
                         <Button
@@ -111,8 +111,8 @@ export const BookmarksGroup = ({
 
                         <Tooltip content='Edit Collection'>
                             <Button
-                                className='dark:hover:bg-neutral-700'
-                                variant='secondary'
+                                className='invisible group-hover:visible dark:hover:bg-neutral-700'
+                                variant='ghost'
                                 size='icon'
                                 onClick={() => setEditting(true)}
                             >
@@ -153,7 +153,7 @@ export const BookmarksGroup = ({
                     </form>
                 )}
 
-                <div className='flex-1' />
+                <div className='flex-1 h-6' />
 
                 <div className='flex flex-row gap-2'>
                     <Tooltip content='Open tabs'>

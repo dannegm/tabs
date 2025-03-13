@@ -994,6 +994,18 @@
     lightningcss "^1.29.1"
     tailwindcss "4.0.12"
 
+"@tanstack/react-virtual@^3.13.3":
+  version "3.13.3"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-virtual/-/react-virtual-3.13.3.tgz#0f452d2937ba9c8dde1b341ab33a7d211663c646"
+  integrity sha512-khJmiDJCkklsDTvXxTZHfEa7H161e94eDKxKyXqg9/3LstIbRg4JWBxPD2/e3LKtklC5dxkoYzNllCMVR904FA==
+  dependencies:
+    "@tanstack/virtual-core" "3.13.3"
+
+"@tanstack/virtual-core@3.13.3":
+  version "3.13.3"
+  resolved "https://registry.yarnpkg.com/@tanstack/virtual-core/-/virtual-core-3.13.3.tgz#7b6168e1f71ef317859b37672afa2a15a799d4d1"
+  integrity sha512-9kfCeSG6zUx1I1iF4RKZrquNog3Eho1T6+LyJEDYpHjNNdDlRhXyqzTod5u6LCEBSeG0f2txkNjAq0tFbCJ4bA==
+
 "@types/babel__core@^7.20.5":
   version "7.20.5"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.20.5.tgz#3df15f27ba85319caa07ba08d0721889bb39c017"

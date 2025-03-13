@@ -1,6 +1,5 @@
-import { useState } from 'react';
 import { nanoid } from 'nanoid';
-import { Bolt, Plus, Search, Trash2 } from 'lucide-react';
+import { Bolt, Plus, Trash2 } from 'lucide-react';
 
 import { cn } from '@/helpers/utils';
 import { reverse, sortBy } from '@/helpers/arrays';
@@ -9,7 +8,6 @@ import { useGroups, useGroupsActions } from '@/store/tabs';
 import { useSettings } from '@/hooks/use-settings';
 
 import { Button } from '@/components/shadcn/button';
-import { Input } from '@/components/shadcn/input';
 import { ScrollArea } from '@/components/shadcn/scroll-area';
 import {
     Tooltip,
@@ -33,7 +31,6 @@ export const Bookmarks = ({ className }) => {
     const { addGroup, editGroup, toggleGroup, removeGroup, addTab, moveTab, removeTab, clear } =
         useGroupsActions();
 
-    const [search, setSearch] = useState('');
     const iterableGroups = reverse(Object.values(groups));
 
     const handleAddGroup = ({ name }) => {
@@ -185,7 +182,7 @@ export const Bookmarks = ({ className }) => {
                     </div>
                 )}
 
-                {iterableGroups.map(group => {
+                {sortBy(iterableGroups, 'index', 'desc').map(group => {
                     const iterableTabs = Object.values(group?.tabs) || [];
                     return (
                         <BookmarksGroup
