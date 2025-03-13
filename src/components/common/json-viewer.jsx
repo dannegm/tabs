@@ -1,5 +1,6 @@
 import ReactJson from 'react-json-view';
 import { cn } from '@/helpers/utils';
+import { ScrollArea } from '../shadcn/scroll-area';
 
 const REACT_JSON_THEME = 'ocean';
 const REACT_JSON_STYLES = {
@@ -9,7 +10,12 @@ const REACT_JSON_STYLES = {
 
 export const JsonViewer = ({ className, name = 'root', data = {}, expanded }) => {
     return (
-        <div className={cn('block max-w-full p-4 pb-3 bg-slate-900 rounded-md', className)}>
+        <ScrollArea
+            className={cn(
+                'block max-w-full max-h-[40vh] overflow-scroll p-4 pb-3 bg-slate-900 rounded-md',
+                className,
+            )}
+        >
             <ReactJson
                 name={name}
                 src={data}
@@ -17,6 +23,6 @@ export const JsonViewer = ({ className, name = 'root', data = {}, expanded }) =>
                 style={REACT_JSON_STYLES}
                 collapsed={!expanded}
             />
-        </div>
+        </ScrollArea>
     );
 };

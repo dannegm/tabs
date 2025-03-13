@@ -78,3 +78,6 @@ export const groupBy = (elements = [], sentence) => {
 };
 
 export const reverse = (arr = []) => [...arr].reverse();
+
+export const sortBy = (arr, key, asc = true) =>
+    arr.sort((a, b) => (asc ? a[key] - b[key] : b[key] - a[key]));

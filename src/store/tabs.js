@@ -18,6 +18,10 @@ const tabsSlice = createSlice({
                 tabs,
             };
         },
+        editGroup: (state, action) => {
+            const { id, name } = action.payload;
+            state[id].name = name;
+        },
         removeGroup: (state, action) => {
             const { id } = action.payload;
             delete state[id];
@@ -68,8 +72,17 @@ const tabsSlice = createSlice({
     },
 });
 
-const { addGroup, removeGroup, toggleGroup, addTab, moveTab, removeTab, clear, importGroups } =
-    tabsSlice.actions;
+const {
+    addGroup,
+    editGroup,
+    removeGroup,
+    toggleGroup,
+    addTab,
+    moveTab,
+    removeTab,
+    clear,
+    importGroups,
+} = tabsSlice.actions;
 
 export default tabsSlice.reducer;
 
@@ -83,6 +96,7 @@ export const useGroupsActions = () => {
     return {
         addGroup: ({ id, name, expanded, tabs = {} }) =>
             dispatch(addGroup({ id, name, expanded, tabs })),
+        editGroup: ({ id, name }) => dispatch(editGroup({ id, name })),
         toggleGroup: ({ id }) => dispatch(toggleGroup({ id })),
         removeGroup: ({ id }) => dispatch(removeGroup({ id })),
         addTab: ({ groupId, id, payload }) => dispatch(addTab({ groupId, id, payload })),

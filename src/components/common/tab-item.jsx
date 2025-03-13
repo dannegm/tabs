@@ -3,15 +3,10 @@ import { CSS } from '@dnd-kit/utilities';
 import { X, File, Volume2, VenetianMask } from 'lucide-react';
 
 import { cn } from '@/helpers/utils';
+import { sanitizeItem } from '@/helpers/mappers';
+
 import { Button } from '@/components/shadcn/button';
 import { Tooltip } from '@/components/shadcn/tooltip-simple';
-
-const sanitizeItem = item => ({
-    id: item.id,
-    title: item.title,
-    url: item.url,
-    favIconUrl: item.favIconUrl,
-});
 
 export const TabItem = ({ className, item }) => {
     const { setNodeRef, attributes, listeners, transform, isDragging } = useDraggable({

@@ -5,13 +5,16 @@ import {
     ChevronDown,
     ChevronRight,
     Download,
-    Ellipsis,
     SquarePen,
+    Save,
 } from 'lucide-react';
 
 import { cn } from '@/helpers/utils';
 import { Button } from '@/components/shadcn/button';
 import { Tooltip } from '@/components/shadcn/tooltip-simple';
+import { sanitizeItem } from '@/helpers/mappers';
+import { Input } from '../shadcn/input';
+import { useState } from 'react';
 
 export const BookmarksGroup = ({
     className,
@@ -26,7 +29,11 @@ export const BookmarksGroup = ({
     onSaveHere,
     onRemove,
     onToggleExpanded,
+    onEdit,
 }) => {
+    const [editting, setEditting] = useState(false);
+    const [newName, setNewName] = useState(name);
+
     const { setNodeRef, isOver } = useDroppable({
         id: `group-${id}`,
         data: {
@@ -35,6 +42,17 @@ export const BookmarksGroup = ({
             type: 'group',
         },
     });
+
+    const handleEditCancel = () => {
+        setEditting(false);
+        setNewName(name);
+    };
+
+    const handleEditSave = ev => {
+        ev.preventDefault();
+        setEditting(false);
+        onEdit?.({ id, name: newName });
+    };
 
     const handleToggle = () => {
         onToggleExpanded?.({ id });
@@ -53,7 +71,7 @@ export const BookmarksGroup = ({
                 onAttach?.({
                     groupId: id,
                     id: item?.id,
-                    payload: item,
+                    payload: sanitizeItem(item),
                 });
             }
 
@@ -79,23 +97,63 @@ export const BookmarksGroup = ({
                 )}
             />
 
-            <div className='flex flex-row items-center justify-between'>
-                <div className='flex flex-row items-center gap-1'>
-                    <Button
-                        className='text-base leading-1 dark:bg-neutral-700'
-                        variant='secondary'
-                        onClick={handleToggle}
-                    >
-                        <span>{name}</span>
-                        {expanded ? <ChevronDown /> : <ChevronRight />}
-                    </Button>
-
-                    <Tooltip content='Edit Collection'>
-                        <Button className='dark:hover:bg-neutral-700' variant='secondary'>
-                            <SquarePen />
+            <div className='flex flex-row items-center gap-2'>
+                {!editting ? (
+                    <div className='flex flex-row items-center gap-1'>
+                        <Button
+                            className='text-base leading-1 dark:bg-neutral-700'
+                            variant='secondary'
+                            onClick={handleToggle}
+                        >
+                            <span>{name}</span>
+                            {expanded ? <ChevronDown /> : <ChevronRight />}
                         </Button>
-                    </Tooltip>
-                </div>
+
+                        <Tooltip content='Edit Collection'>
+                            <Button
+                                className='dark:hover:bg-neutral-700'
+                                variant='secondary'
+                                size='icon'
+                                onClick={() => setEditting(true)}
+                            >
+                                <SquarePen />
+                            </Button>
+                        </Tooltip>
+                    </div>
+                ) : (
+                    <form className='flex flex-row items-center gap-1' onSubmit={handleEditSave}>
+                        <Input
+                            className='min-w-96'
+                            placeholder='Type a new group name...'
+                            value={newName}
+                            onChange={ev => setNewName(ev.target.value)}
+                        />
+
+                        <Tooltip content='Edit Collection'>
+                            <Button
+                                type='button'
+                                className='dark:hover:bg-neutral-700'
+                                variant='secondary'
+                                size='icon'
+                                onClick={handleEditCancel}
+                            >
+                                <X />
+                            </Button>
+                        </Tooltip>
+
+                        <Tooltip content='Edit Collection'>
+                            <Button
+                                type='submit'
+                                className='dark:hover:bg-neutral-700'
+                                variant='secondary'
+                            >
+                                <Save /> Save
+                            </Button>
+                        </Tooltip>
+                    </form>
+                )}
+
+                <div className='flex-1' />
 
                 <div className='flex flex-row gap-2'>
                     <Tooltip content='Open tabs'>

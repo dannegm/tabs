@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
-import { uniqueNamesGenerator, adjectives, animals } from 'unique-names-generator';
 import { Bolt, Plus, Search, Trash2 } from 'lucide-react';
 
 import { cn } from '@/helpers/utils';
-import { reverse } from '@/helpers/arrays';
+import { reverse, sortBy } from '@/helpers/arrays';
 
 import { useGroups, useGroupsActions } from '@/store/tabs';
 import { useSettings } from '@/hooks/use-settings';
@@ -25,33 +24,29 @@ import { ImportBookmarks } from '@/components/common/import-bookmarks';
 import { JsonViewer } from '@/components/common/json-viewer';
 import { BookmarksGroup } from '@/components/common/bookmarks-group';
 import { BookmarkItem } from '@/components/common/bookmark-item';
-
-const getRandomName = () => {
-    return uniqueNamesGenerator({
-        dictionaries: [adjectives, animals],
-        length: 2,
-        separator: ' ',
-        style: 'capital',
-    });
-};
+import { CreateGroupDialog } from '@/components/common/create-group-dialog';
 
 export const Bookmarks = ({ className }) => {
     const [debug] = useSettings('settings:debug', false);
 
     const groups = useGroups();
-    const { addGroup, toggleGroup, removeGroup, addTab, moveTab, removeTab, clear } =
+    const { addGroup, editGroup, toggleGroup, removeGroup, addTab, moveTab, removeTab, clear } =
         useGroupsActions();
 
     const [search, setSearch] = useState('');
     const iterableGroups = reverse(Object.values(groups));
 
-    const handleAddGroup = () => {
+    const handleAddGroup = ({ name }) => {
         const payload = {
+            name,
             id: nanoid(),
-            name: getRandomName(),
             expanded: true,
         };
         addGroup(payload);
+    };
+
+    const handleEditGroup = ({ id, name }) => {
+        editGroup({ id, name });
     };
 
     const handleToggleGroup = ({ id }) => {
@@ -171,9 +166,11 @@ export const Bookmarks = ({ className }) => {
                     onClear={() => setSearch('')}
                 />
                 <div className='flex-1' />
-                <Button size='sm' onClick={handleAddGroup}>
-                    <Plus /> Add Collection
-                </Button>
+                <CreateGroupDialog onCreate={handleAddGroup}>
+                    <Button size='sm'>
+                        <Plus /> Add Collection
+                    </Button>
+                </CreateGroupDialog>
             </div>
 
             {debug && (
@@ -195,14 +192,17 @@ export const Bookmarks = ({ className }) => {
                 type='always'
             >
                 {!iterableGroups.length && (
-                    <div className='flex-center flex-col gap-4 p-16 m-4 bg-rose-200 text-rose-500 dark:bg-rose-500/40 dark:text-rose-400 rounded-lg'>
+                    <div className='flex-center flex-col gap-4 p-12 m-4 bg-rose-100 text-rose-400 dark:bg-rose-500/20 dark:text-rose-400/70 rounded-lg'>
                         <h2 className='text-xl'>Let's start adding some new collection.</h2>
 
-                        <Button size='lg' onClick={handleAddGroup}>
-                            <Plus /> Add Collection
-                        </Button>
+                        <CreateGroupDialog onCreate={handleAddGroup}>
+                            <Button size='lg'>
+                                <Plus /> Add Collection
+                            </Button>
+                        </CreateGroupDialog>
                     </div>
                 )}
+
                 {iterableGroups.map(group => {
                     const iterableTabs = Object.values(group?.tabs) || [];
                     return (
@@ -218,8 +218,9 @@ export const Bookmarks = ({ className }) => {
                             onOpenEverything={() => handleOpenEverything(iterableTabs)}
                             onSaveHere={handleSaveHere}
                             onToggleExpanded={handleToggleGroup}
+                            onEdit={handleEditGroup}
                         >
-                            {iterableTabs.map(tab => (
+                            {sortBy(iterableTabs, 'index').map(tab => (
                                 <BookmarkItem
                                     key={tab.id}
                                     item={tab}

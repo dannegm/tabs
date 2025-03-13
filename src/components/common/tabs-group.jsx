@@ -4,6 +4,7 @@ import { formatDate } from 'date-fns';
 import { ChevronDown, ChevronRight, Download, X } from 'lucide-react';
 
 import { cn } from '@/helpers/utils';
+import { newItem, sanitizeItem } from '@/helpers/mappers';
 import { fromArray } from '@/helpers/objects';
 import { useGroupsActions } from '@/store/tabs';
 
@@ -38,7 +39,8 @@ export const TabsGroup = ({ className, id, index, tabs, children }) => {
     const handleSaveSession = () => {
         const groupId = nanoid();
         const dateLabel = formatDate(new Date(), "MMM d, ''yy 'at' HH:mm");
-        const tabsCollection = fromArray(tabs, 'id');
+        const mappedTabs = tabs.map(newItem);
+        const tabsCollection = fromArray(mappedTabs, 'id');
 
         addGroup({
             id: groupId,
