@@ -19,6 +19,8 @@ import { Tooltip } from '@/modules/shadcn/components/tooltip-simple';
 import { Input } from '@/modules/shadcn/components/input';
 
 import { CardItem } from '@/modules/collections/components/card-item';
+import { ConfirmDialog } from '@/modules/common/components/confirm-dialog';
+import { ConfirmPopover } from '@/modules/common/components/confirm-popover';
 
 export const CollectionItem = ({
     className,
@@ -198,16 +200,24 @@ export const CollectionItem = ({
                         </Button>
                     </Tooltip>
 
-                    <Tooltip content='Delete collection'>
-                        <Button
-                            className='dark:hover:bg-neutral-700'
-                            size='icon-xs'
-                            variant='ghost'
-                            onClick={handleRemove}
-                        >
-                            <X />
-                        </Button>
-                    </Tooltip>
+                    <ConfirmPopover
+                        title='Remove collection'
+                        description='This action is permanent and cannot be undone.'
+                        align='end'
+                        onAccept={handleRemove}
+                    >
+                        <div>
+                            <Tooltip content='Delete collection'>
+                                <Button
+                                    className='dark:hover:bg-neutral-700'
+                                    size='icon-xs'
+                                    variant='ghost'
+                                >
+                                    <X />
+                                </Button>
+                            </Tooltip>
+                        </div>
+                    </ConfirmPopover>
                 </div>
             </div>
 

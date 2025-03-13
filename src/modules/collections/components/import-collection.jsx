@@ -1,15 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { nanoid } from 'nanoid';
 import { z } from 'zod';
-import { FolderInput } from 'lucide-react';
 
 import { reverse } from '@/modules/common/helpers/arrays';
 import { fromArray } from '@/modules/common/helpers/objects';
 
 import { useCollectionsActions } from '@/store/collections';
-
-import { Button } from '@/modules/shadcn/components/button';
-import { Tooltip } from '@/modules/shadcn/components/tooltip-simple';
 
 const cardSchema = z.object({
     title: z.string(),
@@ -37,7 +33,7 @@ export const getValidatedData = data => {
 
 const allowedTypes = ['application/json'].join(',');
 
-export const ImportCollectionButton = () => {
+export const ImportCollection = ({ children, onError, onSuccess }) => {
     const { importCollection } = useCollectionsActions();
     const $picker = useRef();
     const [file, setFile] = useState();
@@ -83,14 +79,14 @@ export const ImportCollectionButton = () => {
 
         const proccessData = fromArray(mappedData, 'id');
         importCollection({ collections: proccessData });
+        onSuccess?.();
     };
 
     const validateData = data => {
         const [validatedData, error] = getValidatedData(data);
 
         if (error) {
-            console.log(error);
-            alert('Archivo inválido');
+            onError?.(error);
             return;
         }
 
@@ -110,17 +106,7 @@ export const ImportCollectionButton = () => {
 
     return (
         <>
-            <Tooltip content='Import Bookmarks'>
-                <Button
-                    className='dark:text-neutral-50 dark:hover:bg-neutral-700'
-                    size='icon'
-                    variant='ghost'
-                    onClick={handleOpen}
-                >
-                    <FolderInput />
-                </Button>
-            </Tooltip>
-
+            <div onClick={handleOpen}>{children}</div>
             <input
                 ref={$picker}
                 className='hidden'

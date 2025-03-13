@@ -5,17 +5,18 @@ import { cn } from '@/modules/common/helpers/utils';
 
 import { useCollectionsActions } from '@/store/collections';
 
-import { Button } from '@/modules/shadcn/components/button';
-import { Tooltip } from '@/modules/shadcn/components/tooltip-simple';
+import { DarkModeToggle } from '@/modules/main/components/dark-mode-toggle';
+import { DebugModeToggle } from '@/modules/main/components/debug-mode-toggle';
+import { SettingsMenu } from '@/modules/main/components/settings-menu';
 
-import { DarkModeToggle } from '@/modules/common/components/dark-mode-toggle';
-import { DebugModeToggle } from '@/modules/common/components/debug-mode-toggle';
-
-import { ImportCollectionButton } from '@/modules/collections/components/import-collection-button';
 import { CreateCollectionDialog } from '@/modules/collections/components/create-collection-dialog';
 
+import { Button } from '@/modules/shadcn/components/button';
+import { ConfirmPopover } from '@/modules/common/components/confirm-popover';
+import { Tooltip } from '@/modules/shadcn/components/tooltip-simple';
+
 export const Header = () => {
-    const { addCollection, clearCollections } = useCollectionsActions();
+    const { addCollection } = useCollectionsActions();
 
     const handleAddCollection = ({ name }) => {
         const payload = {
@@ -24,10 +25,6 @@ export const Header = () => {
             expanded: true,
         };
         addCollection(payload);
-    };
-
-    const handleClearCollections = () => {
-        clearCollections();
     };
 
     return (
@@ -51,30 +48,21 @@ export const Header = () => {
 
             <div data-layer='toolbar' className='flex flex-row gap-1 items-center'>
                 <DebugModeToggle />
-
-                <Tooltip content='clearCollections collections'>
-                    <Button
-                        className='dark:text-neutral-50 dark:hover:bg-neutral-700'
-                        size='icon'
-                        variant='ghost'
-                        onClick={handleClearCollections}
-                    >
-                        <Trash2 />
-                    </Button>
-                </Tooltip>
-
-                <ImportCollectionButton />
                 <DarkModeToggle />
 
-                <Tooltip content='Settings'>
-                    <Button
-                        className='dark:text-neutral-50 dark:hover:bg-neutral-700'
-                        size='icon'
-                        variant='ghost'
-                    >
-                        <Bolt />
-                    </Button>
-                </Tooltip>
+                <SettingsMenu>
+                    <div>
+                        <Tooltip content='Settings'>
+                            <Button
+                                className='dark:text-neutral-50 dark:hover:bg-neutral-700'
+                                size='icon'
+                                variant='ghost'
+                            >
+                                <Bolt />
+                            </Button>
+                        </Tooltip>
+                    </div>
+                </SettingsMenu>
 
                 <CreateCollectionDialog onCreate={handleAddCollection}>
                     <Button size='sm'>
