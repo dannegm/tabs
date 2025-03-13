@@ -1,12 +1,35 @@
-# React + Vite
+# Tabs.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A browser extension to efficiently manage your tabs.
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Running in Development Mode
 
-## Expanding the ESLint configuration
+1. **Install dependencies**
+   ```sh
+   yarn
+   ```
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+2. **Build the extension**
+   ```sh
+   yarn build
+   ```
+
+3. **Enable Developer Mode in your browser**
+   - Chrome: Open `chrome://extensions/` and enable Developer Mode.
+   - Edge: Open `edge://extensions/` and enable Developer Mode.
+
+4. **Load the unpacked extension**
+   - Click on "Load unpacked."
+   - Select the `dist` folder from this project.
+
+5. **Accept permissions**
+   - Grant the required permissions.
+   - Confirm the override of the new tab page if prompted.
+
+## Contributing
+We welcome contributions! Feel free to submit pull requests or open issues for discussion.
+
+## License
+This project is licensed under the [MIT License](LICENSE).
