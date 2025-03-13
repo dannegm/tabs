@@ -15,6 +15,7 @@ export const JsonViewer = ({ className, name = 'root', data = {}, expanded }) =>
                 'block max-w-full max-h-[40vh] overflow-scroll p-4 pb-3 bg-slate-900 rounded-md',
                 className,
             )}
+            type='always'
         >
             <ReactJson
                 name={name}

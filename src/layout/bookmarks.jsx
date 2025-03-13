@@ -146,31 +146,13 @@ export const Bookmarks = ({ className }) => {
                             </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>
-                </div>
-            </div>
 
-            <div
-                data-layer='actions'
-                className={cn(
-                    'flex flex-row items-center gap-2 h-16 p-4 border-b border-b-neutral-200 shadow-sm',
-                    'dark:border-b-neutral-700',
-                )}
-            >
-                <Input
-                    className='w-96 dark:border-neutral-600'
-                    type='text'
-                    placeholder='Type to filter'
-                    startIcon={<Search />}
-                    value={search}
-                    onChange={ev => setSearch(ev.target.value)}
-                    onClear={() => setSearch('')}
-                />
-                <div className='flex-1' />
-                <CreateGroupDialog onCreate={handleAddGroup}>
-                    <Button size='sm'>
-                        <Plus /> Add Collection
-                    </Button>
-                </CreateGroupDialog>
+                    <CreateGroupDialog onCreate={handleAddGroup}>
+                        <Button size='sm'>
+                            <Plus /> Add Collection
+                        </Button>
+                    </CreateGroupDialog>
+                </div>
             </div>
 
             {debug && (
