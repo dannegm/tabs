@@ -37,7 +37,10 @@ const collectionsSlice = createSlice({
         },
         importCollection: (state, action) => {
             const { collections } = action.payload;
-            return collections;
+            return {
+                ...state,
+                ...collections,
+            };
         },
 
         //* Items

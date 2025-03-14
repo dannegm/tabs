@@ -1,9 +1,12 @@
 import { useState } from 'react';
-import { FileInput, Trash2 } from 'lucide-react';
+import { FolderInput, FolderOutput, Trash2 } from 'lucide-react';
 
 import { useCollectionsActions } from '@/store/collections';
 
 import { ConfirmDialog } from '@/modules/common/components/confirm-dialog';
+
+import { ImportCollection } from '@/modules/collections/components/import-collection';
+import { ExportCollection } from '@/modules/collections/components/export-collection';
 
 import {
     DropdownMenu,
@@ -13,7 +16,6 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/modules/shadcn/components/dropdown-menu';
-import { ImportCollection } from '@/modules/collections/components/import-collection';
 
 export const SettingsMenu = ({ children, side = 'bottom', align = 'end' }) => {
     const [open, setOpen] = useState(false);
@@ -49,9 +51,16 @@ export const SettingsMenu = ({ children, side = 'bottom', align = 'end' }) => {
 
                 <DropdownMenuSeparator />
 
+                <ExportCollection onSuccess={handleClose}>
+                    <DropdownMenuItem>
+                        <FolderOutput />
+                        Export collections
+                    </DropdownMenuItem>
+                </ExportCollection>
+
                 <ImportCollection onError={handleClose} onSuccess={handleClose}>
                     <DropdownMenuItem>
-                        <FileInput />
+                        <FolderInput />
                         Import collections
                     </DropdownMenuItem>
                 </ImportCollection>
