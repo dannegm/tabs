@@ -6,7 +6,10 @@ import {
     KeyboardSensor,
     useSensor,
     useSensors,
+    closestCenter,
 } from '@dnd-kit/core';
+
+import { sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 import { restrictToFirstScrollableAncestor } from '@dnd-kit/modifiers';
 
 export const DndProvider = ({ children }) => {
@@ -21,12 +24,15 @@ export const DndProvider = ({ children }) => {
             tolerance: 5,
         },
     });
-    const keyboardSensor = useSensor(KeyboardSensor, {});
+    const keyboardSensor = useSensor(KeyboardSensor, {
+        coordinateGetter: sortableKeyboardCoordinates,
+    });
     const sensors = useSensors(mouseSensor, touchSensor, keyboardSensor);
 
     return (
         <DndContext
             sensors={sensors}
+            collisionDetection={closestCenter}
             modifiers={[restrictToFirstScrollableAncestor]}
             measuring={{
                 droppable: { strategy: MeasuringStrategy.Always },

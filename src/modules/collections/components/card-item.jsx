@@ -65,7 +65,7 @@ export const CardItem = ({ className, collectionId, item, index, onRemove }) => 
                 <div
                     className={cn(
                         'relative cursor-grab transition-all duration-150 rounded-sm select-none',
-                        { 'cursor-grabbing shadow-md': isDragging },
+                        { 'cursor-grabbing shadow-lg': isDragging },
                         className,
                     )}
                     {...listeners}

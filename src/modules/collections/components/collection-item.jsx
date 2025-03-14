@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useDndMonitor, useDroppable } from '@dnd-kit/core';
-import { arrayMove, useSortable } from '@dnd-kit/sortable';
+import { DragOverlay, useDndMonitor } from '@dnd-kit/core';
+import { arrayMove } from '@dnd-kit/sortable';
 
 import {
     X,
@@ -75,6 +75,8 @@ export const CollectionItem = ({
     };
 
     //* DnD
+    const [overlayItem, setOverlayItem] = useState(null);
+
     const matchers = {
         attach: {
             matcher: ({ activeData, overData }) => {
@@ -121,6 +123,12 @@ export const CollectionItem = ({
     };
 
     useDndMonitor({
+        onDragStart: event => {
+            const { active } = event;
+            const activeData = active?.data?.current;
+            console.log(activeData);
+            setOverlayItem(activeData);
+        },
         onDragEnd: event => {
             const { active, over } = event;
             const activeData = active?.data?.current;
@@ -131,6 +139,8 @@ export const CollectionItem = ({
                 .when(matchers.move.matcher, matchers.move.handler)
                 .when(matchers.sort.matcher, matchers.sort.handler)
                 .run();
+
+            setOverlayItem(null);
         },
     });
 
@@ -259,6 +269,9 @@ export const CollectionItem = ({
                         {iterableItems.map((item, index) => (
                             <CardItem
                                 key={item.id}
+                                className={cn({
+                                    'opacity-60': overlayItem?.id === item?.id,
+                                })}
                                 collectionId={id}
                                 item={item}
                                 index={index}
@@ -266,6 +279,12 @@ export const CollectionItem = ({
                             />
                         ))}
                     </CollectionSortableContext>
+
+                    {overlayItem && overlayItem?.type === 'card' && (
+                        <DragOverlay>
+                            <CardItem item={overlayItem} />
+                        </DragOverlay>
+                    )}
                 </div>
             )}
         </div>
