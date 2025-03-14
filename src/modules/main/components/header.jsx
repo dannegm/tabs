@@ -12,7 +12,6 @@ import { SettingsMenu } from '@/modules/main/components/settings-menu';
 import { CreateCollectionDialog } from '@/modules/collections/components/create-collection-dialog';
 
 import { Button } from '@/modules/shadcn/components/button';
-import { ConfirmPopover } from '@/modules/common/components/confirm-popover';
 import { Tooltip } from '@/modules/shadcn/components/tooltip-simple';
 
 export const Header = () => {
@@ -31,7 +30,7 @@ export const Header = () => {
         <div
             data-layer='header'
             className={cn(
-                'flex flex-row items-center h-12 p-4 border-b border-b-neutral-200',
+                'flex flex-row items-center h-12 p-4 pl-8 border-b border-b-neutral-200',
                 'dark:border-b-neutral-700',
             )}
         >

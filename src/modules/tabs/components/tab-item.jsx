@@ -9,9 +9,9 @@ import { Button } from '@/modules/shadcn/components/button';
 import { Tooltip } from '@/modules/shadcn/components/tooltip-simple';
 import { closeTab } from '@/modules/common/helpers/chrome';
 
-export const TabItem = ({ className, item }) => {
+export const TabItem = ({ className, windowId, item }) => {
     const { setNodeRef, attributes, listeners, transform, isDragging } = useDraggable({
-        id: `tab-item-${item?.id}`,
+        id: `tab-item-${windowId}-${item?.id}`,
         data: {
             ...sanitizeItem(item),
             type: 'tab',
@@ -28,10 +28,15 @@ export const TabItem = ({ className, item }) => {
 
     useDndMonitor({
         onDragEnd: event => {
-            const self = event.active?.data?.current;
-            const target = event.over?.data?.current;
+            const { active, over } = event;
+            const activeData = active?.data?.current;
+            const overData = over?.data?.current;
 
-            if (self?.id === item?.id && self?.type === 'tab' && target?.type === 'collection') {
+            const tabSameEntity = activeData?.id === item?.id;
+            const activeIsTab = activeData?.type === 'tab';
+            const overIsCollection = overData?.type === 'collection';
+
+            if (tabSameEntity && activeIsTab && overIsCollection) {
                 handleClose();
             }
         },

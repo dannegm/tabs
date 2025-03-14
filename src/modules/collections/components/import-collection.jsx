@@ -59,7 +59,7 @@ export const ImportCollection = ({ children, onError, onSuccess }) => {
                 id: nanoid(),
                 name: collection.title,
                 created_at: Date.now(),
-                expanded: false,
+                expanded: true,
                 items: collection.cards.map((card, idx) => {
                     const domain = getDomain(card.url);
                     return {

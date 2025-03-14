@@ -99,6 +99,15 @@ const collectionsSlice = createSlice({
                 delete state[collectionId].items[id];
             }
         },
+        sortItems: (state, action) => {
+            const { collectionId, items } = action.payload;
+            console.log({ collectionId, items });
+            items.forEach((id, index) => {
+                if (state[collectionId].items[id]) {
+                    state[collectionId].items[id].index = index;
+                }
+            });
+        },
     },
 });
 
@@ -117,6 +126,7 @@ const {
     addItem,
     moveItem,
     removeItem,
+    sortItems,
 } = collectionsSlice.actions;
 
 export default collectionsSlice.reducer;
@@ -146,5 +156,6 @@ export const useCollectionsActions = () => {
         moveItem: ({ id, originalCollectionId, targetCollectionId }) =>
             dispatch(moveItem({ id, originalCollectionId, targetCollectionId })),
         removeItem: ({ collectionId, id }) => dispatch(removeItem({ collectionId, id })),
+        sortItems: ({ collectionId, items }) => dispatch(sortItems({ collectionId, items })),
     };
 };

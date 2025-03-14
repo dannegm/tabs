@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { useDndMonitor, useDraggable } from '@dnd-kit/core';
+import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { X, File } from 'lucide-react';
 
@@ -9,9 +10,9 @@ import { Button } from '@/modules/shadcn/components/button';
 import { Tooltip } from '@/modules/shadcn/components/tooltip-simple';
 import { ConfirmPopover } from '@/modules/common/components/confirm-popover';
 
-export const CardItem = ({ className, item, index, onRemove }) => {
-    const { setNodeRef, attributes, listeners, transform, isDragging } = useDraggable({
-        id: `card-${item?.id}`,
+export const CardItem = ({ className, collectionId, item, index, onRemove }) => {
+    const { setNodeRef, attributes, listeners, transform, isDragging } = useSortable({
+        id: `card-item-${collectionId}-${item?.id}`,
         data: {
             ...item,
             type: 'card',

@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useDndMonitor, useDroppable } from '@dnd-kit/core';
+import { arrayMove, useSortable } from '@dnd-kit/sortable';
+
 import {
     X,
     ArrowUpRight,
@@ -10,7 +12,7 @@ import {
     Save,
 } from 'lucide-react';
 
-import { cn } from '@/modules/common/helpers/utils';
+import { cn, match } from '@/modules/common/helpers/utils';
 import { sortBy } from '@/modules/common/helpers/arrays';
 import { sanitizeItem } from '@/modules/common/helpers/mappers';
 
@@ -20,6 +22,8 @@ import { Input } from '@/modules/shadcn/components/input';
 
 import { CardItem } from '@/modules/collections/components/card-item';
 import { ConfirmPopover } from '@/modules/common/components/confirm-popover';
+import { CollectionSortableContext } from './collection-sortable-context';
+import { useCollectionsActions } from '@/store/collections';
 
 export const CollectionItem = ({
     className,
@@ -39,10 +43,12 @@ export const CollectionItem = ({
     const [editting, setEditting] = useState(false);
     const [newName, setNewName] = useState(name);
 
-    const iterableItems = Object.values(items) || [];
+    const { sortItems } = useCollectionsActions();
 
-    const { setNodeRef, isOver } = useDroppable({
-        id: `collection-${id}`,
+    const iterableItems = sortBy(Object.values(items), 'index');
+
+    const { setNodeRef, isOver, attributes, listeners } = useDroppable({
+        id: `collection-item-${id}`,
         data: {
             id,
             name,
@@ -77,22 +83,64 @@ export const CollectionItem = ({
         onSaveHere?.({ id });
     };
 
-    useDndMonitor({
-        onDragEnd: event => {
-            const self = event.over?.data?.current;
-            const item = event.active?.data?.current;
+    //* DnD
 
-            if (self?.id === id && item?.type === 'tab') {
+    const matchers = {
+        attach: {
+            matcher: ({ activeData, overData }) => {
+                const isSameCollection = overData?.id === id;
+                const activeIsTab = activeData?.type === 'tab';
+                const overNotCard = overData?.type !== 'card';
+                return isSameCollection && activeIsTab && overNotCard;
+            },
+            handler: ({ activeData }) => {
                 onAttachItem?.({
                     collectionId: id,
-                    id: item?.id,
-                    payload: sanitizeItem(item),
+                    id: activeData?.id,
+                    payload: sanitizeItem(activeData),
                 });
-            }
+            },
+        },
+        move: {
+            matcher: ({ activeData, overData }) => {
+                const isOtherCollection = overData?.id !== id;
+                const activeIsCard = activeData?.type === 'card';
+                const overNotCard = overData?.type !== 'card';
+                return isOtherCollection && activeIsCard && overNotCard;
+            },
+            handler: ({ activeData, overData }) => {
+                onMoveItem?.({ id: activeData?.id, targetCollectionId: overData?.id });
+            },
+        },
+        sort: {
+            matcher: ({ active, over, activeData, overData }) => {
+                console.log('sort matcher', { active, over, activeData, overData });
+                const areDifferent = active?.id !== over?.id;
+                const areCards = activeData?.type === 'card' && overData?.type === 'card';
+                return areDifferent && areCards;
+            },
+            handler: ({ activeData, overData }) => {
+                const oldIndex = iterableItems.findIndex(item => item.id === activeData?.id);
+                const newIndex = iterableItems.findIndex(item => item.id === overData?.id);
+                const sortedItems = arrayMove(iterableItems, oldIndex, newIndex).map(
+                    item => item?.id,
+                );
+                sortItems({ collectionId: id, items: sortedItems });
+            },
+        },
+    };
 
-            if (self?.id !== id && item?.type === 'card') {
-                onMoveItem?.({ id: item?.id, targetCollectionId: self?.id });
-            }
+    useDndMonitor({
+        onDragEnd: event => {
+            const { active, over } = event;
+            const activeData = active?.data?.current;
+            const overData = over?.data?.current;
+
+            match({ active, over, activeData, overData })
+                .when(matchers.attach.matcher, matchers.attach.handler)
+                .when(matchers.move.matcher, matchers.move.handler)
+                .when(matchers.sort.matcher, matchers.sort.handler)
+                .run();
         },
     });
 
@@ -100,7 +148,7 @@ export const CollectionItem = ({
         <div
             data-layer='collection-item'
             className={cn(
-                'relative flex flex-col gap-4 p-4 border-b border-b-neutral-200',
+                'relative flex flex-col gap-4 p-4 pl-8 border-b border-b-neutral-200',
                 'dark:border-b-neutral-700',
                 className,
             )}
@@ -212,7 +260,13 @@ export const CollectionItem = ({
             </div>
 
             {expanded && (
-                <div ref={setNodeRef} data-layer='cards' className='flex flex-row flex-wrap gap-4'>
+                <div
+                    ref={setNodeRef}
+                    data-layer='cards'
+                    className='flex flex-row flex-wrap gap-4'
+                    {...attributes}
+                    {...listeners}
+                >
                     {!iterableItems.length && (
                         <div
                             className={cn(
@@ -228,14 +282,17 @@ export const CollectionItem = ({
                         </div>
                     )}
 
-                    {sortBy(iterableItems, 'index').map((item, index) => (
-                        <CardItem
-                            key={item.id}
-                            item={item}
-                            index={index}
-                            onRemove={item => onRemoveItem?.(id, item)}
-                        />
-                    ))}
+                    <CollectionSortableContext collectionId={id} items={iterableItems}>
+                        {iterableItems.map((item, index) => (
+                            <CardItem
+                                key={item.id}
+                                collectionId={id}
+                                item={item}
+                                index={index}
+                                onRemove={item => onRemoveItem?.(id, item)}
+                            />
+                        ))}
+                    </CollectionSortableContext>
                 </div>
             )}
         </div>

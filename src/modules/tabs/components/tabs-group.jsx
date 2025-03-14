@@ -86,7 +86,7 @@ export const TabsGroup = ({ className, id, index, tabs }) => {
             {open && (
                 <div data-layer='items' className='flex flex-col gap-2'>
                     {tabs.map(tab => (
-                        <TabItem key={tab.id} item={tab} />
+                        <TabItem key={tab.id} windowId={id} item={tab} />
                     ))}
                 </div>
             )}

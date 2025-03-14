@@ -1,6 +1,9 @@
 import { nanoid } from 'nanoid';
+import { useDndMonitor } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
 import { Plus } from 'lucide-react';
+
+import { useCollections, useCollectionsActions } from '@/store/collections';
 
 import { reverse, sortBy } from '@/modules/common/helpers/arrays';
 import { newItem } from '@/modules/common/helpers/mappers';
@@ -10,13 +13,12 @@ import {
     getCurrentWindowTabs,
 } from '@/modules/common/helpers/chrome';
 
-import { useCollections, useCollectionsActions } from '@/store/collections';
-
 import { Button } from '@/modules/shadcn/components/button';
 import { ScrollArea } from '@/modules/shadcn/components/scroll-area';
 
 import { CreateCollectionDialog } from '@/modules/collections/components/create-collection-dialog';
 import { CollectionItem } from '@/modules/collections/components/collection-item';
+
 import { CollectionsSortableContext } from './components/collections-sortable-contex';
 import { CollectionSortableItem } from './components/collection-sortable-item';
 
@@ -95,19 +97,25 @@ export const Collections = () => {
     };
 
     //* Sortable
+    useDndMonitor({
+        onDragEnd: event => {
+            const { active, over } = event;
+            const activeData = active?.data?.current;
+            const overData = over?.data?.current;
 
-    const handleDragEnd = event => {
-        const { active, over } = event;
+            const areDifferent = active?.id !== over?.id;
+            const areSortables = overData?.sortable && activeData?.sortable;
 
-        if (active.id !== over.id) {
-            const oldIndex = iterableCollections.findIndex(item => item.id === active?.id);
-            const newIndex = iterableCollections.findIndex(item => item.id === over?.id);
-            const sortedItems = arrayMove(iterableCollections, oldIndex, newIndex).map(
-                item => item.id,
-            );
-            sortCollections({ items: reverse(sortedItems) });
-        }
-    };
+            if (areDifferent && areSortables) {
+                const oldIndex = iterableCollections.findIndex(item => item.id === activeData?.id);
+                const newIndex = iterableCollections.findIndex(item => item.id === overData?.id);
+                const sortedItems = arrayMove(iterableCollections, oldIndex, newIndex).map(
+                    item => item.id,
+                );
+                sortCollections({ items: reverse(sortedItems) });
+            }
+        },
+    });
 
     return (
         <ScrollArea
@@ -128,11 +136,12 @@ export const Collections = () => {
                 </div>
             )}
 
-            <CollectionsSortableContext items={iterableCollections} onDragEnd={handleDragEnd}>
+            <CollectionsSortableContext items={iterableCollections}>
                 {iterableCollections.map(collection => (
                     <CollectionSortableItem key={collection.id} item={collection}>
                         <CollectionItem
                             {...collection}
+                            key={collection.id}
                             onAttachItem={handleAttachItem}
                             onRemoveItem={handleRemoveItem}
                             onMoveItem={payload => handleMoveItem(collection.id, payload)}

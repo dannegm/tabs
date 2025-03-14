@@ -1,16 +1,14 @@
-import { DndContext } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 
-export const CollectionsSortableContext = ({ items, onDragEnd, children }) => {
-    const handleDragEnd = event => {
-        onDragEnd?.(event);
-    };
-
+export const CollectionsSortableContext = ({ items, children }) => {
+    const mappedItems = items.map(item => ({
+        ...item,
+        id: `collection-sortable-${item?.id}`,
+        _id: item?.id,
+    }));
     return (
-        <DndContext onDragEnd={handleDragEnd}>
-            <SortableContext items={items} strategy={verticalListSortingStrategy}>
-                {children}
-            </SortableContext>
-        </DndContext>
+        <SortableContext items={mappedItems} strategy={verticalListSortingStrategy}>
+            {children}
+        </SortableContext>
     );
 };

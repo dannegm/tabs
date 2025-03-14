@@ -1,17 +1,13 @@
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import { DndContext } from '@dnd-kit/core';
-
-import { store, persistor } from '@/store/store';
 import { useDocumentTitle } from '@/modules/common/hooks/use-document-title';
+import { StoreProvider } from './store-provider';
+import { DndProvider } from './dnd-provider';
 
 export const Providers = ({ children }) => {
     useDocumentTitle('Tabs.');
+
     return (
-        <Provider store={store}>
-            <PersistGate persistor={persistor}>
-                <DndContext>{children}</DndContext>
-            </PersistGate>
-        </Provider>
+        <StoreProvider>
+            <DndProvider>{children}</DndProvider>
+        </StoreProvider>
     );
 };
