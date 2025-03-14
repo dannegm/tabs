@@ -53,3 +53,5 @@ export const Tabs = ({ className }) => {
         </aside>
     );
 };
+
+export default Tabs;

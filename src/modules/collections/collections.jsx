@@ -112,7 +112,7 @@ export const Collections = () => {
     return (
         <ScrollArea
             data-layer='collections'
-            className='flex-1 overflow-scroll flex flex-col'
+            className='flex-1 overflow-scroll overflow-x-hidden overflow-y-scroll flex flex-col'
             classNames={{ thumb: 'dark:bg-neutral-600' }}
             type='always'
         >

@@ -19,3 +19,5 @@ export const Main = ({ className }) => {
         </section>
     );
 };
+
+export default Main;
