@@ -1,6 +1,6 @@
-import { fromArray } from '@/modules/common/helpers/objects';
-import { createSlice } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
+import { createSlice } from '@reduxjs/toolkit';
+import { fromArray } from '@/modules/common/helpers/objects';
 
 const initialState = {};
 
@@ -41,6 +41,15 @@ const collectionsSlice = createSlice({
                 ...state,
                 ...collections,
             };
+        },
+        sortCollections: (state, action) => {
+            const { items } = action.payload;
+
+            items.forEach((id, index) => {
+                if (state[id]) {
+                    state[id].index = index;
+                }
+            });
         },
 
         //* Items
@@ -101,6 +110,7 @@ const {
     toggleCollection,
     clearCollections,
     importCollection,
+    sortCollections,
 
     //* Items
     appendItems,
@@ -127,6 +137,7 @@ export const useCollectionsActions = () => {
         removeCollection: ({ id }) => dispatch(removeCollection({ id })),
         clearCollections: () => dispatch(clearCollections()),
         importCollection: ({ collections }) => dispatch(importCollection({ collections })),
+        sortCollections: ({ items }) => dispatch(sortCollections({ items })),
 
         //* Items
         appendItems: ({ collectionId, items }) => dispatch(appendItems({ collectionId, items })),

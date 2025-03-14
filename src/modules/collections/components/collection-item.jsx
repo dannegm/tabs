@@ -19,7 +19,6 @@ import { Tooltip } from '@/modules/shadcn/components/tooltip-simple';
 import { Input } from '@/modules/shadcn/components/input';
 
 import { CardItem } from '@/modules/collections/components/card-item';
-import { ConfirmDialog } from '@/modules/common/components/confirm-dialog';
 import { ConfirmPopover } from '@/modules/common/components/confirm-popover';
 
 export const CollectionItem = ({
@@ -100,7 +99,6 @@ export const CollectionItem = ({
     return (
         <div
             data-layer='collection-item'
-            ref={setNodeRef}
             className={cn(
                 'relative flex flex-col gap-4 p-4 border-b border-b-neutral-200',
                 'dark:border-b-neutral-700',
@@ -214,7 +212,7 @@ export const CollectionItem = ({
             </div>
 
             {expanded && (
-                <div data-layer='cards' className='flex flex-row flex-wrap gap-4'>
+                <div ref={setNodeRef} data-layer='cards' className='flex flex-row flex-wrap gap-4'>
                     {!iterableItems.length && (
                         <div
                             className={cn(

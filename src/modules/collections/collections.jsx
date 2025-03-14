@@ -1,4 +1,5 @@
 import { nanoid } from 'nanoid';
+import { arrayMove } from '@dnd-kit/sortable';
 import { Plus } from 'lucide-react';
 
 import { reverse, sortBy } from '@/modules/common/helpers/arrays';
@@ -16,6 +17,8 @@ import { ScrollArea } from '@/modules/shadcn/components/scroll-area';
 
 import { CreateCollectionDialog } from '@/modules/collections/components/create-collection-dialog';
 import { CollectionItem } from '@/modules/collections/components/collection-item';
+import { CollectionsSortableContext } from './components/collections-sortable-contex';
+import { CollectionSortableItem } from './components/collection-sortable-item';
 
 export const Collections = () => {
     const collections = useCollections();
@@ -26,6 +29,7 @@ export const Collections = () => {
         editCollection,
         toggleCollection,
         removeCollection,
+        sortCollections,
 
         //* Items
         appendItems,
@@ -34,7 +38,7 @@ export const Collections = () => {
         removeItem,
     } = useCollectionsActions();
 
-    const iterableCollections = reverse(Object.values(collections));
+    const iterableCollections = sortBy(Object.values(collections), 'index', 'desc');
 
     //* Collections
     const handleAddCollection = ({ name }) => {
@@ -90,6 +94,21 @@ export const Collections = () => {
         });
     };
 
+    //* Sortable
+
+    const handleDragEnd = event => {
+        const { active, over } = event;
+
+        if (active.id !== over.id) {
+            const oldIndex = iterableCollections.findIndex(item => item.id === active?.id);
+            const newIndex = iterableCollections.findIndex(item => item.id === over?.id);
+            const sortedItems = arrayMove(iterableCollections, oldIndex, newIndex).map(
+                item => item.id,
+            );
+            sortCollections({ items: reverse(sortedItems) });
+        }
+    };
+
     return (
         <ScrollArea
             data-layer='collections'
@@ -109,24 +128,23 @@ export const Collections = () => {
                 </div>
             )}
 
-            {sortBy(iterableCollections, 'index', 'desc').map(collection => {
-                const iterableItems = Object.values(collection?.items) || [];
-                return (
-                    <CollectionItem
-                        key={collection.id}
-                        className='last:mb-16'
-                        {...collection}
-                        onAttachItem={handleAttachItem}
-                        onRemoveItem={handleRemoveItem}
-                        onMoveItem={payload => handleMoveItem(collection.id, payload)}
-                        onEdit={handleEditCollection}
-                        onToggleExpanded={handleToggleCollection}
-                        onRemove={handleRemoveCollection}
-                        onOpenEverything={handleOpenEverything}
-                        onSaveHere={handleSaveHere}
-                    />
-                );
-            })}
+            <CollectionsSortableContext items={iterableCollections} onDragEnd={handleDragEnd}>
+                {iterableCollections.map(collection => (
+                    <CollectionSortableItem key={collection.id} item={collection}>
+                        <CollectionItem
+                            {...collection}
+                            onAttachItem={handleAttachItem}
+                            onRemoveItem={handleRemoveItem}
+                            onMoveItem={payload => handleMoveItem(collection.id, payload)}
+                            onEdit={handleEditCollection}
+                            onToggleExpanded={handleToggleCollection}
+                            onRemove={handleRemoveCollection}
+                            onOpenEverything={handleOpenEverything}
+                            onSaveHere={handleSaveHere}
+                        />
+                    </CollectionSortableItem>
+                ))}
+            </CollectionsSortableContext>
         </ScrollArea>
     );
 };
