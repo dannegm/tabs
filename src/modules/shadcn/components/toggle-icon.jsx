@@ -5,8 +5,8 @@ import { Toggle } from '@/modules/shadcn/components/toggle';
 import { Square, SquareDashed } from 'lucide-react';
 
 export const ToggleIcon = ({ className, icons, ...props }) => {
-    const onIcon = icons?.on || <Square />;
-    const offIcon = icons?.off || <SquareDashed />;
+    const onIcon = icons?.on || <Square fill='currentColor' />;
+    const offIcon = icons?.off || <Square />;
 
     return (
         <Toggle
