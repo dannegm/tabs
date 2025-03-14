@@ -47,15 +47,6 @@ export const CollectionItem = ({
 
     const iterableItems = sortBy(Object.values(items), 'index');
 
-    const { setNodeRef, isOver, attributes, listeners } = useDroppable({
-        id: `collection-item-${id}`,
-        data: {
-            id,
-            name,
-            type: 'collection',
-        },
-    });
-
     const handleEditCancel = () => {
         setEditting(false);
         setNewName(name);
@@ -84,7 +75,6 @@ export const CollectionItem = ({
     };
 
     //* DnD
-
     const matchers = {
         attach: {
             matcher: ({ activeData, overData }) => {
@@ -153,14 +143,6 @@ export const CollectionItem = ({
                 className,
             )}
         >
-            <div
-                data-layer='target'
-                className={cn(
-                    'hidden absolute inset-2 border-2 border-dashed border-rose-500 rounded-md pointer-events-none',
-                    { block: isOver },
-                )}
-            />
-
             <div data-layer='header' className='group flex flex-row items-center gap-2'>
                 {!editting ? (
                     <div data-layer='name' className='flex flex-row items-center gap-1'>
@@ -260,22 +242,13 @@ export const CollectionItem = ({
             </div>
 
             {expanded && (
-                <div
-                    ref={setNodeRef}
-                    data-layer='cards'
-                    className='flex flex-row flex-wrap gap-4'
-                    {...attributes}
-                    {...listeners}
-                >
+                <div data-layer='cards' className='flex flex-row flex-wrap gap-4'>
                     {!iterableItems.length && (
                         <div
                             className={cn(
                                 'flex-center w-full h-28 bg-neutral-100 text-neutral-500 text-sm rounded-md',
                                 'dark:bg-neutral-700 dark:text-neutral-400',
-                                {
-                                    'bg-rose-200 text-rose-500 dark:bg-rose-500/40 dark:text-rose-400 ':
-                                        isOver,
-                                },
+                                'group-[.drag-over]/sortable:bg-rose-200 group-[.drag-over]/sortable:text-rose-500 group-[.drag-over]/sortable:dark:bg-rose-500/40 group-[.drag-over]/sortable:dark:text-rose-400',
                             )}
                         >
                             Drag tabs here.
