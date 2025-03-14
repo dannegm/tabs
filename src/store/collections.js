@@ -101,7 +101,6 @@ const collectionsSlice = createSlice({
         },
         sortItems: (state, action) => {
             const { collectionId, items } = action.payload;
-            console.log({ collectionId, items });
             items.forEach((id, index) => {
                 if (state[collectionId].items[id]) {
                     state[collectionId].items[id].index = index;

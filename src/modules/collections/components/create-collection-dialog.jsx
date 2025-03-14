@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Save } from 'lucide-react';
 import { uniqueNamesGenerator, adjectives, animals } from 'unique-names-generator';
 
-import { cn, styled } from '@/modules/common/helpers/utils';
+import { styled } from '@/modules/common/helpers/utils';
 import { Button } from '@/modules/shadcn/components/button';
 import { Input } from '@/modules/shadcn/components/input';
 import { Label } from '@/modules/shadcn/components/label';

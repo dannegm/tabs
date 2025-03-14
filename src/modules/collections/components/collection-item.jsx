@@ -12,6 +12,8 @@ import {
     Save,
 } from 'lucide-react';
 
+import { useCollectionsActions } from '@/store/collections';
+
 import { cn, match } from '@/modules/common/helpers/utils';
 import { sortBy } from '@/modules/common/helpers/arrays';
 import { sanitizeItem } from '@/modules/common/helpers/mappers';
@@ -20,10 +22,11 @@ import { Button } from '@/modules/shadcn/components/button';
 import { Tooltip } from '@/modules/shadcn/components/tooltip-simple';
 import { Input } from '@/modules/shadcn/components/input';
 
-import { CardItem } from '@/modules/collections/components/card-item';
 import { ConfirmPopover } from '@/modules/common/components/confirm-popover';
+
+import { CardItem } from '@/modules/collections/components/card-item';
+
 import { CollectionSortableContext } from './collection-sortable-context';
-import { useCollectionsActions } from '@/store/collections';
 
 export const CollectionItem = ({
     className,
@@ -106,7 +109,6 @@ export const CollectionItem = ({
         },
         sort: {
             matcher: ({ active, over, activeData, overData }) => {
-                console.log('sort matcher', { active, over, activeData, overData });
                 const areDifferent = active?.id !== over?.id;
                 const areCards = activeData?.type === 'card' && overData?.type === 'card';
                 return areDifferent && areCards;
@@ -126,7 +128,6 @@ export const CollectionItem = ({
         onDragStart: event => {
             const { active } = event;
             const activeData = active?.data?.current;
-            console.log(activeData);
             setOverlayItem(activeData);
         },
         onDragEnd: event => {

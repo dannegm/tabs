@@ -3,11 +3,6 @@ import { FolderInput, FolderOutput, Trash2 } from 'lucide-react';
 
 import { useCollectionsActions } from '@/store/collections';
 
-import { ConfirmDialog } from '@/modules/common/components/confirm-dialog';
-
-import { ImportCollection } from '@/modules/collections/components/import-collection';
-import { ExportCollection } from '@/modules/collections/components/export-collection';
-
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -16,6 +11,11 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/modules/shadcn/components/dropdown-menu';
+
+import { ConfirmDialog } from '@/modules/common/components/confirm-dialog';
+
+import { ImportCollection } from '@/modules/collections/components/import-collection';
+import { ExportCollection } from '@/modules/collections/components/export-collection';
 
 export const SettingsMenu = ({ children, side = 'bottom', align = 'end' }) => {
     const [open, setOpen] = useState(false);

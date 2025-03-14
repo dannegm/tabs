@@ -1,7 +1,7 @@
-import { cn } from '@/modules/common/helpers/utils';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { GripVertical } from 'lucide-react';
+import { cn } from '@/modules/common/helpers/utils';
 
 export const CollectionSortableItem = ({ item, children }) => {
     const { setNodeRef, attributes, listeners, transform, transition, isDragging, isOver } =

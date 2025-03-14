@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import { nanoid } from 'nanoid';
 import { z } from 'zod';
 
+import { useCollectionsActions } from '@/store/collections';
+
 import { reverse } from '@/modules/common/helpers/arrays';
 import { fromArray } from '@/modules/common/helpers/objects';
-
-import { useCollectionsActions } from '@/store/collections';
 
 const cardSchema = z.object({
     title: z.string(),

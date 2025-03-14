@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { useDndMonitor, useDraggable } from '@dnd-kit/core';
+import { useDndMonitor } from '@dnd-kit/core';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { X, File } from 'lucide-react';

@@ -4,10 +4,10 @@ import { X, File, Volume2, VenetianMask } from 'lucide-react';
 
 import { cn } from '@/modules/common/helpers/utils';
 import { sanitizeItem } from '@/modules/common/helpers/mappers';
+import { closeTab } from '@/modules/common/helpers/chrome';
 
 import { Button } from '@/modules/shadcn/components/button';
 import { Tooltip } from '@/modules/shadcn/components/tooltip-simple';
-import { closeTab } from '@/modules/common/helpers/chrome';
 
 export const TabItem = ({ className, windowId, item }) => {
     const { setNodeRef, attributes, listeners, transform, isDragging } = useDraggable({

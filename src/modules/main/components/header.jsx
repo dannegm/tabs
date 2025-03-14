@@ -1,18 +1,18 @@
 import { nanoid } from 'nanoid';
-import { Bolt, Plus, Trash2 } from 'lucide-react';
-
-import { cn } from '@/modules/common/helpers/utils';
+import { Bolt, Plus } from 'lucide-react';
 
 import { useCollectionsActions } from '@/store/collections';
+
+import { cn } from '@/modules/common/helpers/utils';
 
 import { DarkModeToggle } from '@/modules/main/components/dark-mode-toggle';
 import { DebugModeToggle } from '@/modules/main/components/debug-mode-toggle';
 import { SettingsMenu } from '@/modules/main/components/settings-menu';
 
-import { CreateCollectionDialog } from '@/modules/collections/components/create-collection-dialog';
-
 import { Button } from '@/modules/shadcn/components/button';
 import { Tooltip } from '@/modules/shadcn/components/tooltip-simple';
+
+import { CreateCollectionDialog } from '@/modules/collections/components/create-collection-dialog';
 
 export const Header = () => {
     const { addCollection } = useCollectionsActions();

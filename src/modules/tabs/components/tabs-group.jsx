@@ -3,15 +3,17 @@ import { nanoid } from 'nanoid';
 import { formatDate } from 'date-fns';
 import { ChevronDown, ChevronRight, Download, X } from 'lucide-react';
 
+import { useCollectionsActions } from '@/store/collections';
+
 import { cn } from '@/modules/common/helpers/utils';
 import { closeTabsByWindow, closeWindow } from '@/modules/common/helpers/chrome';
 import { newItem } from '@/modules/common/helpers/mappers';
 import { fromArray } from '@/modules/common/helpers/objects';
-import { useCollectionsActions } from '@/store/collections';
 
 import { Button } from '@/modules/shadcn/components/button';
 import { Separator } from '@/modules/shadcn/components/separator';
 import { Tooltip } from '@/modules/shadcn/components/tooltip-simple';
+
 import { TabItem } from './tab-item';
 
 export const TabsGroup = ({ className, id, index, tabs }) => {
