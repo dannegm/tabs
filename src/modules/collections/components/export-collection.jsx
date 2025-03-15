@@ -12,8 +12,9 @@ export const ExportCollection = ({ onSuccess, children }) => {
                 cards: Object.values(collection.items).map(item => ({
                     title: item.title,
                     url: item.url,
-                    customTitle: '',
-                    customDescription: '',
+                    customTitle: item?.customTitle || '',
+                    customDescription: item?.customDescription || '',
+                    favIconUrl: item.favIconUrl,
                 })),
             })),
         };

@@ -3,6 +3,8 @@ export const sanitizeItem = item => ({
     title: item.title,
     url: item.url,
     favIconUrl: item.favIconUrl,
+    customTitle: '',
+    customDescription: '',
 });
 
 export const newItem = (item, index = 0) => ({
@@ -12,4 +14,6 @@ export const newItem = (item, index = 0) => ({
     title: item.title,
     url: item.url,
     favIconUrl: item.favIconUrl,
+    customTitle: '',
+    customDescription: '',
 });

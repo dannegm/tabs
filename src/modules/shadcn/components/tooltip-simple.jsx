@@ -10,9 +10,7 @@ export const Tooltip = ({ content, side = 'bottom', children }) => {
         <TooltipProvider>
             <TooltipPrimitive>
                 <TooltipTrigger asChild>{children}</TooltipTrigger>
-                <TooltipContent side={side}>
-                    <p>{content}</p>
-                </TooltipContent>
+                <TooltipContent side={side}>{content}</TooltipContent>
             </TooltipPrimitive>
         </TooltipProvider>
     );

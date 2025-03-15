@@ -35,6 +35,7 @@ export const CollectionItem = ({
     expanded,
     items,
     onAttachItem,
+    onUpdateItem,
     onRemoveItem,
     onMoveItem,
     onEdit,
@@ -277,6 +278,7 @@ export const CollectionItem = ({
                                 item={item}
                                 index={index}
                                 onRemove={item => onRemoveItem?.(id, item)}
+                                onUpdate={item => onUpdateItem?.(id, item)}
                             />
                         ))}
                     </CollectionSortableContext>

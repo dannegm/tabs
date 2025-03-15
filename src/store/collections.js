@@ -80,6 +80,18 @@ const collectionsSlice = createSlice({
                 ...payload,
             };
         },
+        updateItem: (state, action) => {
+            const { collectionId, id, payload } = action.payload;
+
+            console.log(payload);
+
+            if (!state[collectionId]) return;
+            const originalPayload = state[collectionId].items[id];
+            state[collectionId].items[id] = {
+                ...originalPayload,
+                ...payload,
+            };
+        },
         moveItem: (state, action) => {
             const { id, originalCollectionId, targetCollectionId } = action.payload;
 
@@ -123,6 +135,7 @@ const {
     //* Items
     appendItems,
     addItem,
+    updateItem,
     moveItem,
     removeItem,
     sortItems,
@@ -152,6 +165,8 @@ export const useCollectionsActions = () => {
         appendItems: ({ collectionId, items }) => dispatch(appendItems({ collectionId, items })),
         addItem: ({ collectionId, id, payload }) =>
             dispatch(addItem({ collectionId, id, payload })),
+        updateItem: ({ collectionId, id, payload }) =>
+            dispatch(updateItem({ collectionId, id, payload })),
         moveItem: ({ id, originalCollectionId, targetCollectionId }) =>
             dispatch(moveItem({ id, originalCollectionId, targetCollectionId })),
         removeItem: ({ collectionId, id }) => dispatch(removeItem({ collectionId, id })),

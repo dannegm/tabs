@@ -36,6 +36,7 @@ export const Collections = () => {
         //* Items
         appendItems,
         addItem,
+        updateItem,
         moveItem,
         removeItem,
     } = useCollectionsActions();
@@ -73,6 +74,14 @@ export const Collections = () => {
         moveItem({ originalCollectionId, ...payload });
     };
 
+    const handleUpdateItem = (collectionId, item) => {
+        updateItem({
+            collectionId,
+            id: item?.id,
+            payload: item,
+        });
+    };
+
     const handleRemoveItem = (collectionId, { id }) => {
         removeItem({ collectionId, id });
     };
@@ -106,6 +115,7 @@ export const Collections = () => {
             const areDifferent = active?.id !== over?.id;
             const areSortables = overData?.sortable && activeData?.sortable;
 
+            //* Sort collections
             if (areDifferent && areSortables) {
                 const oldIndex = iterableCollections.findIndex(item => item.id === activeData?.id);
                 const newIndex = iterableCollections.findIndex(item => item.id === overData?.id);
@@ -144,6 +154,7 @@ export const Collections = () => {
                             key={collection.id}
                             onAttachItem={handleAttachItem}
                             onRemoveItem={handleRemoveItem}
+                            onUpdateItem={handleUpdateItem}
                             onMoveItem={payload => handleMoveItem(collection.id, payload)}
                             onEdit={handleEditCollection}
                             onToggleExpanded={handleToggleCollection}

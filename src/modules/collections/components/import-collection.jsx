@@ -68,7 +68,11 @@ export const ImportCollection = ({ children, onError, onSuccess }) => {
                         created_at: Date.now(),
                         title: card.title,
                         url: card.url,
-                        favIconUrl: `https://www.google.com/s2/favicons?domain=${domain}&sz=256`,
+                        customTitle: card?.customTitle || '',
+                        customDescription: card?.customDescription || '',
+                        favIconUrl:
+                            card?.favIconUrl ||
+                            `https://www.google.com/s2/favicons?domain=${domain}&sz=256`,
                     };
                 }),
             }))
