@@ -1,9 +1,9 @@
 import { nanoid } from 'nanoid';
 import { Bolt, Plus } from 'lucide-react';
 
-import { useCollectionsActions } from '@/store/collections';
+import { useCollections, useCollectionsActions } from '@/store/collections';
 
-import { cn } from '@/modules/common/helpers/utils';
+import { cn, styled } from '@/modules/common/helpers/utils';
 
 import { DarkModeToggle } from '@/modules/main/components/dark-mode-toggle';
 import { DebugModeToggle } from '@/modules/main/components/debug-mode-toggle';
@@ -14,8 +14,12 @@ import { Tooltip } from '@/modules/shadcn/components/tooltip-simple';
 
 import { CreateCollectionDialog } from '@/modules/collections/components/create-collection-dialog';
 
+const Separator = styled('div', 'flex-none h-4 w-px bg-neutral-200 dark:bg-neutral-700');
+
 export const Header = () => {
-    const { addCollection } = useCollectionsActions();
+    const collections = useCollections();
+    const collectionsCount = Object.keys(collections).length;
+    const { addCollection, expandAllColections, collapseAllColections } = useCollectionsActions();
 
     const handleAddCollection = ({ name }) => {
         const payload = {
@@ -34,7 +38,7 @@ export const Header = () => {
                 'dark:border-b-neutral-700',
             )}
         >
-            <div data-layer='logo' className='flex-1'>
+            <div data-layer='logo' className='flex-1 flex flex-row items-center gap-2'>
                 <h1
                     className={cn(
                         'text-sm font-bold uppercase text-rose-600',
@@ -43,9 +47,30 @@ export const Header = () => {
                 >
                     Tabs.
                 </h1>
+                <Separator />
+                <p className='text-xs'>
+                    {collectionsCount === 1 ? `1 collection` : `${collectionsCount} collections`}{' '}
+                </p>
             </div>
 
             <div data-layer='toolbar' className='flex flex-row gap-1 items-center'>
+                <Button
+                    className='dark:text-neutral-200 dark:hover:bg-neutral-700'
+                    size='sm'
+                    variant='ghost'
+                    onClick={expandAllColections}
+                >
+                    Expand
+                </Button>
+                <Button
+                    className='dark:text-neutral-200 dark:hover:bg-neutral-700'
+                    size='sm'
+                    variant='ghost'
+                    onClick={collapseAllColections}
+                >
+                    Collapse
+                </Button>
+
                 <DebugModeToggle />
                 <DarkModeToggle />
 

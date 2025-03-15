@@ -1,5 +1,6 @@
 import { useCollections } from '@/store/collections';
 import { downloadBlob } from '@/modules/common/helpers/utils';
+import { reverse } from '@/modules/common/helpers/arrays';
 
 export const ExportCollection = ({ onSuccess, children }) => {
     const collections = useCollections();
@@ -7,7 +8,7 @@ export const ExportCollection = ({ onSuccess, children }) => {
     const prepareData = data => {
         const content = {
             version: 3,
-            lists: Object.values(data).map(collection => ({
+            lists: reverse(Object.values(data)).map(collection => ({
                 title: collection.name,
                 cards: Object.values(collection.items).map(item => ({
                     title: item.title,

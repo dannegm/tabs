@@ -32,6 +32,16 @@ const collectionsSlice = createSlice({
             const { id } = action.payload;
             state[id].expanded = !state[id].expanded;
         },
+        expandAllColections: state => {
+            for (const id in state) {
+                state[id].expanded = true;
+            }
+        },
+        collapseAllColections: state => {
+            for (const id in state) {
+                state[id].expanded = false;
+            }
+        },
         clearCollections: () => {
             return {};
         },
@@ -128,6 +138,8 @@ const {
     editCollection,
     removeCollection,
     toggleCollection,
+    expandAllColections,
+    collapseAllColections,
     clearCollections,
     importCollection,
     sortCollections,
@@ -156,6 +168,8 @@ export const useCollectionsActions = () => {
             dispatch(addCollection({ id, name, expanded, items })),
         editCollection: ({ id, name }) => dispatch(editCollection({ id, name })),
         toggleCollection: ({ id }) => dispatch(toggleCollection({ id })),
+        expandAllColections: () => dispatch(expandAllColections()),
+        collapseAllColections: () => dispatch(collapseAllColections()),
         removeCollection: ({ id }) => dispatch(removeCollection({ id })),
         clearCollections: () => dispatch(clearCollections()),
         importCollection: ({ collections }) => dispatch(importCollection({ collections })),
