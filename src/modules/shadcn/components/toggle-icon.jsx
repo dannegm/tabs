@@ -2,7 +2,7 @@
 
 import { cn } from '@/modules/common/helpers/utils';
 import { Toggle } from '@/modules/shadcn/components/toggle';
-import { Square, SquareDashed } from 'lucide-react';
+import { Square } from 'lucide-react';
 
 export const ToggleIcon = ({ className, icons, ...props }) => {
     const onIcon = icons?.on || <Square fill='currentColor' />;

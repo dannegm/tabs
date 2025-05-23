@@ -4,6 +4,7 @@ import { cn } from '@/modules/common/helpers/utils';
 import { bindTabsEvents, getAllTabs, unbindTabsEvents } from '@/modules/common/helpers/chrome';
 import { groupBy } from '@/modules/common/helpers/arrays';
 
+import { ScrollArea } from '@/modules/shadcn/components/scroll-area';
 import { TabsGroup } from '@/modules/tabs/components/tabs-group';
 
 export const Tabs = ({ className }) => {
@@ -29,7 +30,7 @@ export const Tabs = ({ className }) => {
         <aside
             data-layer='tabs'
             className={cn(
-                'w-full h-full flex flex-col gap-4 border-l border-l-neutral-200',
+                'w-full h-full flex flex-col border-l border-l-neutral-200',
                 'dark:bg-neutral-800 dark:text-neutral-50 dark:border-l-neutral-700',
                 className,
             )}
@@ -45,11 +46,13 @@ export const Tabs = ({ className }) => {
                 <div className='text-xs font-bold uppercase'>Open Tabs</div>
             </div>
 
-            <div data-layer='tabs-groups' className='flex flex-col gap-4 px-4'>
-                {groups.map(([id, tabs], index) => (
-                    <TabsGroup key={id} id={id} index={index} tabs={tabs} />
-                ))}
-            </div>
+            <ScrollArea className='flex-1 max-h-[calc(100vh-3rem)]'>
+                <div data-layer='tabs-groups' className='flex flex-col gap-4 m-4'>
+                    {groups.map(([id, tabs], index) => (
+                        <TabsGroup key={id} id={id} index={index} tabs={tabs} />
+                    ))}
+                </div>
+            </ScrollArea>
         </aside>
     );
 };

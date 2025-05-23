@@ -54,7 +54,7 @@ export const CardItem = ({ className, collectionId, item, index, onRemove, onUpd
     return (
         <div ref={setNodeRef} style={style}>
             <div className='relative group'>
-                <div className='hidden group-hover:flex flex-row-reverse gap-1 absolute z-20 top-2 right-2'>
+                <div className='invisible group-hover:visible flex flex-row-reverse gap-1 absolute z-20 top-2 right-2'>
                     <ConfirmPopover
                         title='Remove card'
                         description='This action is permanent and cannot be undone.'

@@ -27,6 +27,7 @@ export const ConfirmPopover = ({
             <PopoverTrigger onClick={() => setOpen(true)} asChild>
                 {children}
             </PopoverTrigger>
+
             <PopoverContent
                 className='w-56 flex flex-col gap-4'
                 side={side}
@@ -41,6 +42,7 @@ export const ConfirmPopover = ({
                     {title && <h1 className='font-bold'>{title}</h1>}
                     <p className='text-pretty'>{description}</p>
                 </div>
+
                 <div className='flex flex-row gap-2'>
                     <Button size='sm' variant='secondary' onClick={handleCancel}>
                         {cancelLabe}
