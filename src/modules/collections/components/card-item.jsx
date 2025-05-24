@@ -9,6 +9,8 @@ import { Tooltip } from '@/modules/shadcn/components/tooltip-simple';
 import { ConfirmPopover } from '@/modules/common/components/confirm-popover';
 import { Zelda } from '@/modules/common/components/zelda';
 
+import { useDradAndDrop, useDradAndDropActions } from '@/store/dragAndDrop';
+
 import { EditCardDialog } from './edit-card-dialog';
 
 export const CardItem = ({
@@ -21,6 +23,9 @@ export const CardItem = ({
     onSort,
     onTransfer,
 }) => {
+    const { setItemType, resetItemType } = useDradAndDropActions();
+    const { draggingItem } = useDradAndDrop();
+
     const [dragging, setDragging] = useState(false);
     const [dragOver, setDragOver] = useState(false);
 
@@ -31,14 +36,18 @@ export const CardItem = ({
     };
 
     const handleDragStart = event => {
+        event.stopPropagation();
+
+        setItemType({ type: 'card' });
         setDragging(true);
+
         const data = toJSON({ type: 'card', collectionId, data: item });
         event.dataTransfer.setData('text/plain', data);
-
         $anchor.current?.removeAttribute?.('href');
     };
 
     const handleDragEnd = () => {
+        resetItemType();
         setDragging(false);
 
         setTimeout(() => {
@@ -47,8 +56,10 @@ export const CardItem = ({
     };
 
     const handleDragOver = event => {
-        event.preventDefault();
-        setDragOver(true);
+        if (draggingItem?.type === 'card') {
+            event.preventDefault();
+            setDragOver(true);
+        }
     };
 
     const handleDragLeave = () => {
@@ -96,7 +107,9 @@ export const CardItem = ({
 
     return (
         <div
-            className='relative group flex'
+            className={cn('relative group flex transition-all duration-150', {
+                'translate-x-4': dragOver,
+            })}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
@@ -138,8 +151,8 @@ export const CardItem = ({
 
             <div
                 className={cn(
-                    'drag-over h-full w-0 transition-all duration-150 rounded-sm select-none bg-neutral-100 dark:bg-neutral-700',
-                    { 'w-52 mr-4': dragOver },
+                    'drag-over absolute h-full w-8 translate-x-0 transition-all duration-150 rounded-sm select-none bg-neutral-100 dark:bg-neutral-700',
+                    { '-translate-x-4': dragOver },
                 )}
             />
 

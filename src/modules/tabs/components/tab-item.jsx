@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { use, useState } from 'react';
 import { X, File, Volume2, VenetianMask } from 'lucide-react';
 
 import { cn } from '@/modules/common/helpers/utils';
@@ -8,19 +8,25 @@ import { Button } from '@/modules/shadcn/components/button';
 import { Tooltip } from '@/modules/shadcn/components/tooltip-simple';
 import { toJSON } from '@/modules/common/helpers/objects';
 
+import { useDradAndDropActions } from '@/store/dragAndDrop';
+
 export const TabItem = ({ className, item }) => {
+    const { setItemType, resetItemType } = useDradAndDropActions();
     const [dragging, setDragging] = useState(false);
+
     const handleClose = () => {
         closeTab(item?.id);
     };
 
     const handleDragStart = event => {
         setDragging(true);
+        setItemType({ type: 'tab' });
         const data = toJSON({ type: 'tab', data: item });
         event.dataTransfer.setData('text/plain', data);
     };
 
     const handleDragEnd = () => {
+        resetItemType();
         setDragging(false);
     };
 

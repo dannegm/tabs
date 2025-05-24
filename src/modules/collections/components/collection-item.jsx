@@ -26,6 +26,8 @@ import { Input } from '@/modules/shadcn/components/input';
 import { ConfirmPopover } from '@/modules/common/components/confirm-popover';
 import { CardItem } from '@/modules/collections/components/card-item';
 
+import { useDradAndDrop, useDradAndDropActions } from '@/store/dragAndDrop';
+
 export const CollectionItem = ({
     className,
     id,
@@ -43,8 +45,14 @@ export const CollectionItem = ({
     onSaveHere,
     onSort,
 }) => {
+    const { setItemType, resetItemType } = useDradAndDropActions();
+    const { draggingItem } = useDradAndDrop();
+
     const [dragging, setDragging] = useState(false);
-    const [dragOver, setDragOver] = useState(false);
+    const [dragOverCollection, setDragOverCollection] = useState(false);
+    const [dragOverCard, setDragOverCard] = useState(false);
+    const [dragOverTab, setDragOverTab] = useState(false);
+
     const [editting, setEditting] = useState(false);
     const [newName, setNewName] = useState(name);
 
@@ -84,15 +92,26 @@ export const CollectionItem = ({
     // * DnD
     const handleDragOver = event => {
         event.preventDefault();
-        setDragOver(true);
+        if (draggingItem?.type === 'collection') {
+            setDragOverCollection(true);
+        }
+        if (draggingItem?.type === 'card') {
+            setDragOverCard(true);
+        }
+        if (draggingItem?.type === 'tab') {
+            setDragOverTab(true);
+        }
     };
 
     const handleDragLeave = () => {
-        setDragOver(false);
+        setDragOverCollection(false);
+        setDragOverCard(false);
+        setDragOverTab(false);
     };
 
     const handleDrop = event => {
-        setDragOver(false);
+        handleDragLeave();
+
         const transferedData = event.dataTransfer.getData('text/plain');
         const { data, type, collectionId } = fromJSON(transferedData);
 
@@ -123,7 +142,8 @@ export const CollectionItem = ({
     };
 
     const handleSortCard = ({ active, over }) => {
-        setDragOver(false);
+        handleDragLeave();
+
         const oldIndex = iterableItems.findIndex(item => item.id === active?.id);
         const newIndex = iterableItems.findIndex(item => item.id === over?.id);
         const sortedItems = move(iterableItems, oldIndex, newIndex).map(item => item?.id);
@@ -131,7 +151,8 @@ export const CollectionItem = ({
     };
 
     const handleTransfer = ({ originalCollectionId, targetCollectionId, active, over }) => {
-        setDragOver(false);
+        handleDragLeave();
+
         const index = iterableItems.findIndex(item => item.id === over?.id);
         onMoveItem?.({
             index,
@@ -142,7 +163,9 @@ export const CollectionItem = ({
     };
 
     const handleDragStart = event => {
+        setItemType({ type: 'collection' });
         setDragging(true);
+
         const data = toJSON({ type: 'collection', data: { id } });
         event.dataTransfer.setData('text/plain', data);
     };
@@ -167,9 +190,9 @@ export const CollectionItem = ({
             ref={$collection}
             data-layer='collection-item'
             className={cn(
-                'relative flex flex-col gap-4 p-4 pl-8 border-b border-b-neutral-200 transition-all duration-150',
-                'dark:border-b-neutral-700',
-                { 'translate-x-6': dragOver },
+                'relative flex flex-col gap-4 p-4 pl-8 bg-white border-b border-b-neutral-200 transition-all duration-150',
+                'dark:bg-neutral-800 dark:border-b-neutral-700',
+                { 'translate-x-6': dragOverCollection },
                 className,
             )}
             onDragOver={handleDragOver}
@@ -191,9 +214,9 @@ export const CollectionItem = ({
 
             <div
                 className={cn(
-                    'absolute top-0 -left-6 w-0 h-full bg-rose-500 bg-strip-rose-600 inset-shadow-md transition-all duration-150',
+                    'absolute top-0 -left-6 w-0 h-full bg-strip-rose-200 dark:bg-strip-rose-600 inset-shadow-md transition-all duration-150',
                     {
-                        'w-6': dragOver,
+                        'w-6': dragOverCollection,
                     },
                 )}
             />
@@ -303,7 +326,7 @@ export const CollectionItem = ({
                         data-layer='target'
                         className={cn(
                             'hidden absolute inset-2 left-6 border-2 border-dashed border-rose-500 rounded-md pointer-events-none',
-                            { block: dragOver },
+                            { block: dragOverCard || dragOverTab },
                         )}
                     />
 

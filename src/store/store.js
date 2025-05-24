@@ -5,9 +5,11 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 import collectionsReducer from './collections';
+import dragAndDropReducer from './dragAndDrop';
 
 const rootReducer = combineReducers({
     collections: collectionsReducer,
+    dragAndDrop: dragAndDropReducer,
 });
 
 const persistConfig = {
