@@ -5,3 +5,7 @@ export const fromArray = (arr = [], key = 'index') => {
         return acc;
     }, {});
 };
+
+export const fromJSON = str => JSON.parse(str);
+
+export const toJSON = obj => JSON.stringify(obj);

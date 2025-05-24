@@ -92,3 +92,30 @@ export const unbindTabsEvents = (handler, events = tabsEvents) => {
         chrome?.tabs?.[event].addListener(handler);
     });
 };
+
+export const openLink = async ({ url, target = 'self' }) => {
+    const fallback = {
+        incognito: () => window.open(url, '_blank'),
+        window: () => window.open(url, '_blank'),
+        blank: () => window.open(url, '_blank'),
+        download: () => window.open(url, '_blank'),
+        self: () => (window.location.href = url),
+    };
+
+    const actions = {
+        incognito: () => chrome?.windows?.create?.({ url, incognito: true }),
+        window: () => chrome?.windows?.create?.({ url, incognito: false }),
+        blank: () => chrome?.tabs?.create?.({ url }),
+        download: () => chrome?.download?.download?.({ url, saveAs: true }),
+        self: () => (window.location.href = url),
+    };
+
+    const fallbackAction = fallback[target] || fallback.self;
+    const chromeAction = actions[target] || actions.self;
+
+    if (typeof chrome === 'undefined' || !chrome.tabs || !chrome.windows) {
+        return fallbackAction();
+    }
+
+    return chromeAction();
+};

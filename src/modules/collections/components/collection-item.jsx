@@ -1,6 +1,4 @@
-import { useState } from 'react';
-import { DragOverlay, useDndMonitor } from '@dnd-kit/core';
-import { arrayMove } from '@dnd-kit/sortable';
+import { useRef, useState } from 'react';
 
 import {
     X,
@@ -10,23 +8,23 @@ import {
     Download,
     SquarePen,
     Save,
+    GripVertical,
 } from 'lucide-react';
 
 import { useCollectionsActions } from '@/store/collections';
 
-import { cn, match } from '@/modules/common/helpers/utils';
-import { sortBy } from '@/modules/common/helpers/arrays';
+import { cn } from '@/modules/common/helpers/utils';
+import { move, sortBy } from '@/modules/common/helpers/arrays';
+import { fromJSON, toJSON } from '@/modules/common/helpers/objects';
 import { sanitizeItem } from '@/modules/common/helpers/mappers';
+import { closeTab } from '@/modules/common/helpers/chrome';
 
 import { Button } from '@/modules/shadcn/components/button';
 import { Tooltip } from '@/modules/shadcn/components/tooltip-simple';
 import { Input } from '@/modules/shadcn/components/input';
 
 import { ConfirmPopover } from '@/modules/common/components/confirm-popover';
-
 import { CardItem } from '@/modules/collections/components/card-item';
-
-import { CollectionSortableContext } from './collection-sortable-context';
 
 export const CollectionItem = ({
     className,
@@ -43,9 +41,14 @@ export const CollectionItem = ({
     onRemove,
     onOpenEverything,
     onSaveHere,
+    onSort,
 }) => {
+    const [dragging, setDragging] = useState(false);
+    const [dragOver, setDragOver] = useState(false);
     const [editting, setEditting] = useState(false);
     const [newName, setNewName] = useState(name);
+
+    const $collection = useRef();
 
     const { sortItems } = useCollectionsActions();
 
@@ -56,8 +59,8 @@ export const CollectionItem = ({
         setNewName(name);
     };
 
-    const handleEditSave = ev => {
-        ev.preventDefault();
+    const handleEditSave = event => {
+        event.preventDefault();
         setEditting(false);
         onEdit?.({ id, name: newName });
     };
@@ -78,84 +81,127 @@ export const CollectionItem = ({
         onSaveHere?.({ id });
     };
 
-    //* DnD
-    const [overlayItem, setOverlayItem] = useState(null);
-
-    const matchers = {
-        attach: {
-            matcher: ({ activeData, overData }) => {
-                const isSameCollection = overData?.id === id;
-                const activeIsTab = activeData?.type === 'tab';
-                const overNotCard = overData?.type !== 'card';
-                return isSameCollection && activeIsTab && overNotCard;
-            },
-            handler: ({ activeData }) => {
-                onAttachItem?.({
-                    collectionId: id,
-                    id: activeData?.id,
-                    payload: sanitizeItem(activeData),
-                });
-            },
-        },
-        move: {
-            matcher: ({ activeData, overData }) => {
-                const isOtherCollection = overData?.id !== id;
-                const activeIsCard = activeData?.type === 'card';
-                const overNotCard = overData?.type !== 'card';
-                return isOtherCollection && activeIsCard && overNotCard;
-            },
-            handler: ({ activeData, overData }) => {
-                onMoveItem?.({ id: activeData?.id, targetCollectionId: overData?.id });
-            },
-        },
-        sort: {
-            matcher: ({ active, over, activeData, overData }) => {
-                const areDifferent = active?.id !== over?.id;
-                const areCards = activeData?.type === 'card' && overData?.type === 'card';
-                return areDifferent && areCards;
-            },
-            handler: ({ activeData, overData }) => {
-                const oldIndex = iterableItems.findIndex(item => item.id === activeData?.id);
-                const newIndex = iterableItems.findIndex(item => item.id === overData?.id);
-                const sortedItems = arrayMove(iterableItems, oldIndex, newIndex).map(
-                    item => item?.id,
-                );
-                sortItems({ collectionId: id, items: sortedItems });
-            },
-        },
+    // * DnD
+    const handleDragOver = event => {
+        event.preventDefault();
+        setDragOver(true);
     };
 
-    useDndMonitor({
-        onDragStart: event => {
-            const { active } = event;
-            const activeData = active?.data?.current;
-            setOverlayItem(activeData);
-        },
-        onDragEnd: event => {
-            const { active, over } = event;
-            const activeData = active?.data?.current;
-            const overData = over?.data?.current;
+    const handleDragLeave = () => {
+        setDragOver(false);
+    };
 
-            match({ active, over, activeData, overData })
-                .when(matchers.attach.matcher, matchers.attach.handler)
-                .when(matchers.move.matcher, matchers.move.handler)
-                .when(matchers.sort.matcher, matchers.sort.handler)
-                .run();
+    const handleDrop = event => {
+        setDragOver(false);
+        const transferedData = event.dataTransfer.getData('text/plain');
+        const { data, type, collectionId } = fromJSON(transferedData);
 
-            setOverlayItem(null);
-        },
-    });
+        if (type === 'tab') {
+            onAttachItem?.({
+                collectionId: id,
+                id: data.id,
+                payload: sanitizeItem(data),
+            });
+
+            closeTab(data.id);
+        }
+
+        if (type === 'card') {
+            onMoveItem?.({
+                id: data?.id,
+                targetCollectionId: id,
+                originalCollectionId: collectionId,
+            });
+        }
+
+        if (type === 'collection' && data?.id !== id) {
+            onSort?.({
+                active: data,
+                over: { id },
+            });
+        }
+    };
+
+    const handleSortCard = ({ active, over }) => {
+        setDragOver(false);
+        const oldIndex = iterableItems.findIndex(item => item.id === active?.id);
+        const newIndex = iterableItems.findIndex(item => item.id === over?.id);
+        const sortedItems = move(iterableItems, oldIndex, newIndex).map(item => item?.id);
+        sortItems({ collectionId: id, items: sortedItems });
+    };
+
+    const handleTransfer = ({ originalCollectionId, targetCollectionId, active, over }) => {
+        setDragOver(false);
+        const index = iterableItems.findIndex(item => item.id === over?.id);
+        onMoveItem?.({
+            index,
+            id: active?.id,
+            targetCollectionId: targetCollectionId,
+            originalCollectionId: originalCollectionId,
+        });
+    };
+
+    const handleDragStart = event => {
+        setDragging(true);
+        const data = toJSON({ type: 'collection', data: { id } });
+        event.dataTransfer.setData('text/plain', data);
+    };
+
+    const handleDragEnd = () => {
+        setDragging(false);
+        $collection.current?.removeAttribute('draggable');
+    };
+
+    const handlePointerDown = () => {
+        $collection.current?.setAttribute('draggable', 'true');
+    };
+
+    const handlePointerDownOnCollection = e => {
+        if (e.target !== e.currentTarget.querySelector('.handle')) {
+            $collection.current?.removeAttribute('draggable');
+        }
+    };
 
     return (
         <div
+            ref={$collection}
             data-layer='collection-item'
             className={cn(
-                'relative flex flex-col gap-4 p-4 pl-8 border-b border-b-neutral-200',
+                'relative flex flex-col gap-4 p-4 pl-8 border-b border-b-neutral-200 transition-all duration-150',
                 'dark:border-b-neutral-700',
+                { 'translate-x-6': dragOver },
                 className,
             )}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+            onDragStart={handleDragStart}
+            onDragEnd={handleDragEnd}
+            onPointerDown={handlePointerDownOnCollection}
         >
-            <div data-layer='header' className='group flex flex-row items-center gap-2'>
+            <div
+                className={cn(
+                    'handle absolute top-0 bottom-0 left-0 w-6 flex-center pointer-events-auto cursor-grab hover:bg-neutral-100 dark:hover:bg-neutral-700/30',
+                    { 'cursor-grabbing': dragging },
+                )}
+                onPointerDown={handlePointerDown}
+            >
+                <GripVertical className='size-4' />
+            </div>
+
+            <div
+                className={cn(
+                    'absolute top-0 -left-6 w-0 h-full bg-rose-500 bg-strip-rose-600 inset-shadow-md transition-all duration-150',
+                    {
+                        'w-6': dragOver,
+                    },
+                )}
+            />
+
+            <div
+                data-layer='header'
+                className='group flex flex-row items-center justify-between gap-2'
+            >
                 {!editting ? (
                     <div data-layer='name' className='flex flex-row items-center gap-1'>
                         <Button
@@ -207,8 +253,6 @@ export const CollectionItem = ({
                     </form>
                 )}
 
-                <div data-layer='handler' className='flex-1 h-6' />
-
                 <div data-layer='actions' className='flex flex-row gap-2'>
                     <Tooltip content='Open tabs'>
                         <Button
@@ -255,10 +299,19 @@ export const CollectionItem = ({
 
             {expanded && (
                 <div data-layer='cards' className='flex flex-row flex-wrap gap-4'>
+                    <div
+                        data-layer='target'
+                        className={cn(
+                            'hidden absolute inset-2 left-6 border-2 border-dashed border-rose-500 rounded-md pointer-events-none',
+                            { block: dragOver },
+                        )}
+                    />
+
                     {!iterableItems.length && (
                         <div
+                            data-layer='empty'
                             className={cn(
-                                'flex-center w-full h-28 bg-neutral-100 text-neutral-500 text-sm rounded-md',
+                                'flex-center w-full h-28 bg-neutral-100 text-neutral-500 text-sm rounded-md select-none',
                                 'dark:bg-neutral-700 dark:text-neutral-400',
                                 'group-[.drag-over]/sortable:bg-rose-200 group-[.drag-over]/sortable:text-rose-500 group-[.drag-over]/sortable:dark:bg-rose-500/40 group-[.drag-over]/sortable:dark:text-rose-400',
                             )}
@@ -267,27 +320,21 @@ export const CollectionItem = ({
                         </div>
                     )}
 
-                    <CollectionSortableContext collectionId={id} items={iterableItems}>
-                        {iterableItems.map((item, index) => (
-                            <CardItem
-                                key={item.id}
-                                className={cn({
-                                    'opacity-60': overlayItem?.id === item?.id,
-                                })}
-                                collectionId={id}
-                                item={item}
-                                index={index}
-                                onRemove={item => onRemoveItem?.(id, item)}
-                                onUpdate={item => onUpdateItem?.(id, item)}
-                            />
-                        ))}
-                    </CollectionSortableContext>
-
-                    {overlayItem && overlayItem?.type === 'card' && (
-                        <DragOverlay>
-                            <CardItem item={overlayItem} />
-                        </DragOverlay>
-                    )}
+                    {iterableItems.map((item, index) => (
+                        <CardItem
+                            key={item.id}
+                            className={cn({
+                                'opacity-60': false,
+                            })}
+                            collectionId={id}
+                            item={item}
+                            index={index}
+                            onRemove={item => onRemoveItem?.(id, item)}
+                            onUpdate={item => onUpdateItem?.(id, item)}
+                            onSort={handleSortCard}
+                            onTransfer={handleTransfer}
+                        />
+                    ))}
                 </div>
             )}
         </div>

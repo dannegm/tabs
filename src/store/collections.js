@@ -103,7 +103,7 @@ const collectionsSlice = createSlice({
             };
         },
         moveItem: (state, action) => {
-            const { id, originalCollectionId, targetCollectionId } = action.payload;
+            const { id, originalCollectionId, targetCollectionId, index } = action.payload;
 
             const originalCollection = state[originalCollectionId];
             const targetCollection = state[targetCollectionId];
@@ -111,8 +111,23 @@ const collectionsSlice = createSlice({
             if (!originalCollection || !targetCollection || !originalCollection.items[id]) return;
 
             const item = originalCollection.items[id];
-
             delete originalCollection.items[id];
+
+            const itemsArray = Object.entries(targetCollection.items).sort(
+                (a, b) => a[1].index - b[1].index,
+            );
+
+            console.log('index', index);
+
+            if (typeof index === 'number') {
+                itemsArray.forEach(([key, value]) => {
+                    if (value.index >= index) value.index++;
+                });
+                item.index = index;
+            } else {
+                item.index = itemsArray.length;
+            }
+
             targetCollection.items[id] = item;
         },
         removeItem: (state, action) => {
@@ -181,8 +196,8 @@ export const useCollectionsActions = () => {
             dispatch(addItem({ collectionId, id, payload })),
         updateItem: ({ collectionId, id, payload }) =>
             dispatch(updateItem({ collectionId, id, payload })),
-        moveItem: ({ id, originalCollectionId, targetCollectionId }) =>
-            dispatch(moveItem({ id, originalCollectionId, targetCollectionId })),
+        moveItem: ({ id, originalCollectionId, targetCollectionId, index }) =>
+            dispatch(moveItem({ id, originalCollectionId, targetCollectionId, index })),
         removeItem: ({ collectionId, id }) => dispatch(removeItem({ collectionId, id })),
         sortItems: ({ collectionId, items }) => dispatch(sortItems({ collectionId, items })),
     };

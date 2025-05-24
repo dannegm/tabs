@@ -17,7 +17,7 @@ export const App = () => {
                 <main
                     className={cn(
                         theme,
-                        'grid grid-cols-[1fr_260px] grid-rows-[1fr] [grid-template-areas:"main_side"] w-full h-screen overflow-hidden',
+                        'grid grid-cols-[1fr_var(--sidebar-width)] grid-rows-[1fr] [grid-template-areas:"main_side"] w-full h-screen overflow-hidden',
                     )}
                 >
                     <Main className='[grid-area:main]' />

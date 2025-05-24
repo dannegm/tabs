@@ -19,3 +19,12 @@ export const reverse = (arr = []) => [...arr].reverse();
 
 export const sortBy = (arr, key, direction = 'asc') =>
     arr.sort((a, b) => (direction === 'asc' ? a[key] - b[key] : b[key] - a[key]));
+
+export const move = (array, oldIndex, newIndex) => {
+    if (oldIndex === newIndex) return array;
+
+    const updated = [...array];
+    const [moved] = updated.splice(oldIndex, 1);
+    updated.splice(newIndex, 0, moved);
+    return updated;
+};
