@@ -49,7 +49,15 @@ export const ContextualMenu = ({ url, children }) => {
     );
 };
 
-export const Zelda = ({ ref, className, href, withReferrer, onClick, children, ...props }) => {
+export const Zelda = ({
+    ref,
+    className,
+    href,
+    withReferrer = false,
+    onClick,
+    children,
+    ...props
+}) => {
     const finalHref = withReferrer ? `${href}?referrer=extension:tabs` : href;
     const [modifier, setModifier] = useState(null);
 
