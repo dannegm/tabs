@@ -105,7 +105,7 @@ export const openLink = async ({ url, target = 'self' }) => {
     const actions = {
         incognito: () => chrome?.windows?.create?.({ url, incognito: true }),
         window: () => chrome?.windows?.create?.({ url, incognito: false }),
-        blank: () => chrome?.tabs?.create?.({ url }),
+        blank: () => chrome?.tabs?.create?.({ url, active: false }),
         download: () => chrome?.download?.download?.({ url, saveAs: true }),
         self: () => (window.location.href = url),
     };

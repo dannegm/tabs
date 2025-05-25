@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { FolderInput, FolderOutput, Trash2 } from 'lucide-react';
+import { BadgeInfo, FolderInput, FolderOutput, Trash2 } from 'lucide-react';
 
+import { cn } from '@/modules/common/helpers/utils';
 import { useCollectionsActions } from '@/store/collections';
 
 import {
@@ -16,6 +17,7 @@ import { ConfirmDialog } from '@/modules/common/components/confirm-dialog';
 
 import { ImportCollection } from '@/modules/collections/components/import-collection';
 import { ExportCollection } from '@/modules/collections/components/export-collection';
+import { AboutDialog } from '@/modules/main/components/about-dialog';
 
 export const SettingsMenu = ({ children, side = 'bottom', align = 'end' }) => {
     const [open, setOpen] = useState(false);
@@ -76,6 +78,23 @@ export const SettingsMenu = ({ children, side = 'bottom', align = 'end' }) => {
                         Clear collections
                     </DropdownMenuItem>
                 </ConfirmDialog>
+
+                <DropdownMenuSeparator />
+
+                <AboutDialog>
+                    <DropdownMenuItem>
+                        <BadgeInfo />
+                        About{' '}
+                        <span
+                            className={cn(
+                                'font-bold uppercase text-rose-600',
+                                'dark:text-rose-400',
+                            )}
+                        >
+                            Tabs.
+                        </span>
+                    </DropdownMenuItem>
+                </AboutDialog>
             </DropdownMenuContent>
         </DropdownMenu>
     );

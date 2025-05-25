@@ -49,7 +49,7 @@ export const ContextualMenu = ({ url, children }) => {
     );
 };
 
-export const Zelda = ({ href, onClick, children, className = '', ref, ...props }) => {
+export const Zelda = ({ href, onClick, children, className = '', ref, withReferrer, ...props }) => {
     const [modifier, setModifier] = useState(null);
 
     const handleClick = e => {
@@ -57,6 +57,8 @@ export const Zelda = ({ href, onClick, children, className = '', ref, ...props }
         if (e.defaultPrevented || !href) return;
 
         if (e.button !== 0) return;
+
+        const finalHref = withReferrer ? `${href}?referrer=extension:tabs` : href;
 
         const actions = {
             metaKey: () => openLink({ url: href, target: 'blank' }),
