@@ -2,14 +2,14 @@ import { defineManifest } from '@crxjs/vite-plugin';
 import packageJson from '../package.json';
 
 const { version, description, author } = packageJson;
-const [major, minor, patch, label = '0'] = version.replace(/[^\d.-]+/g, '').split(/[.-]/);
+const [major, minor, patch] = version.replace(/[^\d.-]+/g, '').split(/[.-]/);
 
 export default defineManifest({
     manifest_version: 3,
     name: 'Tabs.',
     description,
     author,
-    version: `${major}.${minor}.${patch}.${label}`,
+    version: `${major}.${minor}.${patch}`,
     version_name: version,
     permissions: ['tabs', 'windows'],
 
