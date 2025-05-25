@@ -49,7 +49,7 @@ export const ContextualMenu = ({ url, children }) => {
     );
 };
 
-export const Zelda = ({ href, onClick, children, className = '', ref, withReferrer, ...props }) => {
+export const Zelda = ({ ref, className, href, withReferrer, onClick, children, ...props }) => {
     const [modifier, setModifier] = useState(null);
 
     const handleClick = e => {
@@ -61,11 +61,11 @@ export const Zelda = ({ href, onClick, children, className = '', ref, withReferr
         const finalHref = withReferrer ? `${href}?referrer=extension:tabs` : href;
 
         const actions = {
-            metaKey: () => openLink({ url: href, target: 'blank' }),
-            ctrlKey: () => openLink({ url: href, target: 'blank' }),
-            shiftKey: () => openLink({ url: href, target: 'window' }),
-            altKey: () => openLink({ url: href, target: 'download' }),
-            default: () => openLink({ url: href, target: 'self' }),
+            metaKey: () => openLink({ url: finalHref, target: 'blank' }),
+            ctrlKey: () => openLink({ url: finalHref, target: 'blank' }),
+            shiftKey: () => openLink({ url: finalHref, target: 'window' }),
+            altKey: () => openLink({ url: finalHref, target: 'download' }),
+            default: () => openLink({ url: finalHref, target: 'self' }),
         };
 
         e.preventDefault();
@@ -104,7 +104,6 @@ export const Zelda = ({ href, onClick, children, className = '', ref, withReferr
             <span
                 role='link'
                 ref={ref}
-                tabIndex={0}
                 className={cn('cursor-pointer', className)}
                 onClick={handleClick}
                 onAuxClick={handleAuxClick}
