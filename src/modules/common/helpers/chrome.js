@@ -89,7 +89,7 @@ export const bindTabsEvents = (handler, events = tabsEvents) => {
 
 export const unbindTabsEvents = (handler, events = tabsEvents) => {
     events.forEach(event => {
-        chrome?.tabs?.[event].addListener(handler);
+        chrome?.tabs?.[event].removeListener(handler);
     });
 };
 
@@ -118,4 +118,14 @@ export const openLink = async ({ url, target = 'self' }) => {
     }
 
     return chromeAction();
+};
+
+export const focusWindow = id => {
+    chrome?.windows?.update?.(+id, { focused: true });
+};
+
+export const focusTab = ({ id, windowId }) => {
+    chrome?.tabs?.update?.(+id, { active: true }, () => {
+        focusWindow(windowId);
+    });
 };

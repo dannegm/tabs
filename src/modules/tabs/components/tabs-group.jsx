@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { formatDate } from 'date-fns';
-import { ChevronDown, ChevronRight, Download, X } from 'lucide-react';
+import { ChevronDown, ChevronRight, Download, Focus, X } from 'lucide-react';
 
 import { useCollectionsActions } from '@/store/collections';
 
 import { cn } from '@/modules/common/helpers/utils';
-import { closeTabsByWindow, closeWindow } from '@/modules/common/helpers/chrome';
+import { closeTabsByWindow, closeWindow, focusWindow } from '@/modules/common/helpers/chrome';
 import { newItem } from '@/modules/common/helpers/mappers';
 import { fromArray } from '@/modules/common/helpers/objects';
 
@@ -20,6 +20,10 @@ export const TabsGroup = ({ className, id, index, tabs }) => {
     const { addCollection } = useCollectionsActions();
 
     const [open, setOpen] = useState(true);
+
+    const handleFocus = () => {
+        focusWindow(id);
+    };
 
     const handleToggle = () => {
         setOpen(!open);
@@ -59,7 +63,18 @@ export const TabsGroup = ({ className, id, index, tabs }) => {
                         {open ? <ChevronDown /> : <ChevronRight />}
                     </Button>
                 </div>
+
                 <div className='flex flex-row items-center gap-1'>
+                    <Tooltip content='Show window'>
+                        <Button
+                            className='dark:hover:bg-neutral-700'
+                            size='icon-xs'
+                            variant='ghost'
+                            onClick={handleFocus}
+                        >
+                            <Focus />
+                        </Button>
+                    </Tooltip>
                     <Tooltip content='Save session'>
                         <Button
                             className='dark:hover:bg-neutral-700'

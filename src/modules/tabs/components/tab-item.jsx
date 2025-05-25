@@ -2,7 +2,7 @@ import { use, useState } from 'react';
 import { X, File, Volume2, VenetianMask } from 'lucide-react';
 
 import { cn } from '@/modules/common/helpers/utils';
-import { closeTab } from '@/modules/common/helpers/chrome';
+import { closeTab, focusTab } from '@/modules/common/helpers/chrome';
 
 import { Button } from '@/modules/shadcn/components/button';
 import { Tooltip } from '@/modules/shadcn/components/tooltip-simple';
@@ -13,6 +13,11 @@ import { useDradAndDropActions } from '@/store/dragAndDrop';
 export const TabItem = ({ className, item }) => {
     const { setItemType, resetItemType } = useDradAndDropActions();
     const [dragging, setDragging] = useState(false);
+
+    const handleDoubleClick = () => {
+        console.log(item);
+        focusTab(item);
+    };
 
     const handleClose = () => {
         closeTab(item?.id);
@@ -55,6 +60,7 @@ export const TabItem = ({ className, item }) => {
                     { 'cursor-grabbing shadow-md': dragging },
                     className,
                 )}
+                onDoubleClick={handleDoubleClick}
                 onDragStart={handleDragStart}
                 onDragEnd={handleDragEnd}
                 draggable
