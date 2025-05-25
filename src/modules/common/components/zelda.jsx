@@ -55,6 +55,7 @@ export const Zelda = ({
     href,
     withReferrer = false,
     onClick,
+    onAuxClick,
     children,
     ...props
 }) => {
@@ -62,9 +63,9 @@ export const Zelda = ({
     const [modifier, setModifier] = useState(null);
 
     const handleClick = e => {
-        if (onClick) onClick(e);
         if (e.defaultPrevented || !href) return;
         if (e.button !== 0) return;
+        onClick?.(e);
 
         const actions = {
             metaKey: () => openLink({ url: finalHref, target: 'blank' }),
@@ -79,11 +80,10 @@ export const Zelda = ({
     };
 
     const handleAuxClick = e => {
-        if (onClick) onClick(e);
         if (e.defaultPrevented || !href) return;
-        if (e.button === 1) {
-            openLink({ url: finalHref, target: 'blank' });
-        }
+        if (e.button !== 1) return;
+        onAuxClick?.(e);
+        openLink({ url: finalHref, target: 'blank' });
     };
 
     useEffect(() => {
