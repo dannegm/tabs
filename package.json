@@ -1,6 +1,6 @@
 {
     "name": "tabs",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "description": "A browser extension to efficiently manage your tabs.",
     "author": "Daniel García <im+tabs@danielgarcia.me> (https://danielgarcia.me)",
     "license": "MIT",
