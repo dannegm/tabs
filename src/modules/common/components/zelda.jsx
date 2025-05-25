@@ -50,15 +50,13 @@ export const ContextualMenu = ({ url, children }) => {
 };
 
 export const Zelda = ({ ref, className, href, withReferrer, onClick, children, ...props }) => {
+    const finalHref = withReferrer ? `${href}?referrer=extension:tabs` : href;
     const [modifier, setModifier] = useState(null);
 
     const handleClick = e => {
         if (onClick) onClick(e);
         if (e.defaultPrevented || !href) return;
-
         if (e.button !== 0) return;
-
-        const finalHref = withReferrer ? `${href}?referrer=extension:tabs` : href;
 
         const actions = {
             metaKey: () => openLink({ url: finalHref, target: 'blank' }),
@@ -73,8 +71,10 @@ export const Zelda = ({ ref, className, href, withReferrer, onClick, children, .
     };
 
     const handleAuxClick = e => {
-        if (e.button === 1 && href) {
-            openLink({ url: href, target: 'blank' });
+        if (onClick) onClick(e);
+        if (e.defaultPrevented || !href) return;
+        if (e.button === 1) {
+            openLink({ url: finalHref, target: 'blank' });
         }
     };
 
@@ -100,7 +100,7 @@ export const Zelda = ({ ref, className, href, withReferrer, onClick, children, .
     }, []);
 
     return (
-        <ContextualMenu url={href}>
+        <ContextualMenu url={finalHref}>
             <span
                 role='link'
                 ref={ref}
