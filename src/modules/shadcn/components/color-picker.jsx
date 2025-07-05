@@ -33,7 +33,12 @@ function ColorPicker({ color, children, onChange, onSelect }) {
     };
 
     React.useEffect(() => {
-        if (internalColor !== color) onChange?.(internalColor);
+        if (internalColor === '#NaNNaNNaN') {
+            setInternalColor('transparent');
+            onSelect?.('transparent');
+        } else {
+            onSelect?.(internalColor);
+        }
     }, [internalColor]);
 
     React.useLayoutEffect(() => {

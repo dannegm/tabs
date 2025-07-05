@@ -26,7 +26,6 @@ const collectionsSlice = createSlice({
         },
         setCollectionBgColor: (state, action) => {
             const { id, bgColor } = action.payload;
-            console.log('setCollectionBgColor', id, bgColor);
             state[id].bgColor = bgColor === 'transparent' ? null : bgColor;
         },
         removeCollection: (state, action) => {
@@ -98,8 +97,6 @@ const collectionsSlice = createSlice({
         updateItem: (state, action) => {
             const { collectionId, id, payload } = action.payload;
 
-            console.log(payload);
-
             if (!state[collectionId]) return;
             const originalPayload = state[collectionId].items[id];
             state[collectionId].items[id] = {
@@ -121,8 +118,6 @@ const collectionsSlice = createSlice({
             const itemsArray = Object.entries(targetCollection.items).sort(
                 (a, b) => a[1].index - b[1].index,
             );
-
-            console.log('index', index);
 
             if (typeof index === 'number') {
                 itemsArray.forEach(([key, value]) => {

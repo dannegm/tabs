@@ -15,7 +15,6 @@ export const TabItem = ({ className, item }) => {
     const [dragging, setDragging] = useState(false);
 
     const handleDoubleClick = () => {
-        console.log(item);
         focusTab(item);
     };
 
