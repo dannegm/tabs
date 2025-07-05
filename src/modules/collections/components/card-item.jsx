@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { X, File, Pencil } from 'lucide-react';
 
 import { cn } from '@/modules/common/helpers/utils';
+import { darken, lighten } from '@/modules/common/helpers/colors';
 import { fromJSON, toJSON } from '@/modules/common/helpers/objects';
 
 import { Button } from '@/modules/shadcn/components/button';
@@ -18,6 +19,8 @@ export const CardItem = ({
     collectionId,
     item,
     index,
+    dark,
+    bgColor,
     onRemove,
     onUpdate,
     onSort,
@@ -151,7 +154,7 @@ export const CardItem = ({
 
             <div
                 className={cn(
-                    'drag-over absolute h-full w-8 translate-x-0 transition-all duration-150 rounded-sm select-none bg-neutral-100 dark:bg-neutral-700',
+                    'drag-over absolute h-full w-8 translate-x-0 transition-all duration-150 rounded-sm select-none bg-neutral-100/50 dark:bg-neutral-700/50',
                     { '-translate-x-4': dragOver },
                 )}
             />
@@ -169,10 +172,14 @@ export const CardItem = ({
                 <Zelda
                     ref={$anchor}
                     className={cn(
-                        'flex flex-col w-52 bg-white border border-neutral-200 rounded-sm',
+                        'flex flex-col w-52 bg-white border border-neutral-200 rounded-sm overflow-hidden',
                         'dark:bg-neutral-800 dark:border-neutral-700',
+                        { 'text-white': dark, 'text-neutral-950': !dark },
                         className,
                     )}
+                    style={{
+                        backgroundColor: bgColor === 'transparent' ? null : bgColor,
+                    }}
                     href={item?.url}
                     data-href={item?.url}
                 >
@@ -196,6 +203,11 @@ export const CardItem = ({
                                 'px-2 py-1.5 bg-neutral-100 text-xs text-ellipsis truncate',
                                 'dark:bg-neutral-700',
                             )}
+                            style={{
+                                backgroundColor: !dark
+                                    ? darken(bgColor, 0.03)
+                                    : lighten(bgColor, 0.1),
+                            }}
                         >
                             {item?.url}
                         </div>

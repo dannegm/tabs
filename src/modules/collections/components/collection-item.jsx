@@ -9,12 +9,14 @@ import {
     SquarePen,
     Save,
     GripVertical,
+    Palette,
 } from 'lucide-react';
 
 import { useCollectionsActions } from '@/store/collections';
 
 import { cn } from '@/modules/common/helpers/utils';
 import { move, sortBy } from '@/modules/common/helpers/arrays';
+import { isDark, darken, lighten } from '@/modules/common/helpers/colors';
 import { fromJSON, toJSON } from '@/modules/common/helpers/objects';
 import { sanitizeItem } from '@/modules/common/helpers/mappers';
 import { closeTab } from '@/modules/common/helpers/chrome';
@@ -27,12 +29,15 @@ import { ConfirmPopover } from '@/modules/common/components/confirm-popover';
 import { CardItem } from '@/modules/collections/components/card-item';
 
 import { useDradAndDrop, useDradAndDropActions } from '@/store/dragAndDrop';
+import { ColorPicker } from '@/modules/shadcn/components/color-picker';
+import { useDarkMode } from '@/modules/common/hooks/use-dark-mode';
 
 export const CollectionItem = ({
     className,
     id,
     name,
     expanded,
+    bgColor,
     items,
     onAttachItem,
     onUpdateItem,
@@ -44,7 +49,10 @@ export const CollectionItem = ({
     onOpenEverything,
     onSaveHere,
     onSort,
+    onBgColorChange,
 }) => {
+    const [theme] = useDarkMode();
+
     const { setItemType, resetItemType } = useDradAndDropActions();
     const { draggingItem } = useDradAndDrop();
 
@@ -55,6 +63,9 @@ export const CollectionItem = ({
 
     const [editting, setEditting] = useState(false);
     const [newName, setNewName] = useState(name);
+
+    const [internalBgColor, setInternalBgColor] = useState(bgColor || 'transparent');
+    const dark = internalBgColor === 'transparent' ? theme === 'dark' : isDark(internalBgColor);
 
     const $collection = useRef();
 
@@ -185,13 +196,19 @@ export const CollectionItem = ({
         }
     };
 
+    const handleChangeBgColor = bgColor => {
+        setInternalBgColor(bgColor || 'transparent');
+        onBgColorChange?.({ id, bgColor });
+    };
+
     return (
         <div
             ref={$collection}
             data-layer='collection-item'
             className={cn(
-                'relative flex flex-col gap-4 p-4 pl-8 bg-white border-b border-b-neutral-200 transition-all duration-150',
-                'dark:bg-neutral-800 dark:border-b-neutral-700',
+                { dark },
+                'relative flex flex-col gap-4 p-4 pl-8 bg-white text-neutral-950 border-b border-b-neutral-200 transition-all duration-150',
+                'dark:bg-neutral-800 dark:border-b-neutral-700 dark:text-white',
                 { 'translate-x-6': dragOverCollection },
                 className,
             )}
@@ -201,6 +218,7 @@ export const CollectionItem = ({
             onDragStart={handleDragStart}
             onDragEnd={handleDragEnd}
             onPointerDown={handlePointerDownOnCollection}
+            style={{ backgroundColor: internalBgColor }}
         >
             <div
                 className={cn(
@@ -228,8 +246,16 @@ export const CollectionItem = ({
                 {!editting ? (
                     <div data-layer='name' className='flex flex-row items-center gap-1'>
                         <Button
-                            className='text-base leading-1 dark:bg-neutral-700'
+                            className={cn('text-base leading-1 dark:bg-neutral-700', {
+                                'text-neutral-950': !dark,
+                                'text-white': dark,
+                            })}
                             variant='secondary'
+                            style={{
+                                backgroundColor: !dark
+                                    ? darken(internalBgColor, 0.03)
+                                    : lighten(internalBgColor, 0.1),
+                            }}
                             onClick={handleToggle}
                         >
                             <span>{name}</span>
@@ -276,7 +302,31 @@ export const CollectionItem = ({
                     </form>
                 )}
 
-                <div data-layer='actions' className='flex flex-row gap-2'>
+                <div
+                    data-layer='actions'
+                    className={cn('flex flex-row gap-2', {
+                        'text-neutral-950': !dark,
+                        'text-white': dark,
+                    })}
+                >
+                    <ColorPicker
+                        color={internalBgColor}
+                        onChange={setInternalBgColor}
+                        onSelect={handleChangeBgColor}
+                    >
+                        {() => (
+                            <Tooltip content='Highlight color'>
+                                <Button
+                                    className='dark:hover:bg-neutral-700'
+                                    size='icon-xs'
+                                    variant='ghost'
+                                >
+                                    <Palette />
+                                </Button>
+                            </Tooltip>
+                        )}
+                    </ColorPicker>
+
                     <Tooltip content='Open tabs'>
                         <Button
                             className='dark:hover:bg-neutral-700'
@@ -349,6 +399,8 @@ export const CollectionItem = ({
                             className={cn({
                                 'opacity-60': false,
                             })}
+                            dark={dark}
+                            bgColor={internalBgColor}
                             collectionId={id}
                             item={item}
                             index={index}

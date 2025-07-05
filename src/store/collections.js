@@ -24,6 +24,11 @@ const collectionsSlice = createSlice({
             const { id, name } = action.payload;
             state[id].name = name;
         },
+        setCollectionBgColor: (state, action) => {
+            const { id, bgColor } = action.payload;
+            console.log('setCollectionBgColor', id, bgColor);
+            state[id].bgColor = bgColor === 'transparent' ? null : bgColor;
+        },
         removeCollection: (state, action) => {
             const { id } = action.payload;
             delete state[id];
@@ -151,6 +156,7 @@ const {
     //* Collections
     addCollection,
     editCollection,
+    setCollectionBgColor,
     removeCollection,
     toggleCollection,
     expandAllColections,
@@ -182,6 +188,7 @@ export const useCollectionsActions = () => {
         addCollection: ({ id, name, expanded, items = {} }) =>
             dispatch(addCollection({ id, name, expanded, items })),
         editCollection: ({ id, name }) => dispatch(editCollection({ id, name })),
+        setCollectionBgColor: ({ id, bgColor }) => dispatch(setCollectionBgColor({ id, bgColor })),
         toggleCollection: ({ id }) => dispatch(toggleCollection({ id })),
         expandAllColections: () => dispatch(expandAllColections()),
         collapseAllColections: () => dispatch(collapseAllColections()),

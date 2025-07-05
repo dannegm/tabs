@@ -25,6 +25,7 @@ export const Collections = () => {
         addCollection,
         editCollection,
         toggleCollection,
+        setCollectionBgColor,
         removeCollection,
         sortCollections,
 
@@ -54,6 +55,10 @@ export const Collections = () => {
 
     const handleToggleCollection = ({ id }) => {
         toggleCollection({ id });
+    };
+
+    const handleSetCollectionBgColor = ({ id, bgColor }) => {
+        setCollectionBgColor({ id, bgColor });
     };
 
     const handleRemoveCollection = ({ id }) => {
@@ -140,6 +145,7 @@ export const Collections = () => {
                     onOpenEverything={handleOpenEverything}
                     onSaveHere={handleSaveHere}
                     onSort={handleSortCollections}
+                    onBgColorChange={handleSetCollectionBgColor}
                 />
             ))}
         </ScrollArea>
