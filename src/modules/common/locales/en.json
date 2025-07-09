@@ -1,0 +1,185 @@
+{
+    "translation": {
+        "common": {
+            "zelda": {
+                "contextual": {
+                    "open-new-tab": "Open in new tab",
+                    "open-new-window": "Open in new window",
+                    "open-new-private-window": "Open in incognito mode",
+                    "copy-link": "Copy address link"
+                },
+                "alerts": {
+                    "copy-link-success": "Link copied to clipboard."
+                }
+            },
+            "dark-mode-toggle": {
+                "tooltip": "Toggle Dark Mode"
+            },
+            "debug-mode-toggle": {
+                "tooltip": "Toggle Debug Mode"
+            },
+            "color-picker": {
+                "labels": {
+                    "confirm": "Confirm",
+                    "reset": "Reset"
+                }
+            },
+            "dialog": {
+                "labels": {
+                    "close": "Close"
+                }
+            },
+            "confirm-popover": {
+                "labels": {
+                    "cancel": "Cancel",
+                    "accept": "Continue"
+                }
+            }
+        },
+        "about": {
+            "title": "Tabs.",
+            "description": "A browser extension to efficiently manage your tabs.",
+            "created-by": "Created by",
+            "inspired-by": "Inspired by the chrome extension",
+            "visit-author-website": "Visit {{authorName}}'s website",
+            "follow-author-twitter": "Follow {{authorName}} on Twitter (X)",
+            "contribute": "Contribute",
+            "view-on-github": "View on GitHub",
+            "help-us-to-improve": "Help us improve by contributing code, reporting bugs, or suggesting features",
+            "report-bug": "Report a bug",
+            "feedback": "Feedback",
+            "made-with": "Made with",
+            "by": "by",
+            "buy-me-a-coffee": "Buy me a coffee",
+            "license": "Tabs. Licensed under"
+        },
+        "header": {
+            "title": "Tabs.",
+            "labels": {
+                "expand": "Expand",
+                "collapse": "Collapse",
+                "settings": "Settings",
+                "language": "Language",
+                "add-collection": "Add collection",
+                "collections_one": "{{count}} collection",
+                "collections_other": "{{count}} collections"
+            }
+        },
+        "settings": {
+            "main": {
+                "items": {
+                    "about": "About",
+                    "tabs": "Tabs."
+                }
+            },
+            "collections": {
+                "title": "Collections",
+                "items": {
+                    "export": "Export collections",
+                    "import": "Import collections",
+                    "clear": "Clear collections"
+                },
+                "alerts": {
+                    "clear-confirmation": "Are you sure you want to delete all collections? This action is permanent and cannot be undone."
+                }
+            },
+            "dialogs": {
+                "clear-collections": {
+                    "title": "Clear collections",
+                    "description": "Are you sure you want to delete all collections? This action is permanent and cannot be undone."
+                }
+            }
+        },
+        "card": {
+            "item": {
+                "tooltips": {
+                    "edit-card": "Edit card",
+                    "remove-card": "Remove card"
+                }
+            },
+            "dialogs": {
+                "remove-card": {
+                    "title": "Remove card",
+                    "description": "This action is permanent and cannot be undone."
+                }
+            }
+        },
+        "collections": {
+            "empty": "Let's start adding some new collection.",
+            "labels": {
+                "add-collection": "Add collection"
+            },
+            "item": {
+                "tooltips": {
+                    "edit-collection": "Edit collection",
+                    "highlight-color": "Highlight color",
+                    "open-tabs": "Open tabs",
+                    "save-to-collection": "Save session to collection",
+                    "delete-collection": "Delete collection"
+                },
+                "labels": {
+                    "save": "Save",
+                    "drag-here": "Drag tabs here."
+                },
+                "placeholders": {
+                    "name": "Type a new collection name..."
+                }
+            },
+            "dialogs": {
+                "remove-collection": {
+                    "title": "Remove collection",
+                    "description": "This action is permanent and cannot be undone."
+                },
+                "create-collection": {
+                    "title": "Create collection",
+                    "description": "Enter the name of your new collection.",
+                    "labels": {
+                        "name": "Collection name",
+                        "auto-name": "Use Auto-name",
+                        "cancel": "Cancel",
+                        "save": "Save"
+                    }
+                },
+                "edit-card": {
+                    "title": "Edit card",
+                    "labels": {
+                        "title": "Title",
+                        "description": "Description",
+                        "url": "URL",
+                        "remove": "Remove",
+                        "cancel": "Cancel",
+                        "save": "Save"
+                    }
+                }
+            }
+        },
+        "tabs": {
+            "title": "Open tabs",
+            "group": {
+                "labels": {
+                    "window-name": "Window #{{number}}",
+                    "show-window": "Show window",
+                    "save-session": "Save session",
+                    "close-window": "Close window",
+                    "no-tabs": "No tabs"
+                }
+            },
+            "item": {
+                "labels": {
+                    "close": "Close tab",
+                    "incognito": "Incognito"
+                },
+                "contextual": {
+                    "close-tab": "Close tab",
+                    "focus-tab": "Focus tab",
+                    "mute-tab": "Mute tab",
+                    "unmute-tab": "Unmute tab",
+                    "copy-link": "Copy address link"
+                },
+                "alerts": {
+                    "copy-link-success": "Link copied to clipboard."
+                }
+            }
+        }
+    }
+}

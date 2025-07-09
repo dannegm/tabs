@@ -134,6 +134,11 @@
     --sidebar-width: 260px;
 }
 
+@utility ltr {
+    direction: ltr;
+    unicode-bidi: bidi-override;
+}
+
 @utility flex-center {
     display: flex;
     justify-content: center;

@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import { nanoid } from 'nanoid';
 import { formatDate } from 'date-fns';
 import { ChevronDown, ChevronRight, Download, Focus, X } from 'lucide-react';
@@ -17,6 +19,8 @@ import { Tooltip } from '@/modules/shadcn/components/tooltip-simple';
 import { TabItem } from './tab-item';
 
 export const TabsGroup = ({ className, id, index, tabs }) => {
+    const { t } = useTranslation();
+
     const { addCollection } = useCollectionsActions();
 
     const [open, setOpen] = useState(true);
@@ -51,21 +55,21 @@ export const TabsGroup = ({ className, id, index, tabs }) => {
 
     return (
         <div data-layer='tabs-group' className={cn('flex flex-col gap-4 rounded-sm', className)}>
-            <div data-layer='header' className='flex flex-row items-center justify-between'>
+            <div data-layer='header' className='flex flex-row rtl:flex-row-reverse items-center justify-between'>
                 <div className='flex flex-row items-center gap-1'>
                     <Button
-                        className='leading-1 dark:bg-neutral-700'
+                        className='leading-1 dark:bg-neutral-700 rtl:flex-row-reverse'
                         variant='secondary'
                         size='xs'
                         onClick={handleToggle}
                     >
-                        <span>Window {index + 1}</span>
+                        <span>{t('tabs.group.labels.window-name', { number: index + 1 })}</span>
                         {open ? <ChevronDown /> : <ChevronRight />}
                     </Button>
                 </div>
 
-                <div className='flex flex-row items-center gap-1'>
-                    <Tooltip content='Show window'>
+                <div className='flex flex-row rtl:flex-row-reverse items-center gap-1'>
+                    <Tooltip content={t('tabs.group.labels.show-window')}>
                         <Button
                             className='dark:hover:bg-neutral-700'
                             size='icon-xs'
@@ -75,7 +79,7 @@ export const TabsGroup = ({ className, id, index, tabs }) => {
                             <Focus />
                         </Button>
                     </Tooltip>
-                    <Tooltip content='Save session'>
+                    <Tooltip content={t('tabs.group.labels.save-session')}>
                         <Button
                             className='dark:hover:bg-neutral-700'
                             size='icon-xs'
@@ -85,7 +89,7 @@ export const TabsGroup = ({ className, id, index, tabs }) => {
                             <Download />
                         </Button>
                     </Tooltip>
-                    <Tooltip content='Close window'>
+                    <Tooltip content={t('tabs.group.labels.close-window')}>
                         <Button
                             className='dark:hover:bg-neutral-700'
                             size='icon-xs'
@@ -98,7 +102,7 @@ export const TabsGroup = ({ className, id, index, tabs }) => {
                 </div>
             </div>
 
-            {!tabs.length && <div className='text-sm'>No tabs</div>}
+            {!tabs.length && <div className='text-sm'>{t('tabs.group.labels.no-tabs')}</div>}
 
             {open && (
                 <div data-layer='items' className='flex flex-col gap-2'>

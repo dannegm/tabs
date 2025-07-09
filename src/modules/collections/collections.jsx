@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { nanoid } from 'nanoid';
 import { Plus } from 'lucide-react';
 
@@ -18,6 +20,8 @@ import { CreateCollectionDialog } from '@/modules/collections/components/create-
 import { CollectionItem } from '@/modules/collections/components/collection-item';
 
 export const Collections = () => {
+    const { t } = useTranslation();
+
     const collections = useCollections();
 
     const {
@@ -121,11 +125,11 @@ export const Collections = () => {
         >
             {!iterableCollections.length && (
                 <div className='flex-center flex-col gap-4 p-12 m-4 bg-rose-100 text-rose-400 dark:bg-rose-500/20 dark:text-rose-400/70 rounded-lg'>
-                    <h2 className='text-xl'>Let's start adding some new collection.</h2>
+                    <h2 className='text-xl'>{t('collections.empty')}</h2>
 
                     <CreateCollectionDialog onCreate={handleAddCollection}>
                         <Button size='lg'>
-                            <Plus /> Add Collection
+                            <Plus /> {t('collections.labels.add-collection')}
                         </Button>
                     </CreateCollectionDialog>
                 </div>

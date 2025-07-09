@@ -1,0 +1,185 @@
+{
+    "translation": {
+        "common": {
+            "zelda": {
+                "contextual": {
+                    "open-new-tab": "在新标签页中打开",
+                    "open-new-window": "在新窗口中打开",
+                    "open-new-private-window": "在无痕模式中打开",
+                    "copy-link": "复制链接地址"
+                },
+                "alerts": {
+                    "copy-link-success": "链接已复制到剪贴板。"
+                }
+            },
+            "dark-mode-toggle": {
+                "tooltip": "切换深色模式"
+            },
+            "debug-mode-toggle": {
+                "tooltip": "切换调试模式"
+            },
+            "color-picker": {
+                "labels": {
+                    "confirm": "确认",
+                    "reset": "重置"
+                }
+            },
+            "dialog": {
+                "labels": {
+                    "close": "关闭"
+                }
+            },
+            "confirm-popover": {
+                "labels": {
+                    "cancel": "取消",
+                    "accept": "继续"
+                }
+            }
+        },
+        "about": {
+            "title": "Tabs.",
+            "description": "一个用于高效管理标签页的浏览器扩展程序。",
+            "created-by": "由...创建",
+            "inspired-by": "灵感来自 Chrome 扩展程序",
+            "visit-author-website": "访问 {{authorName}} 的网站",
+            "follow-author-twitter": "在 X（Twitter）上关注 {{authorName}}",
+            "contribute": "参与贡献",
+            "view-on-github": "在 GitHub 上查看",
+            "help-us-to-improve": "通过贡献代码、报告问题或提出功能建议来帮助我们改进",
+            "report-bug": "报告问题",
+            "feedback": "反馈",
+            "made-with": "由...构建",
+            "by": "作者",
+            "buy-me-a-coffee": "请我喝杯咖啡",
+            "license": "Tabs. 许可协议为"
+        },
+        "header": {
+            "title": "Tabs.",
+            "labels": {
+                "expand": "展开",
+                "collapse": "折叠",
+                "settings": "设置",
+                "language": "语言",
+                "add-collection": "创建收藏集",
+                "collections_one": "{{count}} 个收藏",
+                "collections_other": "{{count}} 个收藏"
+            }
+        },
+        "settings": {
+            "main": {
+                "items": {
+                    "about": "关于",
+                    "tabs": "Tabs."
+                }
+            },
+            "collections": {
+                "title": "收藏集",
+                "items": {
+                    "export": "导出收藏集",
+                    "import": "导入收藏集",
+                    "clear": "清空收藏集"
+                },
+                "alerts": {
+                    "clear-confirmation": "确定要删除所有收藏集吗？此操作不可撤销。"
+                }
+            },
+            "dialogs": {
+                "clear-collections": {
+                    "title": "清除收藏夹",
+                    "description": "你确定要删除所有收藏夹吗？此操作为永久性，无法撤销。"
+                }
+            }
+        },
+        "card": {
+            "item": {
+                "tooltips": {
+                    "edit-card": "编辑卡片",
+                    "remove-card": "删除卡片"
+                }
+            },
+            "dialogs": {
+                "remove-card": {
+                    "title": "删除卡片",
+                    "description": "此操作为永久性，无法撤销。"
+                }
+            }
+        },
+        "collections": {
+            "empty": "开始添加新收藏集吧。",
+            "labels": {
+                "add-collection": "创建收藏集"
+            },
+            "item": {
+                "tooltips": {
+                    "edit-collection": "编辑收藏集",
+                    "highlight-color": "高亮颜色",
+                    "open-tabs": "打开标签页",
+                    "save-to-collection": "将会话保存到收藏集",
+                    "delete-collection": "删除收藏集"
+                },
+                "labels": {
+                    "save": "保存",
+                    "drag-here": "将标签页拖到此处。"
+                },
+                "placeholders": {
+                    "name": "输入新的收藏夹名称..."
+                }
+            },
+            "dialogs": {
+                "remove-collection": {
+                    "title": "删除收藏集",
+                    "description": "此操作不可撤销。"
+                },
+                "create-collection": {
+                    "title": "创建收藏集",
+                    "description": "输入新收藏集的名称。",
+                    "labels": {
+                        "name": "收藏集名称",
+                        "auto-name": "使用自动命名",
+                        "cancel": "取消",
+                        "save": "保存"
+                    }
+                },
+                "edit-card": {
+                    "title": "编辑卡片",
+                    "labels": {
+                        "title": "标题",
+                        "description": "描述",
+                        "url": "链接",
+                        "remove": "移除",
+                        "cancel": "取消",
+                        "save": "保存"
+                    }
+                }
+            }
+        },
+        "tabs": {
+            "title": "打开的标签页",
+            "group": {
+                "labels": {
+                    "window-name": "窗口 #{{number}}",
+                    "show-window": "显示窗口",
+                    "save-session": "保存会话",
+                    "close-window": "关闭窗口",
+                    "no-tabs": "无标签页"
+                }
+            },
+            "item": {
+                "labels": {
+                    "close": "关闭标签页",
+                    "incognito": "无痕模式"
+                },
+                "contextual": {
+                    "close-tab": "关闭标签页",
+                    "focus-tab": "聚焦标签页",
+                    "mute-tab": "静音标签页",
+                    "unmute-tab": "取消静音",
+                    "copy-link": "复制链接"
+                },
+                "alerts": {
+                    "copy-link-success": "链接已复制到剪贴板。"
+                }
+            }
+        }
+    }
+}

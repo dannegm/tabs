@@ -1,0 +1,185 @@
+{
+    "translation": {
+        "common": {
+            "zelda": {
+                "contextual": {
+                    "open-new-tab": "새 탭에서 열기",
+                    "open-new-window": "새 창에서 열기",
+                    "open-new-private-window": "시크릿 모드에서 열기",
+                    "copy-link": "링크 복사"
+                },
+                "alerts": {
+                    "copy-link-success": "링크가 클립보드에 복사되었습니다."
+                }
+            },
+            "dark-mode-toggle": {
+                "tooltip": "다크 모드 토글"
+            },
+            "debug-mode-toggle": {
+                "tooltip": "디버그 모드 토글"
+            },
+            "color-picker": {
+                "labels": {
+                    "confirm": "확인",
+                    "reset": "초기화"
+                }
+            },
+            "dialog": {
+                "labels": {
+                    "close": "닫기"
+                }
+            },
+            "confirm-popover": {
+                "labels": {
+                    "cancel": "취소",
+                    "accept": "계속"
+                }
+            }
+        },
+        "about": {
+            "title": "Tabs.",
+            "description": "탭을 효율적으로 관리하는 브라우저 확장 프로그램입니다.",
+            "created-by": "제작자",
+            "inspired-by": "Chrome 확장 프로그램에서 영감을 받음",
+            "visit-author-website": "{{authorName}}의 웹사이트 방문",
+            "follow-author-twitter": "{{authorName}}를 Twitter (X)에서 팔로우",
+            "contribute": "기여하기",
+            "view-on-github": "GitHub에서 보기",
+            "help-us-to-improve": "코드를 기여하거나, 버그를 보고하거나, 기능을 제안하여 개선에 도움을 주세요",
+            "report-bug": "버그 신고",
+            "feedback": "피드백",
+            "made-with": "제작",
+            "by": "작성자",
+            "buy-me-a-coffee": "커피 한잔 사주세요",
+            "license": "Tabs. 라이센스 하에 제공됨"
+        },
+        "header": {
+            "title": "Tabs.",
+            "labels": {
+                "expand": "확장",
+                "collapse": "축소",
+                "settings": "설정",
+                "language": "언어",
+                "add-collection": "컬렉션 추가",
+                "collections_one": "{{count}} 컬렉션",
+                "collections_other": "{{count}} 컬렉션"
+            }
+        },
+        "settings": {
+            "main": {
+                "items": {
+                    "about": "정보",
+                    "tabs": "Tabs."
+                }
+            },
+            "collections": {
+                "title": "컬렉션",
+                "items": {
+                    "export": "컬렉션 내보내기",
+                    "import": "컬렉션 가져오기",
+                    "clear": "컬렉션 삭제"
+                },
+                "alerts": {
+                    "clear-confirmation": "모든 컬렉션을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다."
+                }
+            },
+            "dialogs": {
+                "clear-collections": {
+                    "title": "컬렉션 삭제",
+                    "description": "모든 컬렉션을 삭제하시겠습니까? 이 작업은 영구적으로 되돌릴 수 없습니다."
+                }
+            }
+        },
+        "card": {
+            "item": {
+                "tooltips": {
+                    "edit-card": "카드 편집",
+                    "remove-card": "카드 제거"
+                }
+            },
+            "dialogs": {
+                "remove-card": {
+                    "title": "카드 제거",
+                    "description": "이 작업은 영구적이며 되돌릴 수 없습니다."
+                }
+            }
+        },
+        "collections": {
+            "empty": "새로운 컬렉션을 추가해 보세요.",
+            "labels": {
+                "add-collection": "컬렉션 추가"
+            },
+            "item": {
+                "tooltips": {
+                    "edit-collection": "컬렉션 편집",
+                    "highlight-color": "하이라이트 색상",
+                    "open-tabs": "탭 열기",
+                    "save-to-collection": "세션을 컬렉션에 저장",
+                    "delete-collection": "컬렉션 삭제"
+                },
+                "labels": {
+                    "save": "저장",
+                    "drag-here": "여기에 탭을 드래그하세요."
+                },
+                "placeholders": {
+                    "name": "새 컬렉션 이름 입력..."
+                }
+            },
+            "dialogs": {
+                "remove-collection": {
+                    "title": "컬렉션 삭제",
+                    "description": "이 작업은 되돌릴 수 없습니다."
+                },
+                "create-collection": {
+                    "title": "컬렉션 생성",
+                    "description": "새 컬렉션 이름을 입력하세요.",
+                    "labels": {
+                        "name": "컬렉션 이름",
+                        "auto-name": "자동 이름 사용",
+                        "cancel": "취소",
+                        "save": "저장"
+                    }
+                },
+                "edit-card": {
+                    "title": "카드 편집",
+                    "labels": {
+                        "title": "제목",
+                        "description": "설명",
+                        "url": "URL",
+                        "remove": "삭제",
+                        "cancel": "취소",
+                        "save": "저장"
+                    }
+                }
+            }
+        },
+        "tabs": {
+            "title": "열린 탭",
+            "group": {
+                "labels": {
+                    "window-name": "창 #{{number}}",
+                    "show-window": "창 표시",
+                    "save-session": "세션 저장",
+                    "close-window": "창 닫기",
+                    "no-tabs": "탭 없음"
+                }
+            },
+            "item": {
+                "labels": {
+                    "close": "탭 닫기",
+                    "incognito": "시크릿"
+                },
+                "contextual": {
+                    "close-tab": "탭 닫기",
+                    "focus-tab": "탭으로 포커스",
+                    "mute-tab": "탭 음소거",
+                    "unmute-tab": "탭 음소거 해제",
+                    "copy-link": "링크 복사"
+                },
+                "alerts": {
+                    "copy-link-success": "링크가 클립보드에 복사되었습니다."
+                }
+            }
+        }
+    }
+}

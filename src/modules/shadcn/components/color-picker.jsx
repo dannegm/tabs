@@ -1,9 +1,12 @@
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 import { HexColorPicker } from 'react-colorful';
 import { Popover, PopoverContent, PopoverTrigger } from '@/modules/shadcn/components/popover';
 import { Button } from './button';
 
 function ColorPicker({ color, children, onChange, onSelect }) {
+    const { t } = useTranslation();
+
     const $target = React.useRef();
     const [open, setOpen] = React.useState(false);
     const [initialColor, setInitialColor] = React.useState(color || 'transparent');
@@ -59,9 +62,11 @@ function ColorPicker({ color, children, onChange, onSelect }) {
                 <HexColorPicker color={internalColor} onChange={setInternalColor} />
                 <div className='flex flex-row gap-2 items-center justify-end'>
                     <Button variant='outline' onClick={handleReset}>
-                        Reset
+                        {t('common.color-picker.labels.reset')}
                     </Button>
-                    <Button onClick={handleConfirm}>Confirm</Button>
+                    <Button onClick={handleConfirm}>
+                        {t('common.color-picker.labels.confirm')}
+                    </Button>
                 </div>
             </PopoverContent>
         </Popover>

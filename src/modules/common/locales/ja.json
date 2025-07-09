@@ -1,0 +1,185 @@
+{
+    "translation": {
+        "common": {
+            "zelda": {
+                "contextual": {
+                    "open-new-tab": "新しいタブで開く",
+                    "open-new-window": "新しいウィンドウで開く",
+                    "open-new-private-window": "シークレットモードで開く",
+                    "copy-link": "リンクをコピー"
+                },
+                "alerts": {
+                    "copy-link-success": "リンクがクリップボードにコピーされました。"
+                }
+            },
+            "dark-mode-toggle": {
+                "tooltip": "ダークモードの切り替え"
+            },
+            "debug-mode-toggle": {
+                "tooltip": "デバッグモードの切り替え"
+            },
+            "color-picker": {
+                "labels": {
+                    "confirm": "確認",
+                    "reset": "リセット"
+                }
+            },
+            "dialog": {
+                "labels": {
+                    "close": "閉じる"
+                }
+            },
+            "confirm-popover": {
+                "labels": {
+                    "cancel": "キャンセル",
+                    "accept": "続行"
+                }
+            }
+        },
+        "about": {
+            "title": "Tabs.",
+            "description": "タブを効率的に管理するブラウザ拡張機能です。",
+            "created-by": "作成者",
+            "inspired-by": "Chrome拡張機能に触発されました",
+            "visit-author-website": "{{authorName}} のウェブサイトへ",
+            "follow-author-twitter": "{{authorName}} を Twitter（X）でフォロー",
+            "contribute": "貢献する",
+            "view-on-github": "GitHubで見る",
+            "help-us-to-improve": "コードを提供したり、バグを報告したり、機能を提案して改善を手伝ってください",
+            "report-bug": "バグを報告する",
+            "feedback": "フィードバック",
+            "made-with": "で作成",
+            "by": "によって",
+            "buy-me-a-coffee": "コーヒーをおごって",
+            "license": "Tabs. ライセンス下で提供"
+        },
+        "header": {
+            "title": "Tabs.",
+            "labels": {
+                "expand": "展開",
+                "collapse": "折りたたむ",
+                "settings": "設定",
+                "language": "言語",
+                "add-collection": "コレクションを追加",
+                "collections_one": "{{count}} コレクション",
+                "collections_other": "{{count}} コレクション"
+            }
+        },
+        "settings": {
+            "main": {
+                "items": {
+                    "about": "概要",
+                    "tabs": "Tabs."
+                }
+            },
+            "collections": {
+                "title": "コレクション",
+                "items": {
+                    "export": "コレクションをエクスポート",
+                    "import": "コレクションをインポート",
+                    "clear": "コレクションをクリア"
+                },
+                "alerts": {
+                    "clear-confirmation": "すべてのコレクションを削除してもよろしいですか？この操作は取り消せません。"
+                }
+            },
+            "dialogs": {
+                "clear-collections": {
+                    "title": "コレクションをクリア",
+                    "description": "すべてのコレクションを削除してもよろしいですか？この操作は取り消せません。"
+                }
+            }
+        },
+        "card": {
+            "item": {
+                "tooltips": {
+                    "edit-card": "カードを編集",
+                    "remove-card": "カードを削除"
+                }
+            },
+            "dialogs": {
+                "remove-card": {
+                    "title": "カードを削除",
+                    "description": "この操作は取り消せません。"
+                }
+            }
+        },
+        "collections": {
+            "empty": "新しいコレクションを追加しましょう。",
+            "labels": {
+                "add-collection": "コレクションを追加"
+            },
+            "item": {
+                "tooltips": {
+                    "edit-collection": "コレクションを編集",
+                    "highlight-color": "ハイライト色",
+                    "open-tabs": "タブを開く",
+                    "save-to-collection": "セッションをコレクションに保存",
+                    "delete-collection": "コレクションを削除"
+                },
+                "labels": {
+                    "save": "保存",
+                    "drag-here": "ここにタブをドラッグしてください。"
+                },
+                "placeholders": {
+                    "name": "新しいコレクション名を入力..."
+                }
+            },
+            "dialogs": {
+                "remove-collection": {
+                    "title": "コレクションを削除",
+                    "description": "この操作は取り消せません。"
+                },
+                "create-collection": {
+                    "title": "コレクションを作成",
+                    "description": "新しいコレクション名を入力してください。",
+                    "labels": {
+                        "name": "コレクション名",
+                        "auto-name": "自動命名を使う",
+                        "cancel": "キャンセル",
+                        "save": "保存"
+                    }
+                },
+                "edit-card": {
+                    "title": "カードを編集",
+                    "labels": {
+                        "title": "タイトル",
+                        "description": "説明",
+                        "url": "URL",
+                        "remove": "削除",
+                        "cancel": "キャンセル",
+                        "save": "保存"
+                    }
+                }
+            }
+        },
+        "tabs": {
+            "title": "開いているタブ",
+            "group": {
+                "labels": {
+                    "window-name": "ウィンドウ #{{number}}",
+                    "show-window": "ウィンドウを表示",
+                    "save-session": "セッションを保存",
+                    "close-window": "ウィンドウを閉じる",
+                    "no-tabs": "タブなし"
+                }
+            },
+            "item": {
+                "labels": {
+                    "close": "タブを閉じる",
+                    "incognito": "シークレット"
+                },
+                "contextual": {
+                    "close-tab": "タブを閉じる",
+                    "focus-tab": "タブにフォーカス",
+                    "mute-tab": "タブをミュート",
+                    "unmute-tab": "タブのミュートを解除",
+                    "copy-link": "リンクをコピー"
+                },
+                "alerts": {
+                    "copy-link-success": "リンクがクリップボードにコピーされました。"
+                }
+            }
+        }
+    }
+}

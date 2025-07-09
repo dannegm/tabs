@@ -1,0 +1,185 @@
+{
+    "translation": {
+        "common": {
+            "zelda": {
+                "contextual": {
+                    "open-new-tab": "Abrir em nova aba",
+                    "open-new-window": "Abrir em nova janela",
+                    "open-new-private-window": "Abrir em modo anônimo",
+                    "copy-link": "Copiar link"
+                },
+                "alerts": {
+                    "copy-link-success": "Link copiado para a área de transferência."
+                }
+            },
+            "dark-mode-toggle": {
+                "tooltip": "Alternar modo escuro"
+            },
+            "debug-mode-toggle": {
+                "tooltip": "Alternar modo de depuração"
+            },
+            "color-picker": {
+                "labels": {
+                    "confirm": "Confirmar",
+                    "reset": "Redefinir"
+                }
+            },
+            "dialog": {
+                "labels": {
+                    "close": "Fechar"
+                }
+            },
+            "confirm-popover": {
+                "labels": {
+                    "cancel": "Cancelar",
+                    "accept": "Continuar"
+                }
+            }
+        },
+        "about": {
+            "title": "Tabs.",
+            "description": "Uma extensão de navegador para gerenciar suas abas de forma eficiente.",
+            "created-by": "Criado por",
+            "inspired-by": "Inspirado pela extensão do Chrome",
+            "visit-author-website": "Visitar o site de {{authorName}}",
+            "follow-author-twitter": "Seguir {{authorName}} no Twitter (X)",
+            "contribute": "Contribuir",
+            "view-on-github": "Ver no GitHub",
+            "help-us-to-improve": "Ajude-nos a melhorar contribuindo com código, reportando bugs ou sugerindo funcionalidades",
+            "report-bug": "Reportar um bug",
+            "feedback": "Feedback",
+            "made-with": "Feito com",
+            "by": "por",
+            "buy-me-a-coffee": "Me pague um café",
+            "license": "Tabs. Licenciado sob"
+        },
+        "header": {
+            "title": "Tabs.",
+            "labels": {
+                "expand": "Expandir",
+                "collapse": "Recolher",
+                "settings": "Configurações",
+                "language": "Idioma",
+                "add-collection": "Adicionar coleção",
+                "collections_one": "{{count}} coleção",
+                "collections_other": "{{count}} coleções"
+            }
+        },
+        "settings": {
+            "main": {
+                "items": {
+                    "about": "Sobre",
+                    "tabs": "Tabs."
+                }
+            },
+            "collections": {
+                "title": "Coleções",
+                "items": {
+                    "export": "Exportar coleções",
+                    "import": "Importar coleções",
+                    "clear": "Limpar coleções"
+                },
+                "alerts": {
+                    "clear-confirmation": "Tem certeza que deseja deletar todas as coleções? Esta ação é permanente e não pode ser desfeita."
+                }
+            },
+            "dialogs": {
+                "clear-collections": {
+                    "title": "Limpar coleções",
+                    "description": "Tem certeza de que deseja excluir todas as coleções? Esta ação é permanente e não pode ser desfeita."
+                }
+            }
+        },
+        "card": {
+            "item": {
+                "tooltips": {
+                    "edit-card": "Editar cartão",
+                    "remove-card": "Remover cartão"
+                }
+            },
+            "dialogs": {
+                "remove-card": {
+                    "title": "Remover cartão",
+                    "description": "Essa ação é permanente e não pode ser desfeita."
+                }
+            }
+        },
+        "collections": {
+            "empty": "Vamos começar adicionando algumas coleções novas.",
+            "labels": {
+                "add-collection": "Adicionar coleção"
+            },
+            "item": {
+                "tooltips": {
+                    "edit-collection": "Editar coleção",
+                    "highlight-color": "Cor de destaque",
+                    "open-tabs": "Abrir abas",
+                    "save-to-collection": "Salvar sessão na coleção",
+                    "delete-collection": "Deletar coleção"
+                },
+                "labels": {
+                    "save": "Salvar",
+                    "drag-here": "Arraste as abas para cá."
+                },
+                "placeholders": {
+                    "name": "Digite um novo nome para a coleção..."
+                }
+            },
+            "dialogs": {
+                "remove-collection": {
+                    "title": "Remover coleção",
+                    "description": "Esta ação é permanente e não pode ser desfeita."
+                },
+                "create-collection": {
+                    "title": "Criar coleção",
+                    "description": "Digite o nome da sua nova coleção.",
+                    "labels": {
+                        "name": "Nome da coleção",
+                        "auto-name": "Usar nome automático",
+                        "cancel": "Cancelar",
+                        "save": "Salvar"
+                    }
+                },
+                "edit-card": {
+                    "title": "Editar cartão",
+                    "labels": {
+                        "title": "Título",
+                        "description": "Descrição",
+                        "url": "URL",
+                        "remove": "Remover",
+                        "cancel": "Cancelar",
+                        "save": "Salvar"
+                    }
+                }
+            }
+        },
+        "tabs": {
+            "title": "Abas abertas",
+            "group": {
+                "labels": {
+                    "window-name": "Janela #{{number}}",
+                    "show-window": "Mostrar janela",
+                    "save-session": "Salvar sessão",
+                    "close-window": "Fechar janela",
+                    "no-tabs": "Sem abas"
+                }
+            },
+            "item": {
+                "labels": {
+                    "close": "Fechar aba",
+                    "incognito": "Anônimo"
+                },
+                "contextual": {
+                    "close-tab": "Fechar aba",
+                    "focus-tab": "Focar aba",
+                    "mute-tab": "Silenciar aba",
+                    "unmute-tab": "Ativar som da aba",
+                    "copy-link": "Copiar link"
+                },
+                "alerts": {
+                    "copy-link-success": "Link copiado para a área de transferência."
+                }
+            }
+        }
+    }
+}

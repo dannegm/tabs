@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { X, File, Pencil } from 'lucide-react';
 
 import { cn } from '@/modules/common/helpers/utils';
@@ -26,6 +27,8 @@ export const CardItem = ({
     onSort,
     onTransfer,
 }) => {
+    const { t } = useTranslation();
+
     const { setItemType, resetItemType } = useDradAndDropActions();
     const { draggingItem } = useDradAndDrop();
 
@@ -117,15 +120,15 @@ export const CardItem = ({
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
         >
-            <div className='invisible group-hover:visible flex flex-row-reverse gap-1 absolute z-20 top-2 right-2'>
+            <div className='invisible group-hover:visible flex flex-row-reverse rtl:flex-row gap-1 absolute z-20 top-2 right-2 rtl:left-2 rtl:right-auto'>
                 <ConfirmPopover
-                    title='Remove card'
-                    description='This action is permanent and cannot be undone.'
+                    title={t('card.dialogs.remove-card.title')}
+                    description={t('card.dialogs.remove-card.description')}
                     align={index === 0 ? 'start' : 'end'}
                     onAccept={handleRemove}
                 >
                     <div>
-                        <Tooltip content='Remove card'>
+                        <Tooltip content={t('card.item.tooltips.remove-card')}>
                             <Button
                                 className='dark:hover:bg-neutral-700'
                                 size='icon-xs'
@@ -139,7 +142,7 @@ export const CardItem = ({
 
                 <EditCardDialog item={item} onRemove={handleRemove} onUpdate={onUpdate}>
                     <div>
-                        <Tooltip content='Edit card'>
+                        <Tooltip content={t('card.item.tooltips.edit-card')}>
                             <Button
                                 className='dark:hover:bg-neutral-700'
                                 size='icon-xs'
@@ -183,7 +186,7 @@ export const CardItem = ({
                     href={item?.url}
                     data-href={item?.url}
                 >
-                    <div className='flex flex-row gap-2 items-center justify-start h-16 px-4'>
+                    <div className='flex flex-row rtl:flex-row-reverse gap-2 items-center justify-start h-16 px-4'>
                         {item?.favIconUrl ? (
                             <img className='size-6' src={item?.favIconUrl} />
                         ) : (

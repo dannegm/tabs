@@ -1,0 +1,185 @@
+{
+    "translation": {
+        "common": {
+            "zelda": {
+                "contextual": {
+                    "open-new-tab": "Apri in una nuova scheda",
+                    "open-new-window": "Apri in una nuova finestra",
+                    "open-new-private-window": "Apri in modalità incognito",
+                    "copy-link": "Copia link"
+                },
+                "alerts": {
+                    "copy-link-success": "Link copiato negli appunti."
+                }
+            },
+            "dark-mode-toggle": {
+                "tooltip": "Attiva/disattiva modalità scura"
+            },
+            "debug-mode-toggle": {
+                "tooltip": "Attiva/disattiva modalità debug"
+            },
+            "color-picker": {
+                "labels": {
+                    "confirm": "Conferma",
+                    "reset": "Reimposta"
+                }
+            },
+            "dialog": {
+                "labels": {
+                    "close": "Chiudi"
+                }
+            },
+            "confirm-popover": {
+                "labels": {
+                    "cancel": "Annulla",
+                    "accept": "Continua"
+                }
+            }
+        },
+        "about": {
+            "title": "Tabs.",
+            "description": "Un’estensione per browser per gestire efficacemente le tue schede.",
+            "created-by": "Creato da",
+            "inspired-by": "Ispirato all’estensione di Chrome",
+            "visit-author-website": "Visita il sito di {{authorName}}",
+            "follow-author-twitter": "Segui {{authorName}} su Twitter (X)",
+            "contribute": "Contribuisci",
+            "view-on-github": "Visualizza su GitHub",
+            "help-us-to-improve": "Aiutaci a migliorare contribuendo con codice, segnalando bug o suggerendo funzionalità",
+            "report-bug": "Segnala un bug",
+            "feedback": "Feedback",
+            "made-with": "Realizzato con",
+            "by": "da",
+            "buy-me-a-coffee": "Offrimi un caffè",
+            "license": "Tabs. Licenziato sotto"
+        },
+        "header": {
+            "title": "Tabs.",
+            "labels": {
+                "expand": "Espandi",
+                "collapse": "Comprimi",
+                "settings": "Impostazioni",
+                "language": "Lingua",
+                "add-collection": "Aggiungi collezione",
+                "collections_one": "{{count}} raccolta",
+                "collections_other": "{{count}} raccolte"
+            }
+        },
+        "settings": {
+            "main": {
+                "items": {
+                    "about": "Info",
+                    "tabs": "Tabs."
+                }
+            },
+            "collections": {
+                "title": "Collezioni",
+                "items": {
+                    "export": "Esporta collezioni",
+                    "import": "Importa collezioni",
+                    "clear": "Pulisci collezioni"
+                },
+                "alerts": {
+                    "clear-confirmation": "Sei sicuro di voler eliminare tutte le collezioni? Questa azione è permanente e non può essere annullata."
+                }
+            },
+            "dialogs": {
+                "clear-collections": {
+                    "title": "Cancella raccolte",
+                    "description": "Sei sicuro di voler eliminare tutte le raccolte? Questa azione è permanente e non può essere annullata."
+                }
+            }
+        },
+        "card": {
+            "item": {
+                "tooltips": {
+                    "edit-card": "Modifica scheda",
+                    "remove-card": "Rimuovi scheda"
+                }
+            },
+            "dialogs": {
+                "remove-card": {
+                    "title": "Rimuovi scheda",
+                    "description": "Questa azione è permanente e non può essere annullata."
+                }
+            }
+        },
+        "collections": {
+            "empty": "Iniziamo ad aggiungere nuove collezioni.",
+            "labels": {
+                "add-collection": "Aggiungi collezione"
+            },
+            "item": {
+                "tooltips": {
+                    "edit-collection": "Modifica collezione",
+                    "highlight-color": "Colore evidenziatore",
+                    "open-tabs": "Apri schede",
+                    "save-to-collection": "Salva sessione nella collezione",
+                    "delete-collection": "Elimina collezione"
+                },
+                "labels": {
+                    "save": "Salva",
+                    "drag-here": "Trascina qui le schede."
+                },
+                "placeholders": {
+                    "name": "Digita un nuovo nome per la raccolta..."
+                }
+            },
+            "dialogs": {
+                "remove-collection": {
+                    "title": "Rimuovi collezione",
+                    "description": "Questa azione è permanente e non può essere annullata."
+                },
+                "create-collection": {
+                    "title": "Crea collezione",
+                    "description": "Inserisci il nome della tua nuova collezione.",
+                    "labels": {
+                        "name": "Nome collezione",
+                        "auto-name": "Usa nome automatico",
+                        "cancel": "Annulla",
+                        "save": "Salva"
+                    }
+                },
+                "edit-card": {
+                    "title": "Modifica scheda",
+                    "labels": {
+                        "title": "Titolo",
+                        "description": "Descrizione",
+                        "url": "URL",
+                        "remove": "Rimuovi",
+                        "cancel": "Annulla",
+                        "save": "Salva"
+                    }
+                }
+            }
+        },
+        "tabs": {
+            "title": "Schede aperte",
+            "group": {
+                "labels": {
+                    "window-name": "Finestra #{{number}}",
+                    "show-window": "Mostra finestra",
+                    "save-session": "Salva sessione",
+                    "close-window": "Chiudi finestra",
+                    "no-tabs": "Nessuna scheda"
+                }
+            },
+            "item": {
+                "labels": {
+                    "close": "Chiudi scheda",
+                    "incognito": "Incognito"
+                },
+                "contextual": {
+                    "close-tab": "Chiudi scheda",
+                    "focus-tab": "Focalizza scheda",
+                    "mute-tab": "Disattiva scheda",
+                    "unmute-tab": "Attiva suono scheda",
+                    "copy-link": "Copia link"
+                },
+                "alerts": {
+                    "copy-link-success": "Link copiato negli appunti."
+                }
+            }
+        }
+    }
+}

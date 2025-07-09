@@ -70,6 +70,7 @@ export const ImportCollection = ({ children, onError, onSuccess }) => {
                         url: card.url,
                         customTitle: card?.customTitle || '',
                         customDescription: card?.customDescription || '',
+                        bgColor: card?.bgColor || null,
                         favIconUrl:
                             card?.favIconUrl ||
                             `https://www.google.com/s2/favicons?domain=${domain}&sz=256`,

@@ -1,0 +1,185 @@
+{
+    "translation": {
+        "common": {
+            "zelda": {
+                "contextual": {
+                    "open-new-tab": "নতুন ট্যাবে খুলুন",
+                    "open-new-window": "নতুন উইন্ডোতে খুলুন",
+                    "open-new-private-window": "গোপন মোডে খুলুন",
+                    "copy-link": "লিঙ্ক কপি করুন"
+                },
+                "alerts": {
+                    "copy-link-success": "লিঙ্ক ক্লিপবোর্ডে কপি হয়েছে।"
+                }
+            },
+            "dark-mode-toggle": {
+                "tooltip": "ডার্ক মোড চালু/বন্ধ করুন"
+            },
+            "debug-mode-toggle": {
+                "tooltip": "ডিবাগ মোড চালু/বন্ধ করুন"
+            },
+            "color-picker": {
+                "labels": {
+                    "confirm": "নিশ্চিত করুন",
+                    "reset": "রিসেট করুন"
+                }
+            },
+            "dialog": {
+                "labels": {
+                    "close": "বন্ধ করুন"
+                }
+            },
+            "confirm-popover": {
+                "labels": {
+                    "cancel": "বাতিল",
+                    "accept": "চালিয়ে যান"
+                }
+            }
+        },
+        "about": {
+            "title": "Tabs.",
+            "description": "আপনার ট্যাবগুলি দক্ষতার সাথে পরিচালনা করার জন্য একটি ব্রাউজার এক্সটেনশন।",
+            "created-by": "তৈরি করেছেন",
+            "inspired-by": "ক্রোম এক্সটেনশন দ্বারা অনুপ্রাণিত",
+            "visit-author-website": "{{authorName}} এর ওয়েবসাইট পরিদর্শন করুন",
+            "follow-author-twitter": "Twitter (X)-এ {{authorName}} কে অনুসরণ করুন",
+            "contribute": "অংশগ্রহণ করুন",
+            "view-on-github": "GitHub এ দেখুন",
+            "help-us-to-improve": "কোড যোগ করে, বাগ রিপোর্ট করে বা বৈশিষ্ট্য প্রস্তাব দিয়ে আমাদের উন্নত করতে সাহায্য করুন",
+            "report-bug": "বাগ রিপোর্ট করুন",
+            "feedback": "প্রতিক্রিয়া",
+            "made-with": "সহ তৈরি",
+            "by": "দ্বারা",
+            "buy-me-a-coffee": "আমাকে একটি কফি কিনুন",
+            "license": "Tabs. লাইসেন্সকৃত"
+        },
+        "header": {
+            "title": "Tabs.",
+            "labels": {
+                "expand": "বিস্তৃত করুন",
+                "collapse": "সংকুচিত করুন",
+                "settings": "সেটিংস",
+                "language": "ভাষা",
+                "add-collection": "সংগ্রহ যোগ করুন",
+                "collections_one": "{{count}} সংগ্রহ",
+                "collections_other": "{{count}} সংগ্রহসমূহ"
+            }
+        },
+        "settings": {
+            "main": {
+                "items": {
+                    "about": "সম্পর্কে",
+                    "tabs": "Tabs."
+                }
+            },
+            "collections": {
+                "title": "সংগ্রহ",
+                "items": {
+                    "export": "সংগ্রহ রপ্তানি করুন",
+                    "import": "সংগ্রহ আমদানি করুন",
+                    "clear": "সংগ্রহ মুছুন"
+                },
+                "alerts": {
+                    "clear-confirmation": "আপনি কি সত্যিই সব সংগ্রহ মুছে ফেলতে চান? এটি স্থায়ী এবং পূর্বাবস্থায় ফেরানো যাবে না।"
+                }
+            },
+            "dialogs": {
+                "clear-collections": {
+                    "title": "সংগ্রহ মুছুন",
+                    "description": "আপনি কি নিশ্চিত যে আপনি সমস্ত সংগ্রহ মুছে ফেলতে চান? এই ক্রিয়াটি স্থায়ী এবং পূর্বাবস্থায় ফেরা যাবে না।"
+                }
+            }
+        },
+        "card": {
+            "item": {
+                "tooltips": {
+                    "edit-card": "কার্ড সম্পাদনা করুন",
+                    "remove-card": "কার্ড মুছুন"
+                }
+            },
+            "dialogs": {
+                "remove-card": {
+                    "title": "কার্ড মুছুন",
+                    "description": "এই ক্রিয়াটি স্থায়ী এবং বাতিল করা যাবে না।"
+                }
+            }
+        },
+        "collections": {
+            "empty": "চলুন কিছু নতুন সংগ্রহ যোগ করা শুরু করি।",
+            "labels": {
+                "add-collection": "সংগ্রহ যোগ করুন"
+            },
+            "item": {
+                "tooltips": {
+                    "edit-collection": "সংগ্রহ সম্পাদনা করুন",
+                    "highlight-color": "হাইলাইট রং",
+                    "open-tabs": "ট্যাব খুলুন",
+                    "save-to-collection": "সংগ্রহে সেশন সংরক্ষণ করুন",
+                    "delete-collection": "সংগ্রহ মুছুন"
+                },
+                "labels": {
+                    "save": "সংরক্ষণ করুন",
+                    "drag-here": "এখানে ট্যাব টেনে আনুন।"
+                },
+                "placeholders": {
+                    "name": "নতুন সংগ্রহের নাম টাইপ করুন..."
+                }
+            },
+            "dialogs": {
+                "remove-collection": {
+                    "title": "সংগ্রহ মুছুন",
+                    "description": "এই কাজটি স্থায়ী এবং পূর্বাবস্থায় ফেরানো যাবে না।"
+                },
+                "create-collection": {
+                    "title": "সংগ্রহ তৈরি করুন",
+                    "description": "আপনার নতুন সংগ্রহের নাম লিখুন।",
+                    "labels": {
+                        "name": "সংগ্রহের নাম",
+                        "auto-name": "স্বয়ংক্রিয় নাম ব্যবহার করুন",
+                        "cancel": "বাতিল",
+                        "save": "সংরক্ষণ করুন"
+                    }
+                },
+                "edit-card": {
+                    "title": "কার্ড সম্পাদনা করুন",
+                    "labels": {
+                        "title": "শিরোনাম",
+                        "description": "বর্ণনা",
+                        "url": "URL",
+                        "remove": "মুছুন",
+                        "cancel": "বাতিল",
+                        "save": "সংরক্ষণ করুন"
+                    }
+                }
+            }
+        },
+        "tabs": {
+            "title": "খোলা ট্যাব",
+            "group": {
+                "labels": {
+                    "window-name": "উইন্ডো #{{number}}",
+                    "show-window": "উইন্ডো দেখান",
+                    "save-session": "সেশন সংরক্ষণ করুন",
+                    "close-window": "উইন্ডো বন্ধ করুন",
+                    "no-tabs": "কোনো ট্যাব নেই"
+                }
+            },
+            "item": {
+                "labels": {
+                    "close": "ট্যাব বন্ধ করুন",
+                    "incognito": "গোপনীয়"
+                },
+                "contextual": {
+                    "close-tab": "ট্যাব বন্ধ করুন",
+                    "focus-tab": "ট্যাবে ফোকাস করুন",
+                    "mute-tab": "ট্যাব নিষ্ক্রিয় করুন",
+                    "unmute-tab": "ট্যাব সক্রিয় করুন",
+                    "copy-link": "লিঙ্ক কপি করুন"
+                },
+                "alerts": {
+                    "copy-link-success": "লিঙ্ক ক্লিপবোর্ডে কপি হয়েছে।"
+                }
+            }
+        }
+    }
+}

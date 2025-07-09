@@ -1,0 +1,189 @@
+{
+    "translation": {
+        "common": {
+            "zelda": {
+                "contextual": {
+                    "open-new-tab": "افتح في علامة تبويب جديدة",
+                    "open-new-window": "افتح في نافذة جديدة",
+                    "open-new-private-window": "افتح في وضع التصفح المتخفي",
+                    "copy-link": "انسخ رابط العنوان"
+                },
+                "alerts": {
+                    "copy-link-success": "تم نسخ الرابط إلى الحافظة."
+                }
+            },
+            "dark-mode-toggle": {
+                "tooltip": "تبديل الوضع الداكن"
+            },
+            "debug-mode-toggle": {
+                "tooltip": "تبديل وضع التصحيح"
+            },
+            "color-picker": {
+                "labels": {
+                    "confirm": "تأكيد",
+                    "reset": "إعادة تعيين"
+                }
+            },
+            "dialog": {
+                "labels": {
+                    "close": "إغلاق"
+                }
+            },
+            "confirm-popover": {
+                "labels": {
+                    "cancel": "إلغاء",
+                    "accept": "متابعة"
+                }
+            }
+        },
+        "about": {
+            "title": "Tabs.",
+            "description": "إضافة للمتصفح لإدارة علامات التبويب بكفاءة.",
+            "created-by": "أنشأها",
+            "inspired-by": "مستوحاة من إضافة كروم",
+            "visit-author-website": "قم بزيارة موقع {{authorName}}",
+            "follow-author-twitter": "تابع {{authorName}} على Twitter (X)",
+            "contribute": "ساهم",
+            "view-on-github": "عرض على GitHub",
+            "help-us-to-improve": "ساعدنا على التحسين من خلال المساهمة بالكود أو الإبلاغ عن أخطاء أو اقتراح ميزات",
+            "report-bug": "الإبلاغ عن خلل",
+            "feedback": "ملاحظات",
+            "made-with": "صُنعت بـ",
+            "by": "بواسطة",
+            "buy-me-a-coffee": "اشترِ لي قهوة",
+            "license": ".Tabs مرخصة بموجب"
+        },
+        "header": {
+            "title": "Tabs.",
+            "labels": {
+                "expand": "توسيع",
+                "collapse": "طيّ",
+                "settings": "الإعدادات",
+                "language": "اللغة",
+                "add-collection": "أضف مجموعة",
+                "collections_zero": "لا مجموعات",
+                "collections_one": "مجموعة واحدة",
+                "collections_two": "مجموعتان",
+                "collections_few": "{{count}} مجموعات",
+                "collections_many": "{{count}} مجموعة",
+                "collections_other": "{{count}} مجموعة"
+            }
+        },
+        "settings": {
+            "main": {
+                "items": {
+                    "about": "حول",
+                    "tabs": "Tabs."
+                }
+            },
+            "collections": {
+                "title": "المجموعات",
+                "items": {
+                    "export": "تصدير المجموعات",
+                    "import": "استيراد المجموعات",
+                    "clear": "مسح المجموعات"
+                },
+                "alerts": {
+                    "clear-confirmation": "هل أنت متأكد أنك تريد حذف جميع المجموعات؟ لا يمكن التراجع عن هذا الإجراء."
+                }
+            },
+            "dialogs": {
+                "clear-collections": {
+                    "title": "مسح المجموعات",
+                    "description": "هل أنت متأكد أنك تريد حذف جميع المجموعات؟ هذا الإجراء دائم ولا يمكن التراجع عنه."
+                }
+            }
+        },
+        "card": {
+            "item": {
+                "tooltips": {
+                    "edit-card": "تحرير البطاقة",
+                    "remove-card": "إزالة البطاقة"
+                }
+            },
+            "dialogs": {
+                "remove-card": {
+                    "title": "إزالة البطاقة",
+                    "description": "هذا الإجراء دائم ولا يمكن التراجع عنه."
+                }
+            }
+        },
+        "collections": {
+            "empty": "لنبدأ بإضافة مجموعة جديدة.",
+            "labels": {
+                "add-collection": "أضف مجموعة"
+            },
+            "item": {
+                "tooltips": {
+                    "edit-collection": "تعديل المجموعة",
+                    "highlight-color": "لون التمييز",
+                    "open-tabs": "فتح علامات التبويب",
+                    "save-to-collection": "احفظ الجلسة في المجموعة",
+                    "delete-collection": "احذف المجموعة"
+                },
+                "labels": {
+                    "save": "حفظ",
+                    "drag-here": "اسحب علامات التبويب إلى هنا."
+                },
+                "placeholders": {
+                    "name": "اكتب اسم مجموعة جديد..."
+                }
+            },
+            "dialogs": {
+                "remove-collection": {
+                    "title": "إزالة المجموعة",
+                    "description": "هذا الإجراء دائم ولا يمكن التراجع عنه."
+                },
+                "create-collection": {
+                    "title": "إنشاء مجموعة",
+                    "description": "أدخل اسم المجموعة الجديدة.",
+                    "labels": {
+                        "name": "اسم المجموعة",
+                        "auto-name": "استخدم التسمية التلقائية",
+                        "cancel": "إلغاء",
+                        "save": "حفظ"
+                    }
+                },
+                "edit-card": {
+                    "title": "تعديل البطاقة",
+                    "labels": {
+                        "title": "العنوان",
+                        "description": "الوصف",
+                        "url": "الرابط",
+                        "remove": "إزالة",
+                        "cancel": "إلغاء",
+                        "save": "حفظ"
+                    }
+                }
+            }
+        },
+        "tabs": {
+            "title": "علامات التبويب المفتوحة",
+            "group": {
+                "labels": {
+                    "window-name": "#{{number}} نافذة",
+                    "show-window": "عرض النافذة",
+                    "save-session": "حفظ الجلسة",
+                    "close-window": "إغلاق النافذة",
+                    "no-tabs": "لا توجد علامات تبويب"
+                }
+            },
+            "item": {
+                "labels": {
+                    "close": "إغلاق التبويب",
+                    "incognito": "خاص"
+                },
+                "contextual": {
+                    "close-tab": "إغلاق التبويب",
+                    "focus-tab": "التركيز على التبويب",
+                    "mute-tab": "كتم صوت التبويب",
+                    "unmute-tab": "إلغاء كتم التبويب",
+                    "copy-link": "نسخ الرابط"
+                },
+                "alerts": {
+                    "copy-link-success": "تم نسخ الرابط إلى الحافظة."
+                }
+            }
+        }
+    }
+}

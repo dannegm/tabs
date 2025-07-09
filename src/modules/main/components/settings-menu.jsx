@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import { BadgeInfo, FolderInput, FolderOutput, Trash2 } from 'lucide-react';
 
 import { cn } from '@/modules/common/helpers/utils';
@@ -20,6 +22,8 @@ import { ExportCollection } from '@/modules/collections/components/export-collec
 import { AboutDialog } from '@/modules/main/components/about-dialog';
 
 export const SettingsMenu = ({ children, side = 'bottom', align = 'end' }) => {
+    const { t } = useTranslation();
+
     const [open, setOpen] = useState(false);
 
     const { clearCollections } = useCollectionsActions();
@@ -49,33 +53,33 @@ export const SettingsMenu = ({ children, side = 'bottom', align = 'end' }) => {
                 onFocusOutside={handleClose}
                 onInteractOutside={handleClose}
             >
-                <DropdownMenuLabel>Collections</DropdownMenuLabel>
+                <DropdownMenuLabel>{t('settings.collections.title')}</DropdownMenuLabel>
 
                 <DropdownMenuSeparator />
 
                 <ExportCollection onSuccess={handleClose}>
                     <DropdownMenuItem>
                         <FolderOutput />
-                        Export collections
+                        {t('settings.collections.items.export')}
                     </DropdownMenuItem>
                 </ExportCollection>
 
                 <ImportCollection onError={handleClose} onSuccess={handleClose}>
                     <DropdownMenuItem>
                         <FolderInput />
-                        Import collections
+                        {t('settings.collections.items.import')}
                     </DropdownMenuItem>
                 </ImportCollection>
 
                 <ConfirmDialog
-                    title='Clear collections'
-                    description='Are you sure you want to delete all collections? This action is permanent and cannot be undone.'
+                    title={t('settings.dialogs.clear-collections.title')}
+                    description={t('settings.dialogs.clear-collections.description')}
                     onCancel={handleClose}
                     onAccept={handleClearCollection}
                 >
                     <DropdownMenuItem>
                         <Trash2 />
-                        Clear collections
+                        {t('settings.collections.items.clear')}
                     </DropdownMenuItem>
                 </ConfirmDialog>
 
@@ -84,14 +88,14 @@ export const SettingsMenu = ({ children, side = 'bottom', align = 'end' }) => {
                 <AboutDialog>
                     <DropdownMenuItem>
                         <BadgeInfo />
-                        About{' '}
+                        {t('settings.main.items.about')}
                         <span
                             className={cn(
                                 'font-bold uppercase text-rose-600',
                                 'dark:text-rose-400',
                             )}
                         >
-                            Tabs.
+                            {t('settings.main.items.tabs')}
                         </span>
                     </DropdownMenuItem>
                 </AboutDialog>

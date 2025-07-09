@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { cn } from '@/modules/common/helpers/utils';
 import { bindTabsEvents, getAllTabs, unbindTabsEvents } from '@/modules/common/helpers/chrome';
@@ -8,6 +9,8 @@ import { ScrollArea } from '@/modules/shadcn/components/scroll-area';
 import { TabsGroup } from '@/modules/tabs/components/tabs-group';
 
 export const Tabs = ({ className }) => {
+    const { t } = useTranslation();
+
     const [groups, setGroups] = useState([]);
 
     const getChromeTabs = () => {
@@ -30,8 +33,8 @@ export const Tabs = ({ className }) => {
         <aside
             data-layer='tabs'
             className={cn(
-                'w-full h-full flex flex-col border-l border-l-neutral-200',
-                'dark:bg-neutral-800 dark:text-neutral-50 dark:border-l-neutral-700',
+                'w-full h-full flex flex-col border-l border-l-neutral-200 rtl:border-l-0 rtl:border-r rtl:border-r-neutral-200',
+                'dark:bg-neutral-800 dark:text-neutral-50 dark:border-l-neutral-700 rtl:dark:border-r-neutral-700',
                 className,
             )}
         >
@@ -43,7 +46,7 @@ export const Tabs = ({ className }) => {
                 )}
             >
                 <div className='flex-1' />
-                <div className='text-xs font-bold uppercase'>Open Tabs</div>
+                <div className='text-xs font-bold uppercase'>{t('tabs.title')}</div>
             </div>
 
             <ScrollArea className='flex-1 max-h-[calc(100vh-3rem)]'>

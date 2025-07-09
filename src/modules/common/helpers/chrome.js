@@ -129,3 +129,11 @@ export const focusTab = ({ id, windowId }) => {
         focusWindow(windowId);
     });
 };
+
+export const muteTab = ({ id }) => {
+    chrome?.tabs?.update?.(+id, { muted: true });
+};
+
+export const unmuteTab = ({ id }) => {
+    chrome?.tabs?.update?.(+id, { muted: false });
+};

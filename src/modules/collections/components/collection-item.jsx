@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
     X,
@@ -51,9 +52,10 @@ export const CollectionItem = ({
     onSort,
     onBgColorChange,
 }) => {
+    const { t } = useTranslation();
     const [theme] = useDarkMode();
 
-    const { setItemType, resetItemType } = useDradAndDropActions();
+    const { setItemType } = useDradAndDropActions();
     const { draggingItem } = useDradAndDrop();
 
     const [dragging, setDragging] = useState(false);
@@ -207,9 +209,9 @@ export const CollectionItem = ({
             data-layer='collection-item'
             className={cn(
                 { dark },
-                'relative flex flex-col gap-4 p-4 pl-8 bg-white text-neutral-950 border-b border-b-neutral-200 transition-all duration-150',
+                'relative flex flex-col gap-4 p-4 pl-8 rtl:pl-4 rtl:pr-8 bg-white text-neutral-950 border-b border-b-neutral-200 transition-all duration-150',
                 'dark:bg-neutral-800 dark:border-b-neutral-700 dark:text-white',
-                { 'translate-x-6': dragOverCollection },
+                { 'translate-x-6 rtl:-translate-x-6': dragOverCollection },
                 className,
             )}
             onDragOver={handleDragOver}
@@ -222,7 +224,7 @@ export const CollectionItem = ({
         >
             <div
                 className={cn(
-                    'handle absolute top-0 bottom-0 left-0 w-6 flex-center pointer-events-auto cursor-grab hover:bg-neutral-100 dark:hover:bg-neutral-700/30',
+                    'handle absolute top-0 bottom-0 left-0 rtl:right-0 rtl:left-auto w-6 flex-center pointer-events-auto cursor-grab hover:bg-neutral-100 dark:hover:bg-neutral-700/30',
                     { 'cursor-grabbing': dragging },
                 )}
                 onPointerDown={handlePointerDown}
@@ -232,7 +234,7 @@ export const CollectionItem = ({
 
             <div
                 className={cn(
-                    'absolute top-0 -left-6 w-0 h-full bg-strip-rose-200 dark:bg-strip-rose-600 inset-shadow-md transition-all duration-150',
+                    'absolute top-0 -left-6 rtl:-right-6 rtl:left-auto w-0 h-full bg-strip-rose-200 dark:bg-strip-rose-600 inset-shadow-md transition-all duration-150',
                     {
                         'w-6': dragOverCollection,
                     },
@@ -241,12 +243,15 @@ export const CollectionItem = ({
 
             <div
                 data-layer='header'
-                className='group flex flex-row items-center justify-between gap-2'
+                className='group flex flex-row rtl:flex-row-reverse items-center justify-between gap-2'
             >
                 {!editting ? (
-                    <div data-layer='name' className='flex flex-row items-center gap-1'>
+                    <div
+                        data-layer='name'
+                        className='flex flex-row rtl:flex-row-reverse items-center gap-1'
+                    >
                         <Button
-                            className={cn('text-base leading-1 dark:bg-neutral-700', {
+                            className={cn('text-base leading-1 dark:bg-neutral-700 rtl:flex-row-reverse', {
                                 'text-neutral-950': !dark,
                                 'text-white': dark,
                             })}
@@ -262,7 +267,7 @@ export const CollectionItem = ({
                             {expanded ? <ChevronDown /> : <ChevronRight />}
                         </Button>
 
-                        <Tooltip content='Edit Collection'>
+                        <Tooltip content={t('collections.item.tooltips.edit-collection')}>
                             <Button
                                 className='invisible group-hover:visible dark:hover:bg-neutral-700'
                                 variant='ghost'
@@ -276,12 +281,12 @@ export const CollectionItem = ({
                 ) : (
                     <form
                         data-layer='editor'
-                        className='flex flex-row items-center gap-1'
+                        className='flex flex-row rtl:flex-row-reverse items-center gap-1'
                         onSubmit={handleEditSave}
                     >
                         <Input
-                            className='min-w-96 dark:border-neutral-700'
-                            placeholder='Type a new collection name...'
+                            className='min-w-96 dark:border-neutral-700 rtl:text-right'
+                            placeholder={t('collections.item.placeholders.name')}
                             value={newName}
                             onChange={ev => setNewName(ev.target.value)}
                         />
@@ -297,14 +302,14 @@ export const CollectionItem = ({
                         </Button>
 
                         <Button type='submit' className='dark:bg-neutral-700' variant='secondary'>
-                            <Save /> Save
+                            <Save /> {t('collections.item.labels.save')}
                         </Button>
                     </form>
                 )}
 
                 <div
                     data-layer='actions'
-                    className={cn('flex flex-row gap-2', {
+                    className={cn('flex flex-row rtl:flex-row-reverse gap-2', {
                         'text-neutral-950': !dark,
                         'text-white': dark,
                     })}
@@ -315,7 +320,7 @@ export const CollectionItem = ({
                         onSelect={handleChangeBgColor}
                     >
                         {() => (
-                            <Tooltip content='Highlight color'>
+                            <Tooltip content={t('collections.item.tooltips.highlight-color')}>
                                 <Button
                                     className='dark:hover:bg-neutral-700'
                                     size='icon-xs'
@@ -327,7 +332,7 @@ export const CollectionItem = ({
                         )}
                     </ColorPicker>
 
-                    <Tooltip content='Open tabs'>
+                    <Tooltip content={t('collections.item.tooltips.open-tabs')}>
                         <Button
                             className='dark:hover:bg-neutral-700'
                             size='icon-xs'
@@ -338,7 +343,7 @@ export const CollectionItem = ({
                         </Button>
                     </Tooltip>
 
-                    <Tooltip content='Save session to collection'>
+                    <Tooltip content={t('collections.item.tooltips.save-to-collection')}>
                         <Button
                             className='dark:hover:bg-neutral-700'
                             size='icon-xs'
@@ -350,13 +355,13 @@ export const CollectionItem = ({
                     </Tooltip>
 
                     <ConfirmPopover
-                        title='Remove collection'
-                        description='This action is permanent and cannot be undone.'
+                        title={t('collections.dialogs.remove-collection.title')}
+                        description={t('collections.dialogs.remove-collection.description')}
                         align='end'
                         onAccept={handleRemove}
                     >
                         <div>
-                            <Tooltip content='Delete collection'>
+                            <Tooltip content={t('collections.item.tooltips.delete-collection')}>
                                 <Button
                                     className='dark:hover:bg-neutral-700'
                                     size='icon-xs'
@@ -371,11 +376,11 @@ export const CollectionItem = ({
             </div>
 
             {expanded && (
-                <div data-layer='cards' className='flex flex-row flex-wrap gap-4'>
+                <div data-layer='cards' className='flex flex-row rtl:flex-row-reverse flex-wrap gap-4'>
                     <div
                         data-layer='target'
                         className={cn(
-                            'hidden absolute inset-2 left-6 border-2 border-dashed border-rose-500 rounded-md pointer-events-none',
+                            'hidden absolute inset-2 left-6 rtl:right-6 rtl:left-2 border-2 border-dashed border-rose-500 rounded-md pointer-events-none',
                             { block: dragOverCard || dragOverTab },
                         )}
                     />
@@ -389,7 +394,7 @@ export const CollectionItem = ({
                                 'group-[.drag-over]/sortable:bg-rose-200 group-[.drag-over]/sortable:text-rose-500 group-[.drag-over]/sortable:dark:bg-rose-500/40 group-[.drag-over]/sortable:dark:text-rose-400',
                             )}
                         >
-                            Drag tabs here.
+                            {t('collections.item.labels.drag-here')}
                         </div>
                     )}
 

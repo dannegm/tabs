@@ -1,0 +1,185 @@
+{
+    "translation": {
+        "common": {
+            "zelda": {
+                "contextual": {
+                    "open-new-tab": "Открыть в новой вкладке",
+                    "open-new-window": "Открыть в новом окне",
+                    "open-new-private-window": "Открыть в режиме инкогнито",
+                    "copy-link": "Копировать ссылку"
+                },
+                "alerts": {
+                    "copy-link-success": "Ссылка скопирована в буфер обмена."
+                }
+            },
+            "dark-mode-toggle": {
+                "tooltip": "Переключить тёмный режим"
+            },
+            "debug-mode-toggle": {
+                "tooltip": "Переключить режим отладки"
+            },
+            "color-picker": {
+                "labels": {
+                    "confirm": "Подтвердить",
+                    "reset": "Сбросить"
+                }
+            },
+            "dialog": {
+                "labels": {
+                    "close": "Закрыть"
+                }
+            },
+            "confirm-popover": {
+                "labels": {
+                    "cancel": "Отмена",
+                    "accept": "Продолжить"
+                }
+            }
+        },
+        "about": {
+            "title": "Tabs.",
+            "description": "Расширение для браузера для эффективного управления вкладками.",
+            "created-by": "Создано",
+            "inspired-by": "Вдохновлено расширением Chrome",
+            "visit-author-website": "Посетить сайт {{authorName}}",
+            "follow-author-twitter": "Подписаться на {{authorName}} в Twitter (X)",
+            "contribute": "Внести вклад",
+            "view-on-github": "Просмотреть на GitHub",
+            "help-us-to-improve": "Помогите нам улучшить, внося код, сообщая об ошибках или предлагая функции",
+            "report-bug": "Сообщить об ошибке",
+            "feedback": "Обратная связь",
+            "made-with": "Сделано с",
+            "by": "от",
+            "buy-me-a-coffee": "Купи мне кофе",
+            "license": "Tabs. Лицензировано под"
+        },
+        "header": {
+            "title": "Tabs.",
+            "labels": {
+                "expand": "Развернуть",
+                "collapse": "Свернуть",
+                "settings": "Настройки",
+                "language": "Язык",
+                "add-collection": "Добавить коллекцию",
+                "collections_one": "{{count}} коллекция",
+                "collections_other": "{{count}} коллекций"
+            }
+        },
+        "settings": {
+            "main": {
+                "items": {
+                    "about": "О программе",
+                    "tabs": "Tabs."
+                }
+            },
+            "collections": {
+                "title": "Коллекции",
+                "items": {
+                    "export": "Экспорт коллекций",
+                    "import": "Импорт коллекций",
+                    "clear": "Очистить коллекции"
+                },
+                "alerts": {
+                    "clear-confirmation": "Вы уверены, что хотите удалить все коллекции? Это действие необратимо."
+                }
+            },
+            "dialogs": {
+                "clear-collections": {
+                    "title": "Очистить коллекции",
+                    "description": "Вы уверены, что хотите удалить все коллекции? Это действие необратимо и не может быть отменено."
+                }
+            }
+        },
+        "card": {
+            "item": {
+                "tooltips": {
+                    "edit-card": "Редактировать карточку",
+                    "remove-card": "Удалить карточку"
+                }
+            },
+            "dialogs": {
+                "remove-card": {
+                    "title": "Удалить карточку",
+                    "description": "Это действие необратимо и не может быть отменено."
+                }
+            }
+        },
+        "collections": {
+            "empty": "Давайте начнем добавлять новые коллекции.",
+            "labels": {
+                "add-collection": "Добавить коллекцию"
+            },
+            "item": {
+                "tooltips": {
+                    "edit-collection": "Редактировать коллекцию",
+                    "highlight-color": "Цвет подсветки",
+                    "open-tabs": "Открыть вкладки",
+                    "save-to-collection": "Сохранить сессию в коллекцию",
+                    "delete-collection": "Удалить коллекцию"
+                },
+                "labels": {
+                    "save": "Сохранить",
+                    "drag-here": "Перетащите вкладки сюда."
+                },
+                "placeholders": {
+                    "name": "Введите новое имя коллекции..."
+                }
+            },
+            "dialogs": {
+                "remove-collection": {
+                    "title": "Удалить коллекцию",
+                    "description": "Это действие необратимо."
+                },
+                "create-collection": {
+                    "title": "Создать коллекцию",
+                    "description": "Введите имя вашей новой коллекции.",
+                    "labels": {
+                        "name": "Название коллекции",
+                        "auto-name": "Использовать автоимя",
+                        "cancel": "Отмена",
+                        "save": "Сохранить"
+                    }
+                },
+                "edit-card": {
+                    "title": "Редактировать карточку",
+                    "labels": {
+                        "title": "Заголовок",
+                        "description": "Описание",
+                        "url": "URL",
+                        "remove": "Удалить",
+                        "cancel": "Отмена",
+                        "save": "Сохранить"
+                    }
+                }
+            }
+        },
+        "tabs": {
+            "title": "Открытые вкладки",
+            "group": {
+                "labels": {
+                    "window-name": "Окно #{{number}}",
+                    "show-window": "Показать окно",
+                    "save-session": "Сохранить сессию",
+                    "close-window": "Закрыть окно",
+                    "no-tabs": "Нет вкладок"
+                }
+            },
+            "item": {
+                "labels": {
+                    "close": "Закрыть вкладку",
+                    "incognito": "Инкогнито"
+                },
+                "contextual": {
+                    "close-tab": "Закрыть вкладку",
+                    "focus-tab": "Переключить на вкладку",
+                    "mute-tab": "Отключить звук вкладки",
+                    "unmute-tab": "Включить звук вкладки",
+                    "copy-link": "Копировать ссылку"
+                },
+                "alerts": {
+                    "copy-link-success": "Ссылка скопирована в буфер обмена."
+                }
+            }
+        }
+    }
+}

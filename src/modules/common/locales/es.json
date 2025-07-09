@@ -1,0 +1,185 @@
+{
+    "translation": {
+        "common": {
+            "zelda": {
+                "contextual": {
+                    "open-new-tab": "Abrir en nueva pestaña",
+                    "open-new-window": "Abrir en nueva ventana",
+                    "open-new-private-window": "Abrir en modo incógnito",
+                    "copy-link": "Copiar dirección de enlace"
+                },
+                "alerts": {
+                    "copy-link-success": "Enlace copiado al portapapeles."
+                }
+            },
+            "dark-mode-toggle": {
+                "tooltip": "Alternar modo oscuro"
+            },
+            "debug-mode-toggle": {
+                "tooltip": "Alternar modo de desarrollo"
+            },
+            "color-picker": {
+                "labels": {
+                    "confirm": "Confirmar",
+                    "reset": "Restablecer"
+                }
+            },
+            "dialog": {
+                "labels": {
+                    "close": "Cerrar"
+                }
+            },
+            "confirm-popover": {
+                "labels": {
+                    "cancel": "Cancelar",
+                    "accept": "Continuar"
+                }
+            }
+        },
+        "about": {
+            "title": "Tabs.",
+            "description": "Una extensión de navegador para gestionar tus pestañas de manera eficiente.",
+            "created-by": "Creado por",
+            "inspired-by": "Inspirado en la extensión de Chrome",
+            "visit-author-website": "Visitar el sitio web de {{authorName}}",
+            "follow-author-twitter": "Seguir a {{authorName}} en Twitter (X)",
+            "contribute": "Contribuir",
+            "view-on-github": "Ver en GitHub",
+            "help-us-to-improve": "Ayúdanos a mejorar contribuyendo con código, informando errores o sugiriendo funciones",
+            "report-bug": "Informar un problema",
+            "feedback": "Comentarios",
+            "made-with": "Hecho con",
+            "by": "por",
+            "buy-me-a-coffee": "Invítame un café",
+            "license": "Tabs. Licenciado bajo"
+        },
+        "header": {
+            "title": "Tabs.",
+            "labels": {
+                "expand": "Expandir",
+                "collapse": "Colapsar",
+                "settings": "Configuraciones",
+                "language": "Idioma",
+                "add-collection": "Crear colección",
+                "collections_one": "{{count}} colección",
+                "collections_other": "{{count}} colecciones"
+            }
+        },
+        "settings": {
+            "main": {
+                "items": {
+                    "about": "Acerca de",
+                    "tabs": "Tabs."
+                }
+            },
+            "collections": {
+                "title": "Colecciones",
+                "items": {
+                    "export": "Exportar colecciones",
+                    "import": "Importar colecciones",
+                    "clear": "Borrar colecciones"
+                },
+                "alerts": {
+                    "clear-confirmation": "¿Estás seguro de que deseas eliminar todas las colecciones? Esta acción es permanente y no se puede deshacer."
+                }
+            },
+            "dialogs": {
+                "clear-collections": {
+                    "title": "Borrar colecciones",
+                    "description": "¿Estás seguro de que deseas eliminar todas las colecciones? Esta acción es permanente y no se puede deshacer."
+                }
+            }
+        },
+        "card": {
+            "item": {
+                "tooltips": {
+                    "edit-card": "Editar enlace",
+                    "remove-card": "Eliminar enlace"
+                }
+            },
+            "dialogs": {
+                "remove-card": {
+                    "title": "Eliminar enlace",
+                    "description": "Esta acción es permanente y no se puede deshacer."
+                }
+            }
+        },
+        "collections": {
+            "empty": "Hora de agregar algunas nuevas colecciones.",
+            "labels": {
+                "add-collection": "Crear colección"
+            },
+            "item": {
+                "tooltips": {
+                    "edit-collection": "Editar colección",
+                    "highlight-color": "Color de resaltado",
+                    "open-tabs": "Abrir pestañas",
+                    "save-to-collection": "Guardar sesión a esta colección",
+                    "delete-collection": "Eliminar colección"
+                },
+                "labels": {
+                    "save": "Guardar",
+                    "drag-here": "Arrastra y suelta las pestañas aquí."
+                },
+                "placeholders": {
+                    "name": "Escribe un nuevo nombre para la colección..."
+                }
+            },
+            "dialogs": {
+                "remove-collection": {
+                    "title": "Eliminar colección",
+                    "description": "Esta acción es permanente y no se puede deshacer."
+                },
+                "create-collection": {
+                    "title": "Crear colección",
+                    "description": "Ingresa el nombre de tu nueva colección.",
+                    "labels": {
+                        "name": "Nombre de la colección",
+                        "auto-name": "Usar nombre automático",
+                        "cancel": "Cancelar",
+                        "save": "Guardar"
+                    }
+                },
+                "edit-card": {
+                    "title": "Editar enlace",
+                    "labels": {
+                        "title": "Título",
+                        "description": "Descripción",
+                        "url": "URL",
+                        "remove": "Eliminar",
+                        "cancel": "Cancelar",
+                        "save": "Guardar"
+                    }
+                }
+            }
+        },
+        "tabs": {
+            "title": "Pestañas abiertas",
+            "group": {
+                "labels": {
+                    "window-name": "Ventana #{{number}}",
+                    "show-window": "Mostrar ventana",
+                    "save-session": "Guardar sesión",
+                    "close-window": "Cerrar ventana",
+                    "no-tabs": "Sin pestañas"
+                }
+            },
+            "item": {
+                "labels": {
+                    "close": "Cerrar pestaña",
+                    "incognito": "Incógnito"
+                },
+                "contextual": {
+                    "close-tab": "Cerrar pestaña",
+                    "focus-tab": "Mostrar pestaña",
+                    "mute-tab": "Silenciar pestaña",
+                    "unmute-tab": "Activar sonido en pestaña",
+                    "copy-link": "Copiar enlace"
+                },
+                "alerts": {
+                    "copy-link-success": "Enlace copiado al portapapeles."
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,185 @@
+{
+    "translation": {
+        "common": {
+            "zelda": {
+                "contextual": {
+                    "open-new-tab": "Ouvrir dans un nouvel onglet",
+                    "open-new-window": "Ouvrir dans une nouvelle fenêtre",
+                    "open-new-private-window": "Ouvrir en navigation privée",
+                    "copy-link": "Copier le lien"
+                },
+                "alerts": {
+                    "copy-link-success": "Lien copié dans le presse-papiers."
+                }
+            },
+            "dark-mode-toggle": {
+                "tooltip": "Basculer le mode sombre"
+            },
+            "debug-mode-toggle": {
+                "tooltip": "Basculer le mode débogage"
+            },
+            "color-picker": {
+                "labels": {
+                    "confirm": "Confirmer",
+                    "reset": "Réinitialiser"
+                }
+            },
+            "dialog": {
+                "labels": {
+                    "close": "Fermer"
+                }
+            },
+            "confirm-popover": {
+                "labels": {
+                    "cancel": "Annuler",
+                    "accept": "Continuer"
+                }
+            }
+        },
+        "about": {
+            "title": "Tabs.",
+            "description": "Une extension de navigateur pour gérer efficacement vos onglets.",
+            "created-by": "Créé par",
+            "inspired-by": "Inspiré par l'extension Chrome",
+            "visit-author-website": "Visiter le site de {{authorName}}",
+            "follow-author-twitter": "Suivre {{authorName}} sur Twitter (X)",
+            "contribute": "Contribuer",
+            "view-on-github": "Voir sur GitHub",
+            "help-us-to-improve": "Aidez-nous à améliorer en contribuant du code, signalant des bugs ou suggérant des fonctionnalités",
+            "report-bug": "Signaler un bug",
+            "feedback": "Retour",
+            "made-with": "Fait avec",
+            "by": "par",
+            "buy-me-a-coffee": "Offrez-moi un café",
+            "license": "Tabs. Sous licence"
+        },
+        "header": {
+            "title": "Tabs.",
+            "labels": {
+                "expand": "Développer",
+                "collapse": "Réduire",
+                "settings": "Paramètres",
+                "language": "Langue",
+                "add-collection": "Ajouter une collection",
+                "collections_one": "{{count}} collection",
+                "collections_other": "{{count}} collections"
+            }
+        },
+        "settings": {
+            "main": {
+                "items": {
+                    "about": "À propos",
+                    "tabs": "Tabs."
+                }
+            },
+            "collections": {
+                "title": "Collections",
+                "items": {
+                    "export": "Exporter les collections",
+                    "import": "Importer les collections",
+                    "clear": "Effacer les collections"
+                },
+                "alerts": {
+                    "clear-confirmation": "Êtes-vous sûr de vouloir supprimer toutes les collections ? Cette action est permanente et irréversible."
+                }
+            },
+            "dialogs": {
+                "clear-collections": {
+                    "title": "Effacer les collections",
+                    "description": "Êtes-vous sûr de vouloir supprimer toutes les collections ? Cette action est permanente et ne peut pas être annulée."
+                }
+            }
+        },
+        "card": {
+            "item": {
+                "tooltips": {
+                    "edit-card": "Modifier la carte",
+                    "remove-card": "Supprimer la carte"
+                }
+            },
+            "dialogs": {
+                "remove-card": {
+                    "title": "Supprimer la carte",
+                    "description": "Cette action est permanente et ne peut pas être annulée."
+                }
+            }
+        },
+        "collections": {
+            "empty": "Commençons par ajouter une nouvelle collection.",
+            "labels": {
+                "add-collection": "Ajouter une collection"
+            },
+            "item": {
+                "tooltips": {
+                    "edit-collection": "Modifier la collection",
+                    "highlight-color": "Couleur de surbrillance",
+                    "open-tabs": "Ouvrir les onglets",
+                    "save-to-collection": "Enregistrer la session dans la collection",
+                    "delete-collection": "Supprimer la collection"
+                },
+                "labels": {
+                    "save": "Enregistrer",
+                    "drag-here": "Faites glisser les onglets ici."
+                },
+                "placeholders": {
+                    "name": "Saisissez un nouveau nom de collection..."
+                }
+            },
+            "dialogs": {
+                "remove-collection": {
+                    "title": "Supprimer la collection",
+                    "description": "Cette action est permanente et irréversible."
+                },
+                "create-collection": {
+                    "title": "Créer une collection",
+                    "description": "Entrez le nom de votre nouvelle collection.",
+                    "labels": {
+                        "name": "Nom de la collection",
+                        "auto-name": "Utiliser un nom automatique",
+                        "cancel": "Annuler",
+                        "save": "Enregistrer"
+                    }
+                },
+                "edit-card": {
+                    "title": "Modifier la carte",
+                    "labels": {
+                        "title": "Titre",
+                        "description": "Description",
+                        "url": "URL",
+                        "remove": "Supprimer",
+                        "cancel": "Annuler",
+                        "save": "Enregistrer"
+                    }
+                }
+            }
+        },
+        "tabs": {
+            "title": "Onglets ouverts",
+            "group": {
+                "labels": {
+                    "window-name": "Fenêtre #{{number}}",
+                    "show-window": "Afficher la fenêtre",
+                    "save-session": "Sauvegarder la session",
+                    "close-window": "Fermer la fenêtre",
+                    "no-tabs": "Pas d'onglets"
+                }
+            },
+            "item": {
+                "labels": {
+                    "close": "Fermer l'onglet",
+                    "incognito": "Navigation privée"
+                },
+                "contextual": {
+                    "close-tab": "Fermer l'onglet",
+                    "focus-tab": "Mettre l'onglet en avant",
+                    "mute-tab": "Mettre l'onglet en sourdine",
+                    "unmute-tab": "Réactiver le son de l'onglet",
+                    "copy-link": "Copier le lien"
+                },
+                "alerts": {
+                    "copy-link-success": "Lien copié dans le presse-papiers."
+                }
+            }
+        }
+    }
+}

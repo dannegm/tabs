@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useCopyToClipboard } from '@uidotdev/usehooks';
 import { toast } from 'sonner';
 
@@ -16,11 +17,13 @@ import {
 } from '@/modules/shadcn/components/context-menu';
 
 export const ContextualMenu = ({ url, children }) => {
+    const { t } = useTranslation();
+
     const [, copyToClipboard] = useCopyToClipboard();
 
     const handleCopy = () => {
         copyToClipboard(url);
-        toast('Copied.', { description: url });
+        toast(t('common.zelda.alerts.copy-link-success'), { description: url });
     };
 
     return (
@@ -29,20 +32,20 @@ export const ContextualMenu = ({ url, children }) => {
             <ContextMenuContent>
                 <ContextMenuItem onClick={() => openLink({ url, target: 'blank' })}>
                     <Link2 />
-                    Abrir en una pestaña nueva
+                    {t('common.zelda.contextual.open-new-tab')}
                 </ContextMenuItem>
                 <ContextMenuItem onClick={() => openLink({ url, target: 'window' })}>
                     <ExternalLink />
-                    Abrir en una ventana nueva
+                    {t('common.zelda.contextual.open-new-window')}
                 </ContextMenuItem>
                 <ContextMenuItem onClick={() => openLink({ url, target: 'incognito' })}>
                     <VenetianMask />
-                    Abrir en una ventana de incógnito
+                    {t('common.zelda.contextual.open-new-private-window')}
                 </ContextMenuItem>
                 <ContextMenuSeparator />
                 <ContextMenuItem onClick={handleCopy}>
                     <Copy />
-                    Copiar dirección del enlace
+                    {t('common.zelda.contextual.copy-link')}
                 </ContextMenuItem>
             </ContextMenuContent>
         </ContextMenu>

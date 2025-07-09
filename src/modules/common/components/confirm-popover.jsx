@@ -1,18 +1,20 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import { Button } from '@/modules/shadcn/components/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/modules/shadcn/components/popover';
 
 export const ConfirmPopover = ({
     title,
     description,
-    cancelLabe = 'Cancel',
-    acceptLabel = 'Continue',
     side = 'bottom',
     align = 'center',
     children,
     onAccept,
     onCancel,
 }) => {
+    const { t } = useTranslation();
+
     const [open, setOpen] = useState(false);
     const handleAccept = () => {
         setOpen(false);
@@ -45,10 +47,10 @@ export const ConfirmPopover = ({
 
                 <div className='flex flex-row gap-2'>
                     <Button size='sm' variant='secondary' onClick={handleCancel}>
-                        {cancelLabe}
+                        {t('common.confirm-popover.labels.cancel')}
                     </Button>
                     <Button size='sm' onClick={handleAccept}>
-                        {acceptLabel}
+                        {t('common.confirm-popover.labels.accept')}
                     </Button>
                 </div>
             </PopoverContent>

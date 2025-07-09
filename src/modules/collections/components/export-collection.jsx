@@ -16,6 +16,7 @@ export const ExportCollection = ({ onSuccess, children }) => {
                     customTitle: item?.customTitle || '',
                     customDescription: item?.customDescription || '',
                     favIconUrl: item.favIconUrl,
+                    bgColor: item?.bgColor,
                 })),
             })),
         };
