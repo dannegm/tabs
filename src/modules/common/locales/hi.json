@@ -34,6 +34,19 @@
                     "cancel": "रद्द करें",
                     "accept": "जारी रखें"
                 }
+            },
+            "import": {
+                "alerts": {
+                    "all-collections-imported": "{{count}} संग्रह आयात किए गए हैं।",
+                    "single-collection-imported": "संग्रह {{name}} आयात किया गया है।",
+                    "unsupported": "असमर्थित फ़ाइल।"
+                }
+            },
+            "export": {
+                "alerts": {
+                    "all-collections-exported": "{{count}} संग्रह निर्यात किए गए हैं।",
+                    "single-collection-exported": "संग्रह {{name}} निर्यात किया गया है।"
+                }
             }
         },
         "about": {
@@ -115,6 +128,7 @@
                     "highlight-color": "हाइलाइट रंग",
                     "open-tabs": "टैब्स खोलें",
                     "save-to-collection": "संग्रह में सत्र सहेजें",
+                    "export-collection": "इस संग्रह को निर्यात करें",
                     "delete-collection": "संग्रह हटाएं"
                 },
                 "labels": {

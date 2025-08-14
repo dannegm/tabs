@@ -10,11 +10,12 @@ const collectionsSlice = createSlice({
     reducers: {
         //* Collections
         addCollection: (state, action) => {
-            const { id, name, expanded, items = {} } = action.payload;
+            const { id, name, expanded, bgColor, items = {} } = action.payload;
             state[id] = {
                 id,
                 name,
                 expanded,
+                bgColor,
                 created_at: Date.now(),
                 index: Object.keys(state).length,
                 items,
@@ -180,8 +181,8 @@ export const useCollectionsActions = () => {
 
     return {
         //* Collections
-        addCollection: ({ id, name, expanded, items = {} }) =>
-            dispatch(addCollection({ id, name, expanded, items })),
+        addCollection: ({ id, name, expanded, bgColor, items = {} }) =>
+            dispatch(addCollection({ id, name, expanded, bgColor, items })),
         editCollection: ({ id, name }) => dispatch(editCollection({ id, name })),
         setCollectionBgColor: ({ id, bgColor }) => dispatch(setCollectionBgColor({ id, bgColor })),
         toggleCollection: ({ id }) => dispatch(toggleCollection({ id })),

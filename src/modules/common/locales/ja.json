@@ -34,6 +34,19 @@
                     "cancel": "キャンセル",
                     "accept": "続行"
                 }
+            },
+            "import": {
+                "alerts": {
+                    "all-collections-imported": "{{count}} 件のコレクションがインポートされました。",
+                    "single-collection-imported": "コレクション {{name}} がインポートされました。",
+                    "unsupported": "サポートされていないファイルです。"
+                }
+            },
+            "export": {
+                "alerts": {
+                    "all-collections-exported": "{{count}} 件のコレクションがエクスポートされました。",
+                    "single-collection-exported": "コレクション {{name}} がエクスポートされました。"
+                }
             }
         },
         "about": {
@@ -115,6 +128,7 @@
                     "highlight-color": "ハイライト色",
                     "open-tabs": "タブを開く",
                     "save-to-collection": "セッションをコレクションに保存",
+                    "export-collection": "このコレクションをエクスポート",
                     "delete-collection": "コレクションを削除"
                 },
                 "labels": {

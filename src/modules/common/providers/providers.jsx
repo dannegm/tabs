@@ -9,7 +9,7 @@ export const Providers = ({ children }) => {
     return (
         <StoreProvider>
             {children}
-            <Toaster />
+            <Toaster richColors />
         </StoreProvider>
     );
 };

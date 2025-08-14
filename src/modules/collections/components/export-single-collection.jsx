@@ -3,16 +3,17 @@ import { toast } from 'sonner';
 
 import { useCollections } from '@/store/collections';
 import { downloadBlob } from '@/modules/common/helpers/utils';
-import { reverse } from '@/modules/common/helpers/arrays';
+import { keyCase } from '@/modules/common/helpers/strings';
 
-export const ExportCollection = ({ onSuccess, children }) => {
+export const ExportSingleCollection = ({ collectionId, onSuccess, children }) => {
     const { t } = useTranslation();
     const collections = useCollections();
 
-    const prepareData = data => {
+    const prepareData = collection => {
         const content = {
             version: 3,
-            lists: reverse(Object.values(data)).map(collection => ({
+            type: 'collection',
+            collection: {
                 title: collection.name,
                 bgColor: collection?.bgColor,
                 cards: Object.values(collection.items).map(item => ({
@@ -22,20 +23,21 @@ export const ExportCollection = ({ onSuccess, children }) => {
                     customDescription: item?.customDescription || '',
                     favIconUrl: item.favIconUrl,
                 })),
-            })),
+            },
         };
         return JSON.stringify(content, null, 4);
     };
 
     const handleDownload = () => {
-        const data = prepareData(collections);
+        const collection = collections[collectionId];
+        const data = prepareData(collection);
         const blob = new Blob([data], { type: 'application/json' });
-        const filename = `tabs-export-${Date.now()}.json`;
+        const filename = `tabs-export-${keyCase(collection.name)}-${Date.now()}.json`;
         downloadBlob(blob, filename);
 
         toast.success(
-            t('common.export.alerts.all-collections-exported', {
-                count: Object.keys(collections).length,
+            t('common.export.alerts.single-collection-exported', {
+                name: collection.name,
             }),
         );
         onSuccess?.();

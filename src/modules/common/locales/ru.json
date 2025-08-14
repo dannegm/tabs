@@ -34,6 +34,19 @@
                     "cancel": "Отмена",
                     "accept": "Продолжить"
                 }
+            },
+            "import": {
+                "alerts": {
+                    "all-collections-imported": "Импортировано {{count}} коллекций.",
+                    "single-collection-imported": "Коллекция {{name}} была импортирована.",
+                    "unsupported": "Неподдерживаемый файл."
+                }
+            },
+            "export": {
+                "alerts": {
+                    "all-collections-exported": "Экспортировано {{count}} коллекций.",
+                    "single-collection-exported": "Коллекция {{name}} была экспортирована."
+                }
             }
         },
         "about": {
@@ -115,6 +128,7 @@
                     "highlight-color": "Цвет подсветки",
                     "open-tabs": "Открыть вкладки",
                     "save-to-collection": "Сохранить сессию в коллекцию",
+                    "export-collection": "Экспортировать эту коллекцию",
                     "delete-collection": "Удалить коллекцию"
                 },
                 "labels": {

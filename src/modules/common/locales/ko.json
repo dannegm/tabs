@@ -34,6 +34,19 @@
                     "cancel": "취소",
                     "accept": "계속"
                 }
+            },
+            "import": {
+                "alerts": {
+                    "all-collections-imported": "{{count}}개의 컬렉션이 가져와졌습니다.",
+                    "single-collection-imported": "컬렉션 {{name}}이 가져와졌습니다.",
+                    "unsupported": "지원되지 않는 파일입니다."
+                }
+            },
+            "export": {
+                "alerts": {
+                    "all-collections-exported": "{{count}}개의 컬렉션이 내보내졌습니다.",
+                    "single-collection-exported": "컬렉션 {{name}}이 내보내졌습니다."
+                }
             }
         },
         "about": {
@@ -115,6 +128,7 @@
                     "highlight-color": "하이라이트 색상",
                     "open-tabs": "탭 열기",
                     "save-to-collection": "세션을 컬렉션에 저장",
+                    "export-collection": "이 컬렉션 내보내기",
                     "delete-collection": "컬렉션 삭제"
                 },
                 "labels": {

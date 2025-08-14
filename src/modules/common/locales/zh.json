@@ -34,6 +34,19 @@
                     "cancel": "取消",
                     "accept": "继续"
                 }
+            },
+            "import": {
+                "alerts": {
+                    "all-collections-imported": "已导入 {{count}} 个集合。",
+                    "single-collection-imported": "已导入集合 {{name}}。",
+                    "unsupported": "不支持的文件。"
+                }
+            },
+            "export": {
+                "alerts": {
+                    "all-collections-exported": "已导出 {{count}} 个集合。",
+                    "single-collection-exported": "已导出集合 {{name}}。"
+                }
             }
         },
         "about": {
@@ -115,6 +128,7 @@
                     "highlight-color": "高亮颜色",
                     "open-tabs": "打开标签页",
                     "save-to-collection": "将会话保存到收藏集",
+                    "export-collection": "导出此集合",
                     "delete-collection": "删除收藏集"
                 },
                 "labels": {

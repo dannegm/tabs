@@ -10,7 +10,7 @@ export const Main = ({ className }) => {
             className={cn(
                 'w-full h-full max-h-screen flex flex-col border-l-8 border-l-rose-300',
                 'dark:bg-neutral-800 dark:text-neutral-50 dark:border-l-rose-500',
-                'ltr:border-l-0 rtl:dark:border-l-0 rtl:border-r-8 rtl:border-r-rose-300 rtl:dark:border-r-rose-500',
+                'rtl:border-l-0 rtl:dark:border-l-0 rtl:border-r-8 rtl:border-r-rose-300 rtl:dark:border-r-rose-500',
                 className,
             )}
         >

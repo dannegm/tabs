@@ -6,6 +6,7 @@ import {
     ArrowUpRight,
     ChevronDown,
     ChevronRight,
+    ArrowDownLeft,
     Download,
     SquarePen,
     Save,
@@ -32,6 +33,7 @@ import { CardItem } from '@/modules/collections/components/card-item';
 import { useDradAndDrop, useDradAndDropActions } from '@/store/dragAndDrop';
 import { ColorPicker } from '@/modules/shadcn/components/color-picker';
 import { useDarkMode } from '@/modules/common/hooks/use-dark-mode';
+import { ExportSingleCollection } from './export-single-collection';
 
 export const CollectionItem = ({
     className,
@@ -251,10 +253,13 @@ export const CollectionItem = ({
                         className='flex flex-row rtl:flex-row-reverse items-center gap-1'
                     >
                         <Button
-                            className={cn('text-base leading-1 dark:bg-neutral-700 rtl:flex-row-reverse', {
-                                'text-neutral-950': !dark,
-                                'text-white': dark,
-                            })}
+                            className={cn(
+                                'text-base leading-1 dark:bg-neutral-700 rtl:flex-row-reverse',
+                                {
+                                    'text-neutral-950': !dark,
+                                    'text-white': dark,
+                                },
+                            )}
                             variant='secondary'
                             style={{
                                 backgroundColor: !dark
@@ -350,9 +355,21 @@ export const CollectionItem = ({
                             variant='ghost'
                             onClick={handleSaveHere}
                         >
-                            <Download />
+                            <ArrowDownLeft />
                         </Button>
                     </Tooltip>
+
+                    <ExportSingleCollection collectionId={id}>
+                        <Tooltip content={t('collections.item.tooltips.export-collection')}>
+                            <Button
+                                className='dark:hover:bg-neutral-700'
+                                size='icon-xs'
+                                variant='ghost'
+                            >
+                                <Download />
+                            </Button>
+                        </Tooltip>
+                    </ExportSingleCollection>
 
                     <ConfirmPopover
                         title={t('collections.dialogs.remove-collection.title')}
@@ -376,7 +393,10 @@ export const CollectionItem = ({
             </div>
 
             {expanded && (
-                <div data-layer='cards' className='flex flex-row rtl:flex-row-reverse flex-wrap gap-4'>
+                <div
+                    data-layer='cards'
+                    className='flex flex-row rtl:flex-row-reverse flex-wrap gap-4'
+                >
                     <div
                         data-layer='target'
                         className={cn(

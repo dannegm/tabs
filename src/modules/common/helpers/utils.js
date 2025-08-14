@@ -16,6 +16,8 @@ export const styled = (baseComponent, className) => {
     });
 };
 
+export const pipe = fns => value => fns.reduce((acc, fn) => fn(acc), value);
+
 export const downloadLink = (url, name = 'file.link') => {
     if (url.trim() === '') {
         console.warn('There is not any URL to download.');

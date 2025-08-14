@@ -34,6 +34,19 @@
                     "cancel": "إلغاء",
                     "accept": "متابعة"
                 }
+            },
+            "import": {
+                "alerts": {
+                    "all-collections-imported": "تم استيراد {{count}} مجموعات.",
+                    "single-collection-imported": "تم استيراد المجموعة {{name}}.",
+                    "unsupported": "ملف غير مدعوم."
+                }
+            },
+            "export": {
+                "alerts": {
+                    "all-collections-exported": "تم تصدير {{count}} مجموعات.",
+                    "single-collection-exported": "تم تصدير المجموعة {{name}}."
+                }
             }
         },
         "about": {
@@ -119,6 +132,7 @@
                     "highlight-color": "لون التمييز",
                     "open-tabs": "فتح علامات التبويب",
                     "save-to-collection": "احفظ الجلسة في المجموعة",
+                    "export-collection": "تصدير هذه المجموعة",
                     "delete-collection": "احذف المجموعة"
                 },
                 "labels": {

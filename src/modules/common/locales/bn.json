@@ -34,6 +34,19 @@
                     "cancel": "বাতিল",
                     "accept": "চালিয়ে যান"
                 }
+            },
+            "import": {
+                "alerts": {
+                    "all-collections-imported": "{{count}} সংগ্রহ আমদানি করা হয়েছে।",
+                    "single-collection-imported": "সংগ্রহ {{name}} আমদানি করা হয়েছে।",
+                    "unsupported": "অসমর্থিত ফাইল।"
+                }
+            },
+            "export": {
+                "alerts": {
+                    "all-collections-exported": "{{count}} সংগ্রহ রপ্তানি করা হয়েছে।",
+                    "single-collection-exported": "সংগ্রহ {{name}} রপ্তানি করা হয়েছে।"
+                }
             }
         },
         "about": {
@@ -115,6 +128,7 @@
                     "highlight-color": "হাইলাইট রং",
                     "open-tabs": "ট্যাব খুলুন",
                     "save-to-collection": "সংগ্রহে সেশন সংরক্ষণ করুন",
+                    "export-collection": "এই সংগ্রহটি রপ্তানি করুন",
                     "delete-collection": "সংগ্রহ মুছুন"
                 },
                 "labels": {

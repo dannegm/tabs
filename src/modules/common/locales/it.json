@@ -34,6 +34,19 @@
                     "cancel": "Annulla",
                     "accept": "Continua"
                 }
+            },
+            "import": {
+                "alerts": {
+                    "all-collections-imported": "Sono state importate {{count}} collezioni.",
+                    "single-collection-imported": "La collezione {{name}} è stata importata.",
+                    "unsupported": "File non supportato."
+                }
+            },
+            "export": {
+                "alerts": {
+                    "all-collections-exported": "Sono state esportate {{count}} collezioni.",
+                    "single-collection-exported": "La collezione {{name}} è stata esportata."
+                }
             }
         },
         "about": {
@@ -115,6 +128,7 @@
                     "highlight-color": "Colore evidenziatore",
                     "open-tabs": "Apri schede",
                     "save-to-collection": "Salva sessione nella collezione",
+                    "export-collection": "Esporta questa collezione",
                     "delete-collection": "Elimina collezione"
                 },
                 "labels": {
