@@ -5,8 +5,10 @@ import { Github, Globe, Twitter, Heart, Coffee, Bug, MessageSquare } from 'lucid
 import { Button } from '@/modules/shadcn/components/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shadcn/components/avatar';
 import { Badge } from '@/modules/shadcn/components/badge';
+import { Zelda } from '@/modules/common/components/zelda';
 import { Separator } from '@/modules/shadcn/components/separator';
 import { Tooltip } from '@/modules/shadcn/components/tooltip-simple';
+
 import {
     Dialog,
     DialogContent,
@@ -15,7 +17,6 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/modules/shadcn/components/dialog';
-import { Zelda } from '@/modules/common/components/zelda';
 
 export const AboutDialog = ({ children }) => {
     const { t } = useTranslation();

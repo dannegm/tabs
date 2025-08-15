@@ -66,6 +66,13 @@
             "buy-me-a-coffee": "আমাকে একটি কফি কিনুন",
             "license": "Tabs. লাইসেন্সকৃত"
         },
+        "changelogs": {
+            "title": "নতুন কী",
+            "labels": {
+                "current": "বর্তমান",
+                "no-entries": "কোনও পরিবর্তনের লগ এন্ট্রি উপলব্ধ নেই।"
+            }
+        },
         "header": {
             "title": "Tabs.",
             "labels": {
@@ -81,6 +88,7 @@
         "settings": {
             "main": {
                 "items": {
+                    "changelogs": "পরিবর্তনের লগ",
                     "about": "সম্পর্কে",
                     "tabs": "Tabs."
                 }

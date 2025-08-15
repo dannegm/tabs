@@ -66,6 +66,13 @@
             "buy-me-a-coffee": "请我喝杯咖啡",
             "license": "Tabs. 许可协议为"
         },
+        "changelogs": {
+            "title": "最新内容",
+            "labels": {
+                "current": "当前",
+                "no-entries": "暂无更新日志条目。"
+            }
+        },
         "header": {
             "title": "Tabs.",
             "labels": {
@@ -81,6 +88,7 @@
         "settings": {
             "main": {
                 "items": {
+                    "changelogs": "更新日志",
                     "about": "关于",
                     "tabs": "Tabs."
                 }

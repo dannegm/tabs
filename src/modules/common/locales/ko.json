@@ -66,6 +66,13 @@
             "buy-me-a-coffee": "커피 한잔 사주세요",
             "license": "Tabs. 라이센스 하에 제공됨"
         },
+        "changelogs": {
+            "title": "새로운 소식",
+            "labels": {
+                "current": "현재",
+                "no-entries": "변경 로그 항목이 없습니다."
+            }
+        },
         "header": {
             "title": "Tabs.",
             "labels": {
@@ -81,6 +88,7 @@
         "settings": {
             "main": {
                 "items": {
+                    "changelogs": "변경 로그",
                     "about": "정보",
                     "tabs": "Tabs."
                 }

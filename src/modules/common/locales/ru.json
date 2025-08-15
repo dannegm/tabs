@@ -66,6 +66,13 @@
             "buy-me-a-coffee": "Купи мне кофе",
             "license": "Tabs. Лицензировано под"
         },
+        "changelogs": {
+            "title": "Что нового",
+            "labels": {
+                "current": "Текущий",
+                "no-entries": "Нет доступных записей журнала изменений."
+            }
+        },
         "header": {
             "title": "Tabs.",
             "labels": {
@@ -81,6 +88,7 @@
         "settings": {
             "main": {
                 "items": {
+                    "changelogs": "Журналы изменений",
                     "about": "О программе",
                     "tabs": "Tabs."
                 }

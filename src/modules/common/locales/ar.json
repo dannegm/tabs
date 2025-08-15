@@ -66,6 +66,13 @@
             "buy-me-a-coffee": "اشترِ لي قهوة",
             "license": ".Tabs مرخصة بموجب"
         },
+        "changelogs": {
+            "title": "ما الجديد",
+            "labels": {
+                "current": "الحالي",
+                "no-entries": "لا توجد إدخالات في سجل التغييرات."
+            }
+        },
         "header": {
             "title": "Tabs.",
             "labels": {
@@ -85,6 +92,7 @@
         "settings": {
             "main": {
                 "items": {
+                    "changelogs": "سجلات التغييرات",
                     "about": "حول",
                     "tabs": "Tabs."
                 }

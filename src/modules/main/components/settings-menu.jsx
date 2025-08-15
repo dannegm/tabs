@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { BadgeInfo, FolderInput, FolderOutput, Trash2 } from 'lucide-react';
+import { BadgeInfo, FolderInput, FolderOutput, PackagePlus, Trash2 } from 'lucide-react';
 
 import { cn } from '@/modules/common/helpers/utils';
 import { useCollectionsActions } from '@/store/collections';
@@ -20,6 +20,7 @@ import { ConfirmDialog } from '@/modules/common/components/confirm-dialog';
 import { ImportCollection } from '@/modules/collections/components/import-collection';
 import { ExportCollection } from '@/modules/collections/components/export-collection';
 import { AboutDialog } from '@/modules/main/components/about-dialog';
+import { Changelog } from '@/modules/main/components//changelogs';
 
 export const SettingsMenu = ({ children, side = 'bottom', align = 'end' }) => {
     const { t } = useTranslation();
@@ -84,6 +85,13 @@ export const SettingsMenu = ({ children, side = 'bottom', align = 'end' }) => {
                 </ConfirmDialog>
 
                 <DropdownMenuSeparator />
+
+                <Changelog>
+                    <DropdownMenuItem>
+                        <PackagePlus />
+                        {t('settings.main.items.changelogs')}
+                    </DropdownMenuItem>
+                </Changelog>
 
                 <AboutDialog>
                     <DropdownMenuItem>

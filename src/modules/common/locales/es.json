@@ -66,6 +66,13 @@
             "buy-me-a-coffee": "Invítame un café",
             "license": "Tabs. Licenciado bajo"
         },
+        "changelogs": {
+            "title": "Novedades",
+            "labels": {
+                "current": "Actual",
+                "no-entries": "No hay entradas de registro de cambios disponibles."
+            }
+        },
         "header": {
             "title": "Tabs.",
             "labels": {
@@ -81,6 +88,7 @@
         "settings": {
             "main": {
                 "items": {
+                    "changelogs": "Novedades",
                     "about": "Acerca de",
                     "tabs": "Tabs."
                 }

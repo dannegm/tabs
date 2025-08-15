@@ -3,6 +3,7 @@ import { Collections } from '@/modules/collections/collections';
 
 import { Header } from './components/header';
 import { Debugger } from './components/debugger';
+import { Changelog } from './components/changelogs';
 
 export const Main = ({ className }) => {
     return (
@@ -14,6 +15,7 @@ export const Main = ({ className }) => {
                 className,
             )}
         >
+            <Changelog />
             <Header />
             <Debugger />
             <Collections />

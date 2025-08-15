@@ -1,0 +1,42 @@
+{
+    "1.4.1": [
+        {
+            "type": "ADDED",
+            "description": "New changelogs modal"
+        }
+    ],
+    "1.4.0": [
+        {
+            "type": "ADDED",
+            "description": "Import/Export single collection"
+        },
+        {
+            "type": "CHANGED",
+            "description": "Add background colors to exported collections"
+        },
+        {
+            "type": "CHANGED",
+            "description": "New icon for the \"Save session to collection\" action"
+        }
+    ],
+    "1.3.2": [
+        {
+            "type": "CHANGED",
+            "description": "Improve scrollbar styles on Windows browsers"
+        }
+    ],
+    "1.3.0": [
+        {
+            "type": "ADDED",
+            "description": "Support for multiple languages, including EN, ES, FR, DE, KO, JA and much more."
+        }
+    ],
+    "1.2.1": [
+        {
+            "type": "FIXED",
+            "description": "Fix color selection for unsoported color. Transparent by default"
+        }
+    ],
+    "1.2.0": [{ "type": "ADDED", "description": "Choose a background color for your collections" }],
+    "1.1.0": [{ "type": "ADDED", "description": "Hello there! :D" }]
+}
