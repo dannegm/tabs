@@ -245,7 +245,7 @@ export const CollectionItem = ({
 
             <div
                 data-layer='header'
-                className='group flex flex-row rtl:flex-row-reverse items-center justify-between gap-2'
+                className='group flex flex-row rtl:flex-row-reverse items-center gap-2'
             >
                 {!editting ? (
                     <div
@@ -311,6 +311,12 @@ export const CollectionItem = ({
                         </Button>
                     </form>
                 )}
+
+                <div
+                    data-layer='handler'
+                    className='flex-1 h-8 rounded-sm'
+                    onDoubleClick={handleToggle}
+                />
 
                 <div
                     data-layer='actions'

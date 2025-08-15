@@ -1,4 +1,10 @@
 {
+    "1.4.2": [
+        {
+            "type": "ADDED",
+            "description": "Double click on the collection to expand/collapse"
+        }
+    ],
     "1.4.1": [
         {
             "type": "ADDED",
