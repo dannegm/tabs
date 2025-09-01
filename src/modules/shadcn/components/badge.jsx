@@ -5,7 +5,7 @@ import { cva } from 'class-variance-authority';
 import { cn } from '@/modules/common/helpers/utils';
 
 const badgeVariants = cva(
-    'inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden',
+    'inline-flex items-center justify-center rounded-md border font-medium w-fit whitespace-nowrap shrink-0 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden',
     {
         variants: {
             variant: {
@@ -22,18 +22,27 @@ const badgeVariants = cva(
                     'border-transparent bg-yellow-500 text-yellow-100 [a&]:hover:bg-yellow-400  ',
                 error: 'border-transparent bg-red-500 text-red-100 [a&]:hover:bg-red-400',
             },
+            size: {
+                default: 'px-2 py-0.5 text-xs [&>svg]:size-3',
+                xs: 'px-1 py-px text-[0.65rem] [&>svg]:size-3 rounded-sm',
+            },
         },
         defaultVariants: {
             variant: 'default',
+            size: 'default',
         },
     },
 );
 
-function Badge({ className, variant, asChild = false, ...props }) {
+function Badge({ className, variant, size, asChild = false, ...props }) {
     const Comp = asChild ? Slot : 'span';
 
     return (
-        <Comp data-slot='badge' className={cn(badgeVariants({ variant }), className)} {...props} />
+        <Comp
+            data-slot='badge'
+            className={cn(badgeVariants({ variant, size, className }))}
+            {...props}
+        />
     );
 }
 

@@ -132,7 +132,9 @@
         "collections": {
             "empty": "لنبدأ بإضافة مجموعة جديدة.",
             "labels": {
-                "add-collection": "أضف مجموعة"
+                "add-collection": "أضف مجموعة",
+                "count-cards_one": "{{count}} عنصر",
+                "count-cards_other": "{{count}} عناصر"
             },
             "item": {
                 "tooltips": {

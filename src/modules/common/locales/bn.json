@@ -128,7 +128,9 @@
         "collections": {
             "empty": "চলুন কিছু নতুন সংগ্রহ যোগ করা শুরু করি।",
             "labels": {
-                "add-collection": "সংগ্রহ যোগ করুন"
+                "add-collection": "সংগ্রহ যোগ করুন",
+                "count-cards_one": "{{count}} উপাদান",
+                "count-cards_other": "{{count}} উপাদান"
             },
             "item": {
                 "tooltips": {

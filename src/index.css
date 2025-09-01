@@ -156,3 +156,9 @@
         var(--strip-color-b) 40px
     );
 }
+
+@utility flag-square {
+    clip-path: polygon(10% 10%, 90% 10%, 90% 90%, 10% 90%);
+    aspect-ratio: 1;
+    object-fit: cover;
+}

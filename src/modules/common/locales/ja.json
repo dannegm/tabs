@@ -128,7 +128,9 @@
         "collections": {
             "empty": "新しいコレクションを追加しましょう。",
             "labels": {
-                "add-collection": "コレクションを追加"
+                "add-collection": "コレクションを追加",
+                "count-cards_one": "{{count}} アイテム",
+                "count-cards_other": "{{count}} アイテム"
             },
             "item": {
                 "tooltips": {

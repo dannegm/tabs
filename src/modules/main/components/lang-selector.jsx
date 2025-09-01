@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import Flag from 'react-flagkit';
 
 import { getDefaultLangCode, languages } from '@/modules/common/helpers/i18next';
 import { useSettings } from '@/modules/common/hooks/use-settings';
@@ -32,13 +33,21 @@ export const LangSelector = () => {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger className='inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm'>
-                <span>{languages[i18n.language]?.flag || '🌐'}</span>
+                <Flag
+                    className='flag border border-black/20'
+                    country={languages[i18n.language]?.flag_code}
+                    size={22}
+                />
             </DropdownMenuTrigger>
             <DropdownMenuContent align={selectedDirection === 'ltr' ? 'end' : 'start'}>
                 <DropdownMenuRadioGroup value={selectedLang} onValueChange={setSelectedLang}>
-                    {Object.entries(languages).map(([code, { flag, native_name }]) => (
+                    {Object.entries(languages).map(([code, { flag_code, native_name }]) => (
                         <DropdownMenuRadioItem key={code} value={code}>
-                            <span className='mr-2'>{flag}</span>
+                            <Flag
+                                className='flag border border-black/20'
+                                country={flag_code}
+                                size={20}
+                            />
                             {native_name}
                         </DropdownMenuRadioItem>
                     ))}

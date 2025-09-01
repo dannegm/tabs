@@ -128,7 +128,9 @@
         "collections": {
             "empty": "새로운 컬렉션을 추가해 보세요.",
             "labels": {
-                "add-collection": "컬렉션 추가"
+                "add-collection": "컬렉션 추가",
+                "count-cards_one": "{{count}} 항목",
+                "count-cards_other": "{{count}} 항목"
             },
             "item": {
                 "tooltips": {

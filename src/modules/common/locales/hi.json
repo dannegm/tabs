@@ -128,7 +128,9 @@
         "collections": {
             "empty": "चलो नया संग्रह जोड़ना शुरू करें।",
             "labels": {
-                "add-collection": "संग्रह जोड़ें"
+                "add-collection": "संग्रह जोड़ें",
+                "count-cards_one": "{{count}} आइटम",
+                "count-cards_other": "{{count}} आइटम"
             },
             "item": {
                 "tooltips": {

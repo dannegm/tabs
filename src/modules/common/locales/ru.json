@@ -128,7 +128,9 @@
         "collections": {
             "empty": "Давайте начнем добавлять новые коллекции.",
             "labels": {
-                "add-collection": "Добавить коллекцию"
+                "add-collection": "Добавить коллекцию",
+                "count-cards_one": "{{count}} элемент",
+                "count-cards_other": "{{count}} элементов"
             },
             "item": {
                 "tooltips": {

@@ -1,4 +1,18 @@
 {
+    "1.5.0": [
+        {
+            "type": "ADDED",
+            "description": "Cards counter in the collection item"
+        },
+        {
+            "type": "CHANGED",
+            "description": "Using SVG Icons instead emojis for language flags"
+        },
+        {
+            "type": "FIXED",
+            "description": "Fix text colors and backgrounds for lighter collections"
+        }
+    ],
     "1.4.2": [
         {
             "type": "ADDED",

@@ -128,7 +128,9 @@
         "collections": {
             "empty": "开始添加新收藏集吧。",
             "labels": {
-                "add-collection": "创建收藏集"
+                "add-collection": "创建收藏集",
+                "count-cards_one": "{{count}} 项",
+                "count-cards_other": "{{count}} 项"
             },
             "item": {
                 "tooltips": {

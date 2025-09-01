@@ -130,7 +130,9 @@ export const CardItem = ({
                     <div>
                         <Tooltip content={t('card.item.tooltips.remove-card')}>
                             <Button
-                                className='dark:hover:bg-neutral-700'
+                                className={cn('dark:hover:bg-neutral-700', {
+                                    'text-black': !dark,
+                                })}
                                 size='icon-xs'
                                 variant='ghost'
                             >
@@ -144,7 +146,9 @@ export const CardItem = ({
                     <div>
                         <Tooltip content={t('card.item.tooltips.edit-card')}>
                             <Button
-                                className='dark:hover:bg-neutral-700'
+                                className={cn('dark:hover:bg-neutral-700', {
+                                    'text-black': !dark,
+                                })}
                                 size='icon-xs'
                                 variant='ghost'
                             >

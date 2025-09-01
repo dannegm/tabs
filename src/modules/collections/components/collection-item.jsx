@@ -34,6 +34,7 @@ import { useDradAndDrop, useDradAndDropActions } from '@/store/dragAndDrop';
 import { ColorPicker } from '@/modules/shadcn/components/color-picker';
 import { useDarkMode } from '@/modules/common/hooks/use-dark-mode';
 import { ExportSingleCollection } from './export-single-collection';
+import { Badge } from '@/modules/shadcn/components/badge';
 
 export const CollectionItem = ({
     className,
@@ -227,7 +228,11 @@ export const CollectionItem = ({
             <div
                 className={cn(
                     'handle absolute top-0 bottom-0 left-0 rtl:right-0 rtl:left-auto w-6 flex-center pointer-events-auto cursor-grab hover:bg-neutral-100 dark:hover:bg-neutral-700/30',
-                    { 'cursor-grabbing': dragging },
+                    {
+                        'cursor-grabbing': dragging,
+                        'hover:bg-white/10!': dark,
+                        'text-black': !dark,
+                    },
                 )}
                 onPointerDown={handlePointerDown}
             >
@@ -274,9 +279,16 @@ export const CollectionItem = ({
 
                         <Tooltip content={t('collections.item.tooltips.edit-collection')}>
                             <Button
-                                className='invisible group-hover:visible dark:hover:bg-neutral-700'
+                                className={cn('invisible group-hover:visible dark:bg-neutral-700', {
+                                    'text-black hover:text-black': !dark,
+                                })}
                                 variant='ghost'
                                 size='icon'
+                                style={{
+                                    backgroundColor: !dark
+                                        ? darken(internalBgColor, 0.03)
+                                        : lighten(internalBgColor, 0.1),
+                                }}
                                 onClick={() => setEditting(true)}
                             >
                                 <SquarePen />
@@ -290,7 +302,9 @@ export const CollectionItem = ({
                         onSubmit={handleEditSave}
                     >
                         <Input
-                            className='min-w-96 dark:border-neutral-700 rtl:text-right'
+                            className={cn('min-w-96 dark:border-neutral-700 rtl:text-right', {
+                                'text-black': !dark,
+                            })}
                             placeholder={t('collections.item.placeholders.name')}
                             value={newName}
                             onChange={ev => setNewName(ev.target.value)}
@@ -298,15 +312,33 @@ export const CollectionItem = ({
 
                         <Button
                             type='button'
-                            className='dark:bg-neutral-700'
+                            className={cn('dark:bg-neutral-700', {
+                                'text-black': !dark,
+                            })}
                             variant='secondary'
                             size='icon'
+                            style={{
+                                backgroundColor: !dark
+                                    ? darken(internalBgColor, 0.03)
+                                    : lighten(internalBgColor, 0.1),
+                            }}
                             onClick={handleEditCancel}
                         >
                             <X />
                         </Button>
 
-                        <Button type='submit' className='dark:bg-neutral-700' variant='secondary'>
+                        <Button
+                            type='submit'
+                            className={cn('dark:bg-neutral-700', {
+                                'text-black': !dark,
+                            })}
+                            variant='secondary'
+                            style={{
+                                backgroundColor: !dark
+                                    ? darken(internalBgColor, 0.03)
+                                    : lighten(internalBgColor, 0.1),
+                            }}
+                        >
                             <Save /> {t('collections.item.labels.save')}
                         </Button>
                     </form>
@@ -317,6 +349,10 @@ export const CollectionItem = ({
                     className='flex-1 h-8 rounded-sm'
                     onDoubleClick={handleToggle}
                 />
+
+                <Badge size='xs'>
+                    {t('collections.labels.count-cards', { count: iterableItems.length })}
+                </Badge>
 
                 <div
                     data-layer='actions'
