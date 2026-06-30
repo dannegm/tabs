@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "notify": {
+      "source": "dannegm/skills",
+      "sourceType": "github",
+      "skillPath": "notify/SKILL.md",
+      "computedHash": "7fe83b163ece31319abbe93fbab6c5b1dafc11998c91722944ea27b1e0cfffd8"
+    }
+  }
+}
