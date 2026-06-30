@@ -1,4 +1,26 @@
 {
+    "2.0.0": [
+        {
+            "type": "CHANGED",
+            "description": "Collections are now persisted in chrome.storage.local — data syncs across all extension tabs automatically"
+        },
+        {
+            "type": "CHANGED",
+            "description": "Rewrote drag and drop with dnd-kit — smoother interactions, better keyboard accessibility"
+        },
+        {
+            "type": "CHANGED",
+            "description": "Settings now sync across tabs in real time via BroadcastChannel"
+        },
+        {
+            "type": "ADDED",
+            "description": "Automatic data migration from previous versions — your collections carry over seamlessly"
+        },
+        {
+            "type": "CHANGED",
+            "description": "Upgraded to React 19, Vite 8 and Tailwind CSS 4"
+        }
+    ],
     "1.5.0": [
         {
             "type": "ADDED",

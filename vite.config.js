@@ -10,8 +10,8 @@ import manifest from './src/manifest.js';
 import pkg from './package.json';
 import changelogs from './changelogs.json';
 
-export default defineConfig({
-    plugins: [react(), tailwindcss(), crx({ manifest })],
+export default defineConfig(({ mode }) => ({
+    plugins: [react(), tailwindcss(), ...(mode === 'production' ? [crx({ manifest })] : [])],
     resolve: {
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url)),
@@ -21,4 +21,4 @@ export default defineConfig({
         __APP_VERSION__: JSON.stringify(pkg.version),
         __CHANGELOGS__: JSON.stringify(changelogs),
     },
-});
+}));

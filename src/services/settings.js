@@ -1,5 +1,5 @@
 import { defaultSettings } from '@/constants/default-settings';
-import { getByPath, setByPath } from '@/modules/common/helpers/objects';
+import { getByPath, setByPath } from '@/helpers/objects';
 
 const STORAGE_KEY = 'tabs:settings';
 const CHANNEL = 'settings';
