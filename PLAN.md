@@ -116,9 +116,16 @@ Esperar el patrón del usuario. Casos de uso identificados:
 
 ---
 
-## Fase 3 — Settings view + Sistema de temas
+## Fase 3 — Radix UI → Base UI (shadcn migration)
 
-### 3.1 Vista `/settings`
+> ⚠️ Verificar paridad de componentes antes de iniciar. Migrar componente a componente en `src/ui/`.
+> Verificar a11y, focus trap y keyboard navigation en cada uno antes de continuar.
+
+---
+
+## Fase 4 — Settings view + Sistema de temas
+
+### 4.1 Vista `/settings`
 
 Secciones:
 - **Apariencia:** tema, color de acento, idioma, dirección RTL
@@ -126,7 +133,7 @@ Secciones:
 - **Acerca de:** migrar contenido de `AboutDialog`
 - **Desarrollador:** debug mode
 
-### 3.2 Sistema de temas extendido
+### 4.2 Sistema de temas extendido
 
 Base actual (OKLCH vars en `index.css`) es sólida. Extender con presets:
 
@@ -139,15 +146,6 @@ Base actual (OKLCH vars en `index.css`) es sólida. Extender con presets:
 ```
 
 Aplicar via `data-theme` en el root en lugar de solo clase `dark`.
-
----
-
-## Fase 4 — Radix UI → Base UI (shadcn migration)
-
-> ⚠️ Esta fase va al final. Base UI + shadcn está en curso y la paridad no es completa aún.
-
-Migrar componente a componente en `src/modules/shadcn/components/`.  
-Verificar a11y, focus trap y keyboard navigation en cada uno antes de continuar.
 
 ---
 
