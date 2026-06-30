@@ -11,7 +11,7 @@ export default defineManifest({
     author,
     version: `${major}.${minor}.${patch}`,
     version_name: version,
-    permissions: ['tabs', 'windows'],
+    permissions: ['tabs', 'windows', 'storage'],
 
     icons: {
         16: 'icons/icon-16.png',

@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-import { Github, Globe, Twitter, Heart, Coffee, Bug, MessageSquare } from 'lucide-react';
+import { Code2, Globe, Share2, Heart, Coffee, Bug, MessageSquare } from 'lucide-react';
 
 import { Button } from '@/modules/shadcn/components/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shadcn/components/avatar';
@@ -115,7 +115,7 @@ export const AboutDialog = ({ children }) => {
                                         asChild
                                     >
                                         <Zelda href='https://x.com/dannegm'>
-                                            <Twitter className='w-4 h-4' />
+                                            <Share2 className='w-4 h-4' />
                                         </Zelda>
                                     </Button>
                                 </Tooltip>
@@ -136,7 +136,7 @@ export const AboutDialog = ({ children }) => {
                             asChild
                         >
                             <Zelda href='https://github.com/dannegm/tabs'>
-                                <Github className='w-4 h-4' />
+                                <Code2 className='w-4 h-4' />
                                 {t('about.view-on-github')}
                             </Zelda>
                         </Button>

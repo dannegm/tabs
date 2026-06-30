@@ -64,7 +64,7 @@ export const closeTabsByWindow = windowId => {
 };
 
 export const closeTabsCurrentWindow = () => {
-    chrome.windows.getCurrent(window => {
+    chrome?.windows?.getCurrent?.(window => {
         closeTabsByWindow(window.id);
     });
 };
@@ -100,13 +100,13 @@ const tabsEvents = [
 
 export const bindTabsEvents = (handler, events = tabsEvents) => {
     events.forEach(event => {
-        chrome?.tabs?.[event].addListener(handler);
+        chrome?.tabs?.[event]?.addListener(handler);
     });
 };
 
 export const unbindTabsEvents = (handler, events = tabsEvents) => {
     events.forEach(event => {
-        chrome?.tabs?.[event].removeListener(handler);
+        chrome?.tabs?.[event]?.removeListener(handler);
     });
 };
 

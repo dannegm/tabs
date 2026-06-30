@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { shallow } from 'zustand/shallow';
+import { useShallow } from 'zustand/react/shallow';
 import { nanoid } from 'nanoid';
 import { fromArray } from '@/modules/common/helpers/objects';
 import { chromeStorage } from '@/lib/chrome-storage';
@@ -243,7 +243,7 @@ export const useCollections = () => useCollectionsStore(state => state.collectio
 
 export const useCollectionsActions = () =>
     useCollectionsStore(
-        state => ({
+        useShallow(state => ({
             addCollection: state.addCollection,
             editCollection: state.editCollection,
             setCollectionBgColor: state.setCollectionBgColor,
@@ -260,6 +260,5 @@ export const useCollectionsActions = () =>
             moveItem: state.moveItem,
             removeItem: state.removeItem,
             sortItems: state.sortItems,
-        }),
-        shallow,
+        })),
     );

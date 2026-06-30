@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next';
 
 import { cn } from '@/modules/common/helpers/utils';
 import { bindTabsEvents, getAllTabs, unbindTabsEvents } from '@/modules/common/helpers/chrome';
+
+const IS_DEV = process.env.NODE_ENV === 'development';
 import { groupBy } from '@/modules/common/helpers/arrays';
 
 import { ScrollArea } from '@/modules/shadcn/components/scroll-area';
@@ -22,10 +24,12 @@ export const Tabs = ({ className }) => {
 
     useEffect(() => {
         getChromeTabs();
-        bindTabsEvents(getChromeTabs);
+        if (!IS_DEV) {
+            bindTabsEvents(getChromeTabs);
+        }
 
         return () => {
-            unbindTabsEvents(getChromeTabs);
+            if (!IS_DEV) unbindTabsEvents(getChromeTabs);
         };
     }, []);
 
