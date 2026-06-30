@@ -15,8 +15,8 @@ import {
 
 export const LangSelector = () => {
     const { i18n } = useTranslation();
-    const [selectedLang, setSelectedLang] = useSettings('settings:language', getDefaultLangCode());
-    const [selectedDirection, setSelectedDirection] = useSettings('settings:direction', 'ltr');
+    const [selectedLang, setSelectedLang] = useSettings('language', getDefaultLangCode());
+    const [selectedDirection, setSelectedDirection] = useSettings('direction', 'ltr');
 
     const changeLanguage = lang => {
         i18n.changeLanguage(lang);

@@ -4,7 +4,7 @@ import { useCollections } from '@/store/collections';
 import { JsonViewer } from '@/modules/common/components/json-viewer';
 
 export const Debugger = () => {
-    const [debug] = useSettings('settings:debug', false);
+    const [debug] = useSettings('debug', false);
     const collections = useCollections();
 
     if (!debug) return null;

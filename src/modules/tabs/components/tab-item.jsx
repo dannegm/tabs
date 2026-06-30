@@ -1,13 +1,13 @@
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useCopyToClipboard } from '@uidotdev/usehooks';
 import { toast } from 'sonner';
+import { useDraggable } from '@dnd-kit/core';
+import { CSS } from '@dnd-kit/utilities';
 
 import { X, File, Volume2, VenetianMask, VolumeOff, Focus, Copy } from 'lucide-react';
 
 import { cn } from '@/modules/common/helpers/utils';
 import { closeTab, focusTab, muteTab, unmuteTab } from '@/modules/common/helpers/chrome';
-import { toJSON } from '@/modules/common/helpers/objects';
 
 import { Button } from '@/modules/shadcn/components/button';
 import { Tooltip } from '@/modules/shadcn/components/tooltip-simple';
@@ -20,11 +20,8 @@ import {
     ContextMenuSeparator,
 } from '@/modules/shadcn/components/context-menu';
 
-import { useDradAndDropActions } from '@/store/dragAndDrop';
-
 const ContextualMenu = ({ item, children }) => {
     const { t } = useTranslation();
-
     const [, copyToClipboard] = useCopyToClipboard();
 
     const handleCopy = () => {
@@ -74,32 +71,19 @@ const ContextualMenu = ({ item, children }) => {
 export const TabItem = ({ className, item }) => {
     const { t } = useTranslation();
 
-    const { setItemType, resetItemType } = useDradAndDropActions();
-    const [dragging, setDragging] = useState(false);
+    const { attributes, listeners, setNodeRef, isDragging, transform } = useDraggable({
+        id: String(item.id),
+        data: { type: 'tab', item },
+    });
 
-    const handleDoubleClick = () => {
-        focusTab(item);
-    };
+    const style = { transform: CSS.Translate.toString(transform) };
 
-    const handleClose = () => {
-        closeTab(item?.id);
-    };
-
-    const handleDragStart = event => {
-        setDragging(true);
-        setItemType({ type: 'tab' });
-        const data = toJSON({ type: 'tab', data: item });
-        event.dataTransfer.setData('text/plain', data);
-    };
-
-    const handleDragEnd = () => {
-        resetItemType();
-        setDragging(false);
-    };
+    const handleDoubleClick = () => focusTab(item);
+    const handleClose = () => closeTab(item?.id);
 
     return (
         <ContextualMenu item={item}>
-            <div data-layer='tab-item' className='relative group'>
+            <div data-layer='tab-item' className='relative group' ref={setNodeRef} style={style}>
                 <Tooltip content='Close tab'>
                     <Button
                         className='hidden absolute right-2 top-1/2 transform -translate-y-1/2 group-hover:flex rtl:right-auto rtl:left-2'
@@ -120,13 +104,12 @@ export const TabItem = ({ className, item }) => {
                             'bg-neutral-800 border-neutral-600 text-neutral-200 dark:bg-white dark:border-neutral-200 dark:text-neutral-800':
                                 item?.incognito,
                         },
-                        { 'cursor-grabbing shadow-md': dragging },
+                        { 'cursor-grabbing shadow-md opacity-50': isDragging },
                         className,
                     )}
                     onDoubleClick={handleDoubleClick}
-                    onDragStart={handleDragStart}
-                    onDragEnd={handleDragEnd}
-                    draggable
+                    {...attributes}
+                    {...listeners}
                 >
                     {item?.favIconUrl ? (
                         <img className='size-4' src={item.favIconUrl} />

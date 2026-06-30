@@ -3,6 +3,7 @@ const IS_DEV = process.env.NODE_ENV === 'development';
 const sampleTabs = [
     {
         id: 1,
+        windowId: 1,
         title: 'Google',
         url: 'https://www.google.com/',
         favIconUrl: 'https://www.google.com/s2/favicons?domain=google.com&sz=256',
@@ -10,16 +11,32 @@ const sampleTabs = [
     },
     {
         id: 2,
+        windowId: 1,
         title: 'Inicio / X',
         url: 'https://x.com/home',
         favIconUrl: 'https://www.google.com/s2/favicons?domain=x.com&sz=256',
     },
     {
         id: 3,
+        windowId: 1,
         title: 'Youtube',
         url: 'https://www.youtube.com/',
         favIconUrl: 'https://www.google.com/s2/favicons?domain=youtube.com&sz=256',
         audible: true,
+    },
+    {
+        id: 4,
+        windowId: 2,
+        title: 'GitHub',
+        url: 'https://github.com/',
+        favIconUrl: 'https://www.google.com/s2/favicons?domain=github.com&sz=256',
+    },
+    {
+        id: 5,
+        windowId: 2,
+        title: 'Stack Overflow',
+        url: 'https://stackoverflow.com/',
+        favIconUrl: 'https://www.google.com/s2/favicons?domain=stackoverflow.com&sz=256',
     },
 ];
 

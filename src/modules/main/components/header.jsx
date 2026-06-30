@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next';
 
-import { nanoid } from 'nanoid';
 import { Bolt, Plus } from 'lucide-react';
 
 import { useCollections, useCollectionsActions } from '@/store/collections';
@@ -22,20 +21,13 @@ const Separator = styled('div', 'flex-none h-4 w-px bg-neutral-200 dark:bg-neutr
 
 export const Header = () => {
     const { t } = useTranslation();
-    const [direction] = useSettings('settings:direction', 'ltr');
+    const [direction] = useSettings('direction', 'ltr');
 
     const collections = useCollections();
     const collectionsCount = Object.keys(collections).length;
-    const { addCollection, expandAllColections, collapseAllColections } = useCollectionsActions();
+    const { addCollection, expandAllCollections, collapseAllCollections } = useCollectionsActions();
 
-    const handleAddCollection = ({ name }) => {
-        const payload = {
-            name,
-            id: nanoid(),
-            expanded: true,
-        };
-        addCollection(payload);
-    };
+    const handleAddCollection = ({ name }) => addCollection({ name, expanded: true });
 
     return (
         <div
@@ -67,7 +59,7 @@ export const Header = () => {
                     className='dark:text-neutral-200 dark:hover:bg-neutral-700'
                     size='sm'
                     variant='ghost'
-                    onClick={expandAllColections}
+                    onClick={expandAllCollections}
                 >
                     {t('header.labels.expand')}
                 </Button>
@@ -75,7 +67,7 @@ export const Header = () => {
                     className='dark:text-neutral-200 dark:hover:bg-neutral-700'
                     size='sm'
                     variant='ghost'
-                    onClick={collapseAllColections}
+                    onClick={collapseAllCollections}
                 >
                     {t('header.labels.collapse')}
                 </Button>

@@ -82,7 +82,7 @@ const mapItem = (item, idx) => {
 export const ImportCollection = ({ children, onError, onSuccess }) => {
     const { t } = useTranslation();
 
-    const { importCollection, addCollection } = useCollectionsActions();
+    const { importCollections, addCollection } = useCollectionsActions();
     const $picker = useRef();
     const [file, setFile] = useState();
 
@@ -108,7 +108,7 @@ export const ImportCollection = ({ children, onError, onSuccess }) => {
             }));
 
         const proccessData = fromArray(mappedData, 'id');
-        importCollection({ collections: proccessData });
+        importCollections({ collections: proccessData });
 
         toast.success(
             t('common.import.alerts.all-collections-imported', {
@@ -120,14 +120,12 @@ export const ImportCollection = ({ children, onError, onSuccess }) => {
 
     const proccessCollectionData = ({ collection }) => {
         const items = collection.cards.map(mapItem);
-        const collectionData = {
-            id: nanoid(),
+        addCollection({
             name: collection.title,
             expanded: true,
             bgColor: collection.bgColor || null,
             items: fromArray(items, 'id'),
-        };
-        addCollection(collectionData);
+        });
 
         toast.success(
             t('common.import.alerts.single-collection-imported', {

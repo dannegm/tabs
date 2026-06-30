@@ -7,7 +7,7 @@ import { ToggleIcon } from '@/modules/shadcn/components/toggle-icon';
 
 export const DebugModeToggle = () => {
     const { t } = useTranslation();
-    const [debug, setDebug] = useSettings('settings:debug', false);
+    const [debug, setDebug] = useSettings('debug', false);
 
     return (
         <Tooltip content={t('common.debug-mode-toggle.tooltip')}>

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { BadgeInfo, FolderInput, FolderOutput, PackagePlus, Trash2 } from 'lucide-react';
@@ -24,48 +23,25 @@ import { Changelog } from '@/modules/main/components//changelogs';
 
 export const SettingsMenu = ({ children, side = 'bottom', align = 'end' }) => {
     const { t } = useTranslation();
-
-    const [open, setOpen] = useState(false);
-
     const { clearCollections } = useCollectionsActions();
 
-    const handleClose = () => {
-        setOpen(false);
-    };
-
-    const handleClearCollection = () => {
-        clearCollections();
-        handleClose();
-    };
-
     return (
-        <DropdownMenu open={open}>
-            <DropdownMenuTrigger onClick={() => setOpen(true)} asChild>
-                {children}
-            </DropdownMenuTrigger>
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>{children}</DropdownMenuTrigger>
 
-            <DropdownMenuContent
-                className='w-56'
-                side={side}
-                align={align}
-                onCloseAutoFocus={handleClose}
-                onEscapeKeyDown={handleClose}
-                onPointerDownOutside={handleClose}
-                onFocusOutside={handleClose}
-                onInteractOutside={handleClose}
-            >
+            <DropdownMenuContent className='w-56' side={side} align={align}>
                 <DropdownMenuLabel>{t('settings.collections.title')}</DropdownMenuLabel>
 
                 <DropdownMenuSeparator />
 
-                <ExportCollection onSuccess={handleClose}>
+                <ExportCollection>
                     <DropdownMenuItem>
                         <FolderOutput />
                         {t('settings.collections.items.export')}
                     </DropdownMenuItem>
                 </ExportCollection>
 
-                <ImportCollection onError={handleClose} onSuccess={handleClose}>
+                <ImportCollection>
                     <DropdownMenuItem>
                         <FolderInput />
                         {t('settings.collections.items.import')}
@@ -75,8 +51,7 @@ export const SettingsMenu = ({ children, side = 'bottom', align = 'end' }) => {
                 <ConfirmDialog
                     title={t('settings.dialogs.clear-collections.title')}
                     description={t('settings.dialogs.clear-collections.description')}
-                    onCancel={handleClose}
-                    onAccept={handleClearCollection}
+                    onAccept={clearCollections}
                 >
                     <DropdownMenuItem>
                         <Trash2 />

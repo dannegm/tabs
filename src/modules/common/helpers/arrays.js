@@ -18,7 +18,7 @@ export const groupBy = (elements = [], sentence) => {
 export const reverse = (arr = []) => [...arr].reverse();
 
 export const sortBy = (arr, key, direction = 'asc') =>
-    arr.sort((a, b) => (direction === 'asc' ? a[key] - b[key] : b[key] - a[key]));
+    [...arr].sort((a, b) => (direction === 'asc' ? a[key] - b[key] : b[key] - a[key]));
 
 export const move = (array, oldIndex, newIndex) => {
     if (oldIndex === newIndex) return array;

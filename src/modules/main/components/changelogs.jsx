@@ -61,7 +61,7 @@ export const Changelog = ({ children }) => {
     const { t } = useTranslation();
 
     const [open, setOpen] = useState(false);
-    const [appVersion, setAppVersion] = useSettings('app:version', '0.0.0');
+    const [appVersion, setAppVersion] = useSettings('appVersion', '0.0.0');
 
     useEffect(() => {
         if (!children && appVersion !== APP_VERSION) {
