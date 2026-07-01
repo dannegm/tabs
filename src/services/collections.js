@@ -127,25 +127,28 @@ const useCollectionsStore = create(
             });
         },
 
-        addItem: ({ collectionId, id, payload }) => {
+        addItem: ({ collectionId, id, payload, index }) => {
             set(state => {
                 const col = state.collections[collectionId];
                 if (!col) return state;
+                const newItems = { ...col.items };
+                if (typeof index === 'number') {
+                    Object.values(newItems).forEach(i => {
+                        if (i.index >= index) newItems[i.id] = { ...i, index: i.index + 1 };
+                    });
+                    newItems[id] = { id, created_at: Date.now(), index, ...payload };
+                } else {
+                    newItems[id] = {
+                        id,
+                        created_at: Date.now(),
+                        index: Object.keys(col.items).length,
+                        ...payload,
+                    };
+                }
                 return {
                     collections: {
                         ...state.collections,
-                        [collectionId]: {
-                            ...col,
-                            items: {
-                                ...col.items,
-                                [id]: {
-                                    id,
-                                    created_at: Date.now(),
-                                    index: Object.keys(col.items).length,
-                                    ...payload,
-                                },
-                            },
-                        },
+                        [collectionId]: { ...col, items: newItems },
                     },
                 };
             });

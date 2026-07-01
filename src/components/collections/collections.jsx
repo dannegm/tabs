@@ -41,7 +41,7 @@ export const Collections = () => {
     useListener('collections:sort', useCallback(({ items }) => sortCollections({ items }), [sortCollections]));
     useListener('items:sort', useCallback(({ collectionId, items }) => sortItems({ collectionId, items }), [sortItems]));
     useListener('items:move', useCallback(({ id, from, to, index }) => moveItem({ id, originalCollectionId: from, targetCollectionId: to, index }), [moveItem]));
-    useListener('tab:save', useCallback(({ collectionId, id, payload }) => addItem({ collectionId, id, payload }), [addItem]));
+    useListener('tab:save', useCallback(({ collectionId, id, payload, index }) => addItem({ collectionId, id, payload, index }), [addItem]));
 
     const handleAddCollection = ({ name }) => addCollection({ name, expanded: true });
 

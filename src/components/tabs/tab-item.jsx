@@ -2,7 +2,6 @@ import { useTranslation } from 'react-i18next';
 import { useCopyToClipboard } from '@uidotdev/usehooks';
 import { toast } from 'sonner';
 import { useDraggable } from '@dnd-kit/core';
-import { CSS } from '@dnd-kit/utilities';
 
 import { X, File, Volume2, VenetianMask, VolumeOff, Focus, Copy } from 'lucide-react';
 
@@ -71,19 +70,17 @@ const ContextualMenu = ({ item, children }) => {
 export const TabItem = ({ className, item }) => {
     const { t } = useTranslation();
 
-    const { attributes, listeners, setNodeRef, isDragging, transform } = useDraggable({
+    const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
         id: String(item.id),
         data: { type: 'tab', item },
     });
-
-    const style = { transform: CSS.Translate.toString(transform) };
 
     const handleDoubleClick = () => focusTab(item);
     const handleClose = () => closeTab(item?.id);
 
     return (
         <ContextualMenu item={item}>
-            <div data-layer='tab-item' className='relative group' ref={setNodeRef} style={style}>
+            <div data-layer='tab-item' className={cn('relative group', { 'opacity-0 pointer-events-none': isDragging })} ref={setNodeRef}>
                 <Tooltip content='Close tab'>
                     <Button
                         className='hidden absolute right-2 top-1/2 transform -translate-y-1/2 group-hover:flex rtl:right-auto rtl:left-2'
@@ -104,7 +101,7 @@ export const TabItem = ({ className, item }) => {
                             'bg-neutral-800 border-neutral-600 text-neutral-200 dark:bg-white dark:border-neutral-200 dark:text-neutral-800':
                                 item?.incognito,
                         },
-                        { 'cursor-grabbing shadow-md opacity-50': isDragging },
+                        { 'cursor-grabbing': isDragging },
                         className,
                     )}
                     onDoubleClick={handleDoubleClick}

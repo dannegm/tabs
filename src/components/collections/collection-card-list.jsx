@@ -26,9 +26,10 @@ export const CollectionCardList = ({
 
     useDndMonitor({
         onDragStart: ({ active }) => {
-            const isCard = active?.data.current?.type === 'card';
-            const isExternal = active?.data.current?.collectionId !== collectionId;
-            setIsDraggingExternalCard(isCard && isExternal);
+            const type = active?.data.current?.type;
+            const isTab = type === 'tab';
+            const isExternalCard = type === 'card' && active?.data.current?.collectionId !== collectionId;
+            setIsDraggingExternalCard(isTab || isExternalCard);
         },
         onDragOver: ({ over }) => {
             const overType = over?.data.current?.type;

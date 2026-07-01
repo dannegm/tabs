@@ -65,6 +65,30 @@ const CardDragGhost = ({ item }) => {
     );
 };
 
+const TabDragGhost = ({ item }) => {
+    if (!item) return null;
+    return (
+        <div
+            className={cn(
+                'flex flex-row gap-2 px-3 py-2 items-center text-sm rounded-sm select-none',
+                'bg-white border border-neutral-200 text-neutral-800',
+                'dark:bg-neutral-800 dark:border-neutral-600 dark:text-neutral-200',
+                'shadow-xl opacity-90 cursor-grabbing',
+                item?.incognito &&
+                    'bg-neutral-800 border-neutral-600 text-neutral-200 dark:bg-white dark:border-neutral-200 dark:text-neutral-800',
+            )}
+            style={{ width: 'calc(var(--sidebar-width) - 2rem)' }}
+        >
+            {item?.favIconUrl ? (
+                <img className='size-4 shrink-0' src={item.favIconUrl} />
+            ) : (
+                <File className='size-4 shrink-0' />
+            )}
+            <span className='flex-1 line-clamp-1 text-ellipsis'>{item?.title}</span>
+        </div>
+    );
+};
+
 const ActiveDragOverlay = ({ collections }) => {
     const { active } = useDndContext();
     if (!active) return null;
@@ -89,16 +113,31 @@ const ActiveDragOverlay = ({ collections }) => {
         );
     }
 
+    if (type === 'tab') {
+        return (
+            <DragOverlay adjustScale={false} dropAnimation={null}>
+                <TabDragGhost item={active.data.current?.item} />
+            </DragOverlay>
+        );
+    }
+
     return null;
 };
 
 const cardAwareCollisionDetection = (args) => {
     const activeType = args.active.data.current?.type;
 
-    if (activeType === 'card' || activeType === 'tab') {
+    if (activeType === 'tab') {
+        // Tabs must land physically inside a droppable — no fallback,
+        // so releasing over the tabs panel yields over=null and cancels cleanly.
+        return pointerWithin(args);
+    }
+
+    if (activeType === 'card') {
         const pointerCollisions = pointerWithin(args);
         if (pointerCollisions.length > 0) return pointerCollisions;
 
+        // Fall back to closestCenter against non-card droppables (collections, end-zones)
         return closestCenter({
             ...args,
             droppableContainers: args.droppableContainers.filter(
@@ -185,20 +224,35 @@ export const DndProvider = ({ children }) => {
             }
 
             if (activeType === 'tab') {
-                const collIdByType = {
-                    card: over.data.current.collectionId,
-                    collection: over.id,
-                };
-                const targetCollId = collIdByType[overType] ?? null;
+                const tabData = active.data.current.item;
 
-                if (targetCollId) {
-                    const tabData = active.data.current.item;
+                if (overType === 'card') {
+                    const { collectionId: targetCollId } = over.data.current;
+                    const targetItems = sortBy(
+                        Object.values(collections[targetCollId]?.items || {}),
+                        'index',
+                    );
+                    const index = targetItems.findIndex(i => i.id === over.id);
+                    emit('tab:save', {
+                        collectionId: targetCollId,
+                        id: String(tabData.id),
+                        payload: sanitizeItem(tabData),
+                        index: index !== -1 ? index : undefined,
+                    });
+                    closeTab(tabData.id);
+                    return;
+                }
+
+                if (overType === 'collection' || overType === 'collection-end') {
+                    const targetCollId =
+                        overType === 'collection' ? over.id : over.data.current.collectionId;
                     emit('tab:save', {
                         collectionId: targetCollId,
                         id: String(tabData.id),
                         payload: sanitizeItem(tabData),
                     });
                     closeTab(tabData.id);
+                    return;
                 }
             }
         },

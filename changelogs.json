@@ -1,4 +1,34 @@
 {
+    "2.3.0": [
+        {
+            "type": "FIXED",
+            "description": "Drag ghost no longer shifts with scroll — it now follows the cursor correctly at any scroll position"
+        },
+        {
+            "type": "FIXED",
+            "description": "Drag ghost no longer clips inside its container — it renders above all panels"
+        },
+        {
+            "type": "FIXED",
+            "description": "Dropping a card or tab outside a collection no longer closes the tab or moves the card"
+        },
+        {
+            "type": "FIXED",
+            "description": "Card drop target indicator no longer activates outside the card's bounds"
+        },
+        {
+            "type": "FIXED",
+            "description": "Collection drop indicator no longer appears on all collections at once — only the one under the cursor"
+        },
+        {
+            "type": "IMPROVED",
+            "description": "Tabs can now be dragged onto a specific card position — the target card shifts to make room"
+        },
+        {
+            "type": "IMPROVED",
+            "description": "Dragging a card over its own collection's empty space now shows a ghost at its origin and cancels on drop"
+        }
+    ],
     "2.2.0": [
         {
             "type": "FIXED",

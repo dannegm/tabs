@@ -26,9 +26,10 @@ export const CardItem = ({ className, collectionId, item, index, dark, bgColor, 
 
     useDndMonitor({
         onDragOver: ({ over, active }) => {
+            const activeType = active?.data.current?.type;
             setIsOver(
                 over?.id === item.id &&
-                active?.data.current?.type === 'card' &&
+                (activeType === 'card' || activeType === 'tab') &&
                 active?.id !== item.id,
             );
 

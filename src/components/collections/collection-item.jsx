@@ -31,7 +31,7 @@ export const CollectionItem = ({
 
     const [dragState, setDragState] = useState({
         type: null,
-        isExternalCard: false,
+        isExternalDrop: false,
         isOverCardInThis: false,
     });
 
@@ -47,17 +47,18 @@ export const CollectionItem = ({
                 overType === 'collection-end' && over?.data.current?.collectionId === id;
 
             if (!isOverCollection && !isOverCardInThis && !isOverEndZone) {
-                setDragState({ type: null, isExternalCard: false, isOverCardInThis: false });
+                setDragState({ type: null, isExternalDrop: false, isOverCardInThis: false });
                 return;
             }
 
-            const isExternalCard =
-                activeType === 'card' && active.data.current?.collectionId !== id;
+            const isExternalDrop =
+                (activeType === 'card' && active.data.current?.collectionId !== id) ||
+                activeType === 'tab';
 
-            setDragState({ type: activeType, isExternalCard, isOverCardInThis });
+            setDragState({ type: activeType, isExternalDrop, isOverCardInThis });
         },
-        onDragEnd: () => setDragState({ type: null, isExternalCard: false, isOverCardInThis: false }),
-        onDragCancel: () => setDragState({ type: null, isExternalCard: false, isOverCardInThis: false }),
+        onDragEnd: () => setDragState({ type: null, isExternalDrop: false, isOverCardInThis: false }),
+        onDragCancel: () => setDragState({ type: null, isExternalDrop: false, isOverCardInThis: false }),
     });
 
     const { attributes, listeners, setNodeRef, isDragging } = useSortable({
@@ -117,10 +118,7 @@ export const CollectionItem = ({
                 expanded={expanded}
                 dark={dark}
                 bgColor={internalBgColor}
-                isDropTarget={
-                    (dragState.isExternalCard && !dragState.isOverCardInThis) ||
-                    dragState.type === 'tab'
-                }
+                isDropTarget={dragState.isExternalDrop && !dragState.isOverCardInThis}
                 onRemoveItem={item => onRemoveItem?.(id, item)}
                 onUpdateItem={item => onUpdateItem?.(id, item)}
             />
