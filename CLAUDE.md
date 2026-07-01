@@ -38,7 +38,7 @@ The app renders as a two-column layout:
 | `helpers/` | Pure utility functions and i18n config |
 | `locales/` | i18n translation files (one JSON per language) |
 | `hooks/` | Shared React hooks — useDarkMode, useSettings, useDocumentTitle, useDelayedState |
-| `routes/` | TanStack Router routes — `__root.jsx`, `index.jsx`, `settings.jsx` |
+| `pages/` | One file per route — `home.jsx`, `settings.jsx`. Each wraps itself in `<Layout>` |
 | `queries/` | TanStack Query factory functions — one file per domain (e.g. `chrome.js`) |
 | `constants/` | Static config — defaultSettings |
 
@@ -50,13 +50,16 @@ Zustand v5 with a single `collections` slice persisted via a custom `chromeStora
 
 Access state exclusively through the co-located hooks: `useCollections()` and `useCollectionsActions()` from `@/store/collections`. Always wrap object selectors with `useShallow` (Zustand v5 requirement).
 
-### Routing (`src/router.js` + `src/routes/`)
+### Routing (`src/router.jsx` + `src/pages/`)
 
-TanStack Router with hash history (`createHashHistory`) — required for Chrome extensions. Routes:
-- `/` → main two-column layout (collections + tabs)
-- `/settings` → settings view (Phase 4)
+TanStack Router with hash history (`createHashHistory`) — required for Chrome extensions. All routes are defined in `src/router.jsx`. Pages live in `src/pages/`, each wrapping itself in `<Layout>`:
+- `/` → `pages/home.jsx` — main two-column layout (collections + tabs)
+- `/settings` → `pages/settings.jsx` — settings view (Phase 4)
+- unknown routes → redirect to `/`
 
-nuqs (`nuqs/adapters/tanstack-router`) is mounted in `__root.jsx` for URL search-param state. Use `useQueryState` from `nuqs` for any search/filter state that should survive navigation.
+To add a new route: create `src/pages/my-page.jsx`, import it in `router.jsx`, add a `createRoute`.
+
+nuqs (`nuqs/adapters/tanstack-router`) is mounted in `Providers` for URL search-param state. Use `useQueryState` from `nuqs` for any search/filter state that should survive navigation.
 
 ### Async data (`src/queries/`)
 

@@ -1,4 +1,14 @@
 {
+    "2.1.0": [
+        {
+            "type": "ADDED",
+            "description": "Navigation between views — a dedicated Settings page is on its way"
+        },
+        {
+            "type": "CHANGED",
+            "description": "Live tabs now use smarter data fetching — faster updates and no unnecessary re-renders"
+        }
+    ],
     "2.0.0": [
         {
             "type": "CHANGED",
