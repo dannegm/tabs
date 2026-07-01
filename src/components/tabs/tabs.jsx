@@ -1,37 +1,35 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { cn } from '@/helpers/utils';
-import { bindTabsEvents, getAllTabs, unbindTabsEvents } from '@/helpers/chrome';
-
-const IS_DEV = process.env.NODE_ENV === 'development';
 import { groupBy } from '@/helpers/arrays';
+import { bindTabsEvents, unbindTabsEvents } from '@/helpers/chrome';
+import { getAllTabsQuery } from '@/queries/chrome';
 
 import { ScrollArea } from '@/ui/scroll-area';
 import { TabsGroup } from '@/components/tabs/tabs-group';
 
+const IS_DEV = process.env.NODE_ENV === 'development';
+
 export const Tabs = ({ className }) => {
     const { t } = useTranslation();
+    const queryClient = useQueryClient();
 
-    const [groups, setGroups] = useState([]);
+    const { data: rawTabs = [] } = useQuery(getAllTabsQuery());
+    const groups = Object.entries(groupBy(rawTabs, item => item.windowId));
 
-    const getChromeTabs = () => {
-        getAllTabs(tabs => {
-            const groups = groupBy(tabs, item => item.windowId);
-            setGroups(Object.entries(groups));
-        });
-    };
+    const refetchTabs = useCallback(
+        () => queryClient.invalidateQueries({ queryKey: ['chrome', 'tabs'] }),
+        [queryClient],
+    );
 
     useEffect(() => {
-        getChromeTabs();
         if (!IS_DEV) {
-            bindTabsEvents(getChromeTabs);
+            bindTabsEvents(refetchTabs);
+            return () => unbindTabsEvents(refetchTabs);
         }
-
-        return () => {
-            if (!IS_DEV) unbindTabsEvents(getChromeTabs);
-        };
-    }, []);
+    }, [refetchTabs]);
 
     return (
         <aside

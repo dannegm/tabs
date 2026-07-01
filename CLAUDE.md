@@ -38,6 +38,8 @@ The app renders as a two-column layout:
 | `helpers/` | Pure utility functions and i18n config |
 | `locales/` | i18n translation files (one JSON per language) |
 | `hooks/` | Shared React hooks — useDarkMode, useSettings, useDocumentTitle, useDelayedState |
+| `routes/` | TanStack Router routes — `__root.jsx`, `index.jsx`, `settings.jsx` |
+| `queries/` | TanStack Query factory functions — one file per domain (e.g. `chrome.js`) |
 | `constants/` | Static config — defaultSettings |
 
 ### State (`src/store/`)
@@ -48,7 +50,27 @@ Zustand v5 with a single `collections` slice persisted via a custom `chromeStora
 
 Access state exclusively through the co-located hooks: `useCollections()` and `useCollectionsActions()` from `@/store/collections`. Always wrap object selectors with `useShallow` (Zustand v5 requirement).
 
-### Providers (`src/modules/common/providers/`)
+### Routing (`src/router.js` + `src/routes/`)
+
+TanStack Router with hash history (`createHashHistory`) — required for Chrome extensions. Routes:
+- `/` → main two-column layout (collections + tabs)
+- `/settings` → settings view (Phase 4)
+
+nuqs (`nuqs/adapters/tanstack-router`) is mounted in `__root.jsx` for URL search-param state. Use `useQueryState` from `nuqs` for any search/filter state that should survive navigation.
+
+### Async data (`src/queries/`)
+
+TanStack Query (`@tanstack/react-query`) with factory pattern:
+```js
+export const myQuery = (opts = {}) => ({
+    queryKey: ['domain', 'key'],
+    queryFn: async () => { ... },
+    ...opts,
+})
+```
+Use `useQuery(myQuery())` at call sites. Chrome tab events trigger `queryClient.invalidateQueries` instead of local state updates.
+
+### Providers (`src/providers/`)
 
 Providers are composed in `providers.jsx` and consumed in `App.jsx` as `<Providers>`:
 
