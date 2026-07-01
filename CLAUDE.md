@@ -32,7 +32,7 @@ The app renders as a two-column layout:
 | `components/tabs/` | Live tab viewer — Tabs, TabsGroup, TabItem |
 | `components/collections/` | Collections UI — list, cards, dialogs for create/edit/import/export |
 | `components/system/` | Generic shared components — Loader, Zelda, ErrorBoundary, ConfirmDialog |
-| `ui/` | Primitive UI components — shadcn/Radix wrappers (Button, Input, Dialog, etc.) |
+| `ui/` | Primitive UI components — shadcn wrappers over Base UI (`@base-ui/react`) and plain HTML (Button, Input, Dialog, etc.) |
 | `providers/` | React context providers — BusProvider, DndProvider, Providers |
 | `services/` | Data services — collections store, settings, chrome-storage middleware, migration |
 | `helpers/` | Pure utility functions and i18n config |

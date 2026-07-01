@@ -1,5 +1,4 @@
-import * as React from 'react';
-import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
+import { ScrollArea as ScrollAreaPrimitive } from '@base-ui/react';
 
 import { cn } from '@/helpers/utils';
 
@@ -24,7 +23,7 @@ function ScrollArea({ className, classNames, children, ...props }) {
 
 function ScrollBar({ className, classNames, orientation = 'vertical', ...props }) {
     return (
-        <ScrollAreaPrimitive.ScrollAreaScrollbar
+        <ScrollAreaPrimitive.Scrollbar
             data-slot='scroll-area-scrollbar'
             orientation={orientation}
             className={cn(
@@ -35,11 +34,11 @@ function ScrollBar({ className, classNames, orientation = 'vertical', ...props }
             )}
             {...props}
         >
-            <ScrollAreaPrimitive.ScrollAreaThumb
+            <ScrollAreaPrimitive.Thumb
                 data-slot='scroll-area-thumb'
                 className={cn('bg-border relative flex-1 rounded-full', classNames?.thumb)}
             />
-        </ScrollAreaPrimitive.ScrollAreaScrollbar>
+        </ScrollAreaPrimitive.Scrollbar>
     );
 }
 
