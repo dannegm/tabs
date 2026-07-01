@@ -22,6 +22,7 @@ export const CardItem = ({ className, collectionId, item, index, dark, bgColor, 
     });
 
     const [isOver, setIsOver] = useState(false);
+    const [showOriginGhost, setShowOriginGhost] = useState(false);
 
     useDndMonitor({
         onDragOver: ({ over, active }) => {
@@ -30,9 +31,16 @@ export const CardItem = ({ className, collectionId, item, index, dark, bgColor, 
                 active?.data.current?.type === 'card' &&
                 active?.id !== item.id,
             );
+
+            if (active?.id === item.id) {
+                const overType = over?.data.current?.type;
+                const isOverSameCollectionSpace =
+                    overType === 'collection' && over?.id === collectionId;
+                setShowOriginGhost(isOverSameCollectionSpace);
+            }
         },
-        onDragEnd: () => setIsOver(false),
-        onDragCancel: () => setIsOver(false),
+        onDragEnd: () => { setIsOver(false); setShowOriginGhost(false); },
+        onDragCancel: () => { setIsOver(false); setShowOriginGhost(false); },
     });
 
     const { open: openEditCard } = useModal('edit-card');
@@ -52,7 +60,8 @@ export const CardItem = ({ className, collectionId, item, index, dark, bgColor, 
         <div
             ref={setNodeRef}
             className={cn('relative group flex transition-all duration-150', {
-                'opacity-0': isDragging,
+                'opacity-0 pointer-events-none': isDragging && !showOriginGhost,
+                'opacity-25 pointer-events-none': isDragging && showOriginGhost,
                 'translate-x-4 rtl:-translate-x-4': isOver,
             })}
         >

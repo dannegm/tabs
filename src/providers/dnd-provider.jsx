@@ -4,6 +4,7 @@ import {
     DragOverlay,
     useDndContext,
     closestCenter,
+    pointerWithin,
     PointerSensor,
     KeyboardSensor,
     useSensor,
@@ -91,6 +92,24 @@ const ActiveDragOverlay = ({ collections }) => {
     return null;
 };
 
+const cardAwareCollisionDetection = (args) => {
+    const activeType = args.active.data.current?.type;
+
+    if (activeType === 'card' || activeType === 'tab') {
+        const pointerCollisions = pointerWithin(args);
+        if (pointerCollisions.length > 0) return pointerCollisions;
+
+        return closestCenter({
+            ...args,
+            droppableContainers: args.droppableContainers.filter(
+                c => c.data.current?.type !== 'card',
+            ),
+        });
+    }
+
+    return closestCenter(args);
+};
+
 export const DndProvider = ({ children }) => {
     const { emit } = useEvents();
     const collections = useCollections();
@@ -156,6 +175,15 @@ export const DndProvider = ({ children }) => {
                 return;
             }
 
+            if (activeType === 'card' && overType === 'collection-end') {
+                const { collectionId: activeCollId } = active.data.current;
+                const { collectionId: targetCollId } = over.data.current;
+                if (activeCollId !== targetCollId) {
+                    emit('items:move', { id: active.id, from: activeCollId, to: targetCollId });
+                }
+                return;
+            }
+
             if (activeType === 'tab') {
                 const collIdByType = {
                     card: over.data.current.collectionId,
@@ -180,7 +208,7 @@ export const DndProvider = ({ children }) => {
     return (
         <DndContext
             sensors={sensors}
-            collisionDetection={closestCenter}
+            collisionDetection={cardAwareCollisionDetection}
             onDragEnd={handleDragEnd}
             autoScroll={{
                 threshold: { x: 0, y: 0.08 },
