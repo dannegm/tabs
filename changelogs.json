@@ -1,4 +1,10 @@
 {
+    "2.2.0": [
+        {
+            "type": "FIXED",
+            "description": "Dialogs no longer close when the menu that opened them unmounts — open state is now stored in the URL"
+        }
+    ],
     "2.1.0": [
         {
             "type": "ADDED",

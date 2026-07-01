@@ -32,12 +32,13 @@ The app renders as a two-column layout:
 | `components/tabs/` | Live tab viewer — Tabs, TabsGroup, TabItem |
 | `components/collections/` | Collections UI — list, cards, dialogs for create/edit/import/export |
 | `components/system/` | Generic shared components — Loader, Zelda, ErrorBoundary, ConfirmDialog |
-| `ui/` | Primitive UI components — shadcn wrappers over Base UI (`@base-ui/react`) and plain HTML (Button, Input, Dialog, etc.) |
+| `ui/` | Primitive UI components — shadcn wrappers over Radix UI and plain HTML (Button, Input, Dialog, etc.) |
+| `store/` | Zustand stores — `collections.js` (persisted), `modals.js` (ephemeral modal props) |
 | `providers/` | React context providers — BusProvider, DndProvider, Providers |
 | `services/` | Data services — collections store, settings, chrome-storage middleware, migration |
 | `helpers/` | Pure utility functions and i18n config |
 | `locales/` | i18n translation files (one JSON per language) |
-| `hooks/` | Shared React hooks — useDarkMode, useSettings, useDocumentTitle, useDelayedState |
+| `hooks/` | Shared React hooks — useDarkMode, useSettings, useDocumentTitle, useDelayedState, useModal |
 | `pages/` | One file per route — `home.jsx`, `settings.jsx`. Each wraps itself in `<Layout>` |
 | `queries/` | TanStack Query factory functions — one file per domain (e.g. `chrome.js`) |
 | `constants/` | Static config — defaultSettings |
@@ -126,6 +127,24 @@ All `chrome.*` calls are centralized in `src/modules/common/helpers/chrome.js`. 
 ### i18n
 
 13 languages configured in `src/helpers/i18next.js`. All user-facing strings must use `useTranslation()` with keys defined in each locale file under `src/locales/`. The `en.json` file is the source of truth — add new keys there first.
+
+### Modal system (`src/hooks/use-modal.js` + `src/store/modals.js`)
+
+All dialogs are rendered in a single `<Modals />` component at the top of `<Main />`, decoupled from the components that trigger them. Open state lives in `?modal=<name>` (nuqs, `history: 'replace'`); dynamic props (callbacks, item data) live in `useModalsStore` (ephemeral zustand).
+
+```js
+const { open, close, isOpen, props } = useModal('edit-card');
+
+// open from any component — passes props into the store
+open({ item, onRemove, onUpdate });
+
+// modal component reads its own state
+const { isOpen, close, props } = useModal('edit-card');
+```
+
+Registered modal names: `'about'`, `'changelog'`, `'confirm'`, `'create-collection'`, `'edit-card'`.
+
+`ConfirmPopover` is NOT part of this system — it is position-anchored to its trigger and stays local with `useState`.
 
 ### Adding a new locale string
 
