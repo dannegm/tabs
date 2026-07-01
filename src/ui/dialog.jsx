@@ -1,141 +1,133 @@
-import * as React from 'react';
-import { Dialog as DialogPrimitive } from '@base-ui/react';
+import * as React from "react"
+import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { useTranslation } from 'react-i18next';
-import { XIcon } from 'lucide-react';
+import { XIcon } from "lucide-react"
 
-import { cn } from '@/helpers/utils';
+import { cn } from "@/helpers/utils"
 
-function Dialog({ ...props }) {
-    return <DialogPrimitive.Root data-slot='dialog' {...props} />;
+function Dialog({
+  ...props
+}) {
+  return <DialogPrimitive.Root data-slot="dialog" {...props} />;
 }
 
-function DialogTrigger({ asChild, children, ...props }) {
-    if (asChild && React.isValidElement(children)) {
-        return (
-            <DialogPrimitive.Trigger
-                data-slot='dialog-trigger'
-                nativeButton={false}
-                render={(renderProps) => {
-                    const { nativeButton: _, ...safeProps } = renderProps;
-                    return React.cloneElement(children, safeProps);
-                }}
-                {...props}
-            />
-        );
-    }
-    return <DialogPrimitive.Trigger data-slot='dialog-trigger' {...props}>{children}</DialogPrimitive.Trigger>;
+function DialogTrigger({
+  ...props
+}) {
+  return <DialogPrimitive.Trigger data-slot="dialog-trigger" {...props} />;
 }
 
-function DialogPortal({ ...props }) {
-    return <DialogPrimitive.Portal data-slot='dialog-portal' {...props} />;
+function DialogPortal({
+  ...props
+}) {
+  return <DialogPrimitive.Portal data-slot="dialog-portal" {...props} />;
 }
 
-function DialogClose({ asChild, children, ...props }) {
-    if (asChild && React.isValidElement(children)) {
-        return (
-            <DialogPrimitive.Close
-                data-slot='dialog-close'
-                nativeButton={false}
-                render={(renderProps) => {
-                    const { nativeButton: _, ...safeProps } = renderProps;
-                    return React.cloneElement(children, safeProps);
-                }}
-                {...props}
-            />
-        );
-    }
-    return <DialogPrimitive.Close data-slot='dialog-close' {...props}>{children}</DialogPrimitive.Close>;
+function DialogClose({
+  ...props
+}) {
+  return <DialogPrimitive.Close data-slot="dialog-close" {...props} />;
 }
 
-function DialogOverlay({ className, ...props }) {
-    return (
-        <DialogPrimitive.Backdrop
-            data-slot='dialog-overlay'
-            className={cn(
-                'fixed inset-0 z-50 bg-black/80 transition-opacity data-[starting-style]:opacity-0 data-[ending-style]:opacity-0',
-                className,
-            )}
-            {...props}
-        />
-    );
+function DialogOverlay({
+  className,
+  ...props
+}) {
+  return (
+    (<DialogPrimitive.Overlay
+      data-slot="dialog-overlay"
+      className={cn(
+        "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/80",
+        className
+      )}
+      {...props} />)
+  );
 }
 
-function DialogContent({ className, children, ...props }) {
-    const { t } = useTranslation();
-    return (
-        <DialogPortal>
-            <DialogOverlay />
-            <DialogPrimitive.Popup
-                data-slot='dialog-content'
-                className={cn(
-                    'bg-background fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg duration-200 sm:max-w-lg',
-                    'transition-all data-[starting-style]:opacity-0 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[ending-style]:scale-95',
-                    className,
-                )}
-                {...props}
-            >
-                {children}
-                <DialogPrimitive.Close className="ring-offset-background focus:ring-ring absolute top-4 right-4 rtl:left-4 rtl:right-auto rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4">
-                    <XIcon />
-                    <span className='sr-only'>{t('common.dialog.labels.close')}</span>
-                </DialogPrimitive.Close>
-            </DialogPrimitive.Popup>
-        </DialogPortal>
-    );
+function DialogContent({
+  className,
+  children,
+  ...props
+}) {
+  const { t } = useTranslation();
+  return (
+    (<DialogPortal data-slot="dialog-portal">
+      <DialogOverlay />
+      <DialogPrimitive.Content
+        data-slot="dialog-content"
+        className={cn(
+          "bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg duration-200 sm:max-w-lg",
+          className
+        )}
+        {...props}>
+        {children}
+        <DialogPrimitive.Close
+          className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rtl:left-4 rtl:right-auto rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4">
+          <XIcon />
+          <span className="sr-only">{t('common.dialog.labels.close')}</span>
+        </DialogPrimitive.Close>
+      </DialogPrimitive.Content>
+    </DialogPortal>)
+  );
 }
 
-function DialogHeader({ className, ...props }) {
-    return (
-        <div
-            data-slot='dialog-header'
-            className={cn('flex flex-col gap-2 text-center sm:text-left rtl:text-right', className)}
-            {...props}
-        />
-    );
+function DialogHeader({
+  className,
+  ...props
+}) {
+  return (
+    (<div
+      data-slot="dialog-header"
+      className={cn("flex flex-col gap-2 text-center sm:text-left rtl:text-right", className)}
+      {...props} />)
+  );
 }
 
-function DialogFooter({ className, ...props }) {
-    return (
-        <div
-            data-slot='dialog-footer'
-            className={cn(
-                'flex flex-col-reverse gap-2 sm:flex-row sm:justify-end rtl:flex-row-reverse rtl:justify-start',
-                className,
-            )}
-            {...props}
-        />
-    );
+function DialogFooter({
+  className,
+  ...props
+}) {
+  return (
+    (<div
+      data-slot="dialog-footer"
+      className={cn("flex flex-col-reverse gap-2 sm:flex-row sm:justify-end rtl:flex-row-reverse rtl:justify-start", className)}
+      {...props} />)
+  );
 }
 
-function DialogTitle({ className, ...props }) {
-    return (
-        <DialogPrimitive.Title
-            data-slot='dialog-title'
-            className={cn('text-lg leading-none font-semibold', className)}
-            {...props}
-        />
-    );
+function DialogTitle({
+  className,
+  ...props
+}) {
+  return (
+    (<DialogPrimitive.Title
+      data-slot="dialog-title"
+      className={cn("text-lg leading-none font-semibold", className)}
+      {...props} />)
+  );
 }
 
-function DialogDescription({ className, ...props }) {
-    return (
-        <DialogPrimitive.Description
-            data-slot='dialog-description'
-            className={cn('text-muted-foreground text-sm', className)}
-            {...props}
-        />
-    );
+function DialogDescription({
+  className,
+  ...props
+}) {
+  return (
+    (<DialogPrimitive.Description
+      data-slot="dialog-description"
+      className={cn("text-muted-foreground text-sm", className)}
+      {...props} />)
+  );
 }
 
 export {
-    Dialog,
-    DialogClose,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogOverlay,
-    DialogPortal,
-    DialogTitle,
-    DialogTrigger,
-};
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogOverlay,
+  DialogPortal,
+  DialogTitle,
+  DialogTrigger,
+}
