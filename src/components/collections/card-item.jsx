@@ -10,8 +10,7 @@ import { Button } from '@/ui/button';
 import { Tooltip } from '@/ui/tooltip-simple';
 import { ConfirmPopover } from '@/components/system/confirm-popover';
 import { Zelda } from '@/components/system/zelda';
-
-import { EditCardDialog } from './edit-card-dialog';
+import { useModal } from '@/hooks/use-modal';
 
 export const CardItem = ({ className, collectionId, item, index, dark, bgColor, onRemove, onUpdate }) => {
     const { t } = useTranslation();
@@ -33,6 +32,7 @@ export const CardItem = ({ className, collectionId, item, index, dark, bgColor, 
         transition,
     };
 
+    const { open: openEditCard } = useModal('edit-card');
     const handleRemove = () => onRemove?.(item);
 
     const composedCustomContent = item?.customTitle + item?.customDescription;
@@ -75,21 +75,19 @@ export const CardItem = ({ className, collectionId, item, index, dark, bgColor, 
                     </div>
                 </ConfirmPopover>
 
-                <EditCardDialog item={item} onRemove={handleRemove} onUpdate={onUpdate}>
-                    <div>
-                        <Tooltip content={t('card.item.tooltips.edit-card')}>
-                            <Button
-                                className={cn('dark:hover:bg-neutral-700', {
-                                    'text-black': !dark,
-                                })}
-                                size='icon-xs'
-                                variant='ghost'
-                            >
-                                <Pencil />
-                            </Button>
-                        </Tooltip>
-                    </div>
-                </EditCardDialog>
+                <div onClick={() => openEditCard({ item, onRemove: handleRemove, onUpdate })}>
+                    <Tooltip content={t('card.item.tooltips.edit-card')}>
+                        <Button
+                            className={cn('dark:hover:bg-neutral-700', {
+                                'text-black': !dark,
+                            })}
+                            size='icon-xs'
+                            variant='ghost'
+                        >
+                            <Pencil />
+                        </Button>
+                    </Tooltip>
+                </div>
             </div>
 
             <div

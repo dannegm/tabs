@@ -1,3 +1,5 @@
+import { useModal } from '@/hooks/use-modal';
+
 import {
     AlertDialog,
     AlertDialogAction,
@@ -7,28 +9,28 @@ import {
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle,
-    AlertDialogTrigger,
 } from '@/ui/alert-dialog';
 
-export const ConfirmDialog = ({
-    title,
-    description,
-    cancelLabe = 'Cancel',
-    acceptLabel = 'Continue',
-    children,
-    onAccept,
-    onCancel,
-}) => {
+export const ConfirmDialog = () => {
+    const { isOpen, close, props } = useModal('confirm');
+    const {
+        title,
+        description,
+        cancelLabel = 'Cancel',
+        acceptLabel = 'Continue',
+        onAccept,
+        onCancel,
+    } = props;
+
     return (
-        <AlertDialog>
-            <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
+        <AlertDialog open={isOpen} onOpenChange={v => !v && close()}>
             <AlertDialogContent>
                 <AlertDialogHeader>
                     <AlertDialogTitle>{title}</AlertDialogTitle>
                     <AlertDialogDescription>{description}</AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                    <AlertDialogCancel onClick={onCancel}>{cancelLabe}</AlertDialogCancel>
+                    <AlertDialogCancel onClick={onCancel}>{cancelLabel}</AlertDialogCancel>
                     <AlertDialogAction onClick={onAccept}>{acceptLabel}</AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>

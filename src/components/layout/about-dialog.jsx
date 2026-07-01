@@ -2,6 +2,8 @@ import { useTranslation } from 'react-i18next';
 
 import { Code2, Globe, Share2, Heart, Coffee, Bug, MessageSquare } from 'lucide-react';
 
+import { useModal } from '@/hooks/use-modal';
+
 import { Button } from '@/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/ui/avatar';
 import { Badge } from '@/ui/badge';
@@ -15,14 +17,14 @@ import {
     DialogDescription,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
 } from '@/ui/dialog';
 
-export const AboutDialog = ({ children }) => {
+export const AboutDialog = () => {
     const { t } = useTranslation();
+    const { isOpen, close } = useModal('about');
+
     return (
-        <Dialog>
-            <DialogTrigger asChild>{children}</DialogTrigger>
+        <Dialog open={isOpen} onOpenChange={v => !v && close()}>
             <DialogContent
                 className='max-w-md bg-background border-border'
                 onOpenAutoFocus={e => e.preventDefault()}

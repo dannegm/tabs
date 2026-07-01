@@ -13,9 +13,9 @@ import { SettingsMenu } from '@/components/layout/settings-menu';
 import { Button } from '@/ui/button';
 import { Tooltip } from '@/ui/tooltip-simple';
 
-import { CreateCollectionDialog } from '@/components/collections/create-collection-dialog';
 import { LangSelector } from '@/components/layout/lang-selector';
 import { useSettings } from '@/hooks/use-settings';
+import { useModal } from '@/hooks/use-modal';
 
 const Separator = styled('div', 'flex-none h-4 w-px bg-neutral-200 dark:bg-neutral-700');
 
@@ -26,6 +26,7 @@ export const Header = () => {
     const collections = useCollections();
     const collectionsCount = Object.keys(collections).length;
     const { addCollection, expandAllCollections, collapseAllCollections } = useCollectionsActions();
+    const { open: openCreateCollection } = useModal('create-collection');
 
     const handleAddCollection = ({ name }) => addCollection({ name, expanded: true });
 
@@ -91,11 +92,12 @@ export const Header = () => {
                     </div>
                 </SettingsMenu>
 
-                <CreateCollectionDialog onCreate={handleAddCollection}>
-                    <Button size='sm'>
-                        <Plus /> {t('header.labels.add-collection')}
-                    </Button>
-                </CreateCollectionDialog>
+                <Button
+                    size='sm'
+                    onClick={() => openCreateCollection({ onCreate: handleAddCollection })}
+                >
+                    <Plus /> {t('header.labels.add-collection')}
+                </Button>
             </div>
         </div>
     );

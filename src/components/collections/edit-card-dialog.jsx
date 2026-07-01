@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Save } from 'lucide-react';
 
 import { styled } from '@/helpers/utils';
+import { useModal } from '@/hooks/use-modal';
 import { Label } from '@/ui/label';
 import { Button } from '@/ui/button';
 import { Input } from '@/ui/input';
@@ -11,24 +12,32 @@ import { Textarea } from '@/ui/textarea';
 
 import {
     Dialog,
-    DialogClose,
     DialogContent,
     DialogFooter,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
 } from '@/ui/dialog';
 
 const Separator = styled('div', 'flex-1');
 
-export const EditCardDialog = ({ item, children, onRemove, onUpdate }) => {
+export const EditCardDialog = () => {
     const { t } = useTranslation();
+    const { isOpen, close, props } = useModal('edit-card');
+    const { item, onRemove, onUpdate } = props;
 
-    const [title, setTitle] = useState(item?.title);
+    const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [url, setUrl] = useState(item?.url);
+    const [url, setUrl] = useState('');
 
     const canSubmit = title.trim() !== '';
+
+    useEffect(() => {
+        if (isOpen && item) {
+            setTitle(item.title ?? '');
+            setUrl(item.url ?? '');
+            setDescription('');
+        }
+    }, [isOpen, item?.id]);
 
     const handleUpdate = ev => {
         ev.preventDefault();
@@ -39,11 +48,16 @@ export const EditCardDialog = ({ item, children, onRemove, onUpdate }) => {
             customTitle: title,
             customDescription: description,
         });
+        close();
+    };
+
+    const handleRemove = () => {
+        onRemove?.();
+        close();
     };
 
     return (
-        <Dialog>
-            <DialogTrigger asChild>{children}</DialogTrigger>
+        <Dialog open={isOpen} onOpenChange={v => !v && close()}>
             <DialogContent className='sm:max-w-md'>
                 <form className='flex flex-col gap-8' onSubmit={handleUpdate}>
                     <DialogHeader>
@@ -97,25 +111,19 @@ export const EditCardDialog = ({ item, children, onRemove, onUpdate }) => {
                     </div>
 
                     <DialogFooter className='sm:justify-start rtl:flex-row'>
-                        <DialogClose asChild>
-                            <Button type='button' variant='secondary' onClick={onRemove}>
-                                {t('collections.dialogs.edit-card.labels.remove')}
-                            </Button>
-                        </DialogClose>
+                        <Button type='button' variant='secondary' onClick={handleRemove}>
+                            {t('collections.dialogs.edit-card.labels.remove')}
+                        </Button>
 
                         <Separator />
 
-                        <DialogClose asChild>
-                            <Button type='button' variant='secondary'>
-                                {t('collections.dialogs.edit-card.labels.cancel')}
-                            </Button>
-                        </DialogClose>
+                        <Button type='button' variant='secondary' onClick={close}>
+                            {t('collections.dialogs.edit-card.labels.cancel')}
+                        </Button>
 
-                        <DialogClose asChild>
-                            <Button type='submit' disabled={!canSubmit}>
-                                <Save /> {t('collections.dialogs.edit-card.labels.save')}
-                            </Button>
-                        </DialogClose>
+                        <Button type='submit' disabled={!canSubmit}>
+                            <Save /> {t('collections.dialogs.edit-card.labels.save')}
+                        </Button>
                     </DialogFooter>
                 </form>
             </DialogContent>

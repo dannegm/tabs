@@ -3,7 +3,7 @@ import { Collections } from '@/components/collections/collections';
 
 import { Header } from './header';
 import { Debugger } from './debugger';
-import { Changelog } from './changelogs';
+import { Modals } from './modals';
 
 export const Main = ({ className }) => {
     return (
@@ -15,7 +15,7 @@ export const Main = ({ className }) => {
                 className,
             )}
         >
-            <Changelog />
+            <Modals />
             <Header />
             <Debugger />
             <Collections />

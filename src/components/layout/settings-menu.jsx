@@ -4,6 +4,7 @@ import { BadgeInfo, FolderInput, FolderOutput, PackagePlus, Trash2 } from 'lucid
 
 import { cn } from '@/helpers/utils';
 import { useCollectionsActions } from '@/services/collections';
+import { useModal } from '@/hooks/use-modal';
 
 import {
     DropdownMenu,
@@ -14,16 +15,23 @@ import {
     DropdownMenuTrigger,
 } from '@/ui/dropdown-menu';
 
-import { ConfirmDialog } from '@/components/system/confirm-dialog';
-
 import { ImportCollection } from '@/components/collections/import-collection';
 import { ExportCollection } from '@/components/collections/export-collection';
-import { AboutDialog } from '@/components/layout/about-dialog';
-import { Changelog } from '@/components/layout//changelogs';
 
 export const SettingsMenu = ({ children, side = 'bottom', align = 'end' }) => {
     const { t } = useTranslation();
     const { clearCollections } = useCollectionsActions();
+    const { open: openConfirm } = useModal('confirm');
+    const { open: openChangelog } = useModal('changelog');
+    const { open: openAbout } = useModal('about');
+
+    const handleClear = () => {
+        openConfirm({
+            title: t('settings.dialogs.clear-collections.title'),
+            description: t('settings.dialogs.clear-collections.description'),
+            onAccept: clearCollections,
+        });
+    };
 
     return (
         <DropdownMenu>
@@ -48,40 +56,30 @@ export const SettingsMenu = ({ children, side = 'bottom', align = 'end' }) => {
                     </DropdownMenuItem>
                 </ImportCollection>
 
-                <ConfirmDialog
-                    title={t('settings.dialogs.clear-collections.title')}
-                    description={t('settings.dialogs.clear-collections.description')}
-                    onAccept={clearCollections}
-                >
-                    <DropdownMenuItem>
-                        <Trash2 />
-                        {t('settings.collections.items.clear')}
-                    </DropdownMenuItem>
-                </ConfirmDialog>
+                <DropdownMenuItem onClick={handleClear}>
+                    <Trash2 />
+                    {t('settings.collections.items.clear')}
+                </DropdownMenuItem>
 
                 <DropdownMenuSeparator />
 
-                <Changelog>
-                    <DropdownMenuItem>
-                        <PackagePlus />
-                        {t('settings.main.items.changelogs')}
-                    </DropdownMenuItem>
-                </Changelog>
+                <DropdownMenuItem onClick={() => openChangelog()}>
+                    <PackagePlus />
+                    {t('settings.main.items.changelogs')}
+                </DropdownMenuItem>
 
-                <AboutDialog>
-                    <DropdownMenuItem>
-                        <BadgeInfo />
-                        {t('settings.main.items.about')}
-                        <span
-                            className={cn(
-                                'font-bold uppercase text-rose-600',
-                                'dark:text-rose-400',
-                            )}
-                        >
-                            {t('settings.main.items.tabs')}
-                        </span>
-                    </DropdownMenuItem>
-                </AboutDialog>
+                <DropdownMenuItem onClick={() => openAbout()}>
+                    <BadgeInfo />
+                    {t('settings.main.items.about')}
+                    <span
+                        className={cn(
+                            'font-bold uppercase text-rose-600',
+                            'dark:text-rose-400',
+                        )}
+                    >
+                        {t('settings.main.items.tabs')}
+                    </span>
+                </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
     );
