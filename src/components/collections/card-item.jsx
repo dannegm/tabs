@@ -1,7 +1,8 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { X, File, Pencil } from 'lucide-react';
 import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
+import { useDndMonitor } from '@dnd-kit/core';
 
 import { cn } from '@/helpers/utils';
 import { darken, lighten } from '@/helpers/colors';
@@ -15,22 +16,24 @@ import { useModal } from '@/hooks/use-modal';
 export const CardItem = ({ className, collectionId, item, index, dark, bgColor, onRemove, onUpdate }) => {
     const { t } = useTranslation();
 
-    const {
-        attributes,
-        listeners,
-        setNodeRef,
-        transform,
-        transition,
-        isDragging,
-    } = useSortable({
+    const { attributes, listeners, setNodeRef, isDragging } = useSortable({
         id: item.id,
         data: { type: 'card', id: item.id, collectionId },
     });
 
-    const style = {
-        transform: CSS.Transform.toString(transform),
-        transition,
-    };
+    const [isOver, setIsOver] = useState(false);
+
+    useDndMonitor({
+        onDragOver: ({ over, active }) => {
+            setIsOver(
+                over?.id === item.id &&
+                active?.data.current?.type === 'card' &&
+                active?.id !== item.id,
+            );
+        },
+        onDragEnd: () => setIsOver(false),
+        onDragCancel: () => setIsOver(false),
+    });
 
     const { open: openEditCard } = useModal('edit-card');
     const handleRemove = () => onRemove?.(item);
@@ -48,11 +51,18 @@ export const CardItem = ({ className, collectionId, item, index, dark, bgColor, 
     return (
         <div
             ref={setNodeRef}
-            style={style}
             className={cn('relative group flex transition-all duration-150', {
-                'opacity-50 z-50': isDragging,
+                'opacity-0': isDragging,
+                'translate-x-4 rtl:-translate-x-4': isOver,
             })}
         >
+            <div
+                className={cn(
+                    'absolute top-0 left-0 rtl:right-0 rtl:left-auto w-8 h-full translate-x-0 transition-all duration-150 rounded-sm select-none bg-neutral-100/50 dark:bg-neutral-700/50',
+                    { '-translate-x-4 rtl:translate-x-4': isOver },
+                )}
+            />
+
             <div className='invisible group-hover:visible flex flex-row-reverse rtl:flex-row gap-1 absolute z-20 top-2 right-2 rtl:left-2 rtl:right-auto'>
                 <ConfirmPopover
                     title={t('card.dialogs.remove-card.title')}

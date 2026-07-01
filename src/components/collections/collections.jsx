@@ -5,6 +5,7 @@ import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 
 import { useCollections, useCollectionsActions } from '@/services/collections';
 import { useListener } from '@/providers/bus-provider';
+import { useModal } from '@/hooks/use-modal';
 
 import { sortBy } from '@/helpers/arrays';
 import { newItem } from '@/helpers/mappers';
@@ -13,7 +14,6 @@ import { closeTabsCurrentWindow, getCurrentWindowTabs, openLink } from '@/helper
 import { Button } from '@/ui/button';
 import { ScrollArea } from '@/ui/scroll-area';
 
-import { CreateCollectionDialog } from '@/components/collections/create-collection-dialog';
 import { CollectionItem } from '@/components/collections/collection-item';
 
 export const Collections = () => {
@@ -36,6 +36,7 @@ export const Collections = () => {
     } = useCollectionsActions();
 
     const sortedCollections = sortBy(Object.values(collections), 'index', 'desc');
+    const { open: openCreateCollection } = useModal('create-collection');
 
     useListener('collections:sort', useCallback(({ items }) => sortCollections({ items }), [sortCollections]));
     useListener('items:sort', useCallback(({ collectionId, items }) => sortItems({ collectionId, items }), [sortItems]));
@@ -71,11 +72,12 @@ export const Collections = () => {
                 <div className='flex-center flex-col gap-4 p-12 m-4 bg-rose-100 text-rose-400 dark:bg-rose-500/20 dark:text-rose-400/70 rounded-lg'>
                     <h2 className='text-xl'>{t('collections.empty')}</h2>
 
-                    <CreateCollectionDialog onCreate={handleAddCollection}>
-                        <Button size='lg'>
-                            <Plus /> {t('collections.labels.add-collection')}
-                        </Button>
-                    </CreateCollectionDialog>
+                    <Button
+                        size='lg'
+                        onClick={() => openCreateCollection({ onCreate: handleAddCollection })}
+                    >
+                        <Plus /> {t('collections.labels.add-collection')}
+                    </Button>
                 </div>
             )}
 

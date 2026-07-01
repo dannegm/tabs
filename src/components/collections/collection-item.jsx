@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
 import { useDndMonitor } from '@dnd-kit/core';
 
 import { cn } from '@/helpers/utils';
@@ -42,21 +41,13 @@ export const CollectionItem = ({
         onDragCancel: () => setDragOverType(null),
     });
 
-    const {
-        attributes,
-        listeners,
-        setNodeRef,
-        transform,
-        transition,
-        isDragging,
-    } = useSortable({
+    const { attributes, listeners, setNodeRef, isDragging } = useSortable({
         id,
         data: { type: 'collection', id },
     });
 
     const style = {
-        transform: CSS.Transform.toString(transform),
-        transition,
+        ...(isDragging ? { opacity: 0 } : {}),
         backgroundColor: internalBgColor !== 'transparent' ? internalBgColor : undefined,
     };
 
