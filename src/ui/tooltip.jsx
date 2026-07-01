@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { Tooltip as TooltipPrimitive } from '@base-ui/react';
 
 import { cn } from '@/helpers/utils';
@@ -14,8 +15,25 @@ function Tooltip({ ...props }) {
     return <TooltipPrimitive.Root data-slot='tooltip' {...props} />;
 }
 
-function TooltipTrigger({ ...props }) {
-    return <TooltipPrimitive.Trigger data-slot='tooltip-trigger' {...props} />;
+function TooltipTrigger({ asChild, children, ...props }) {
+    if (asChild && React.isValidElement(children)) {
+        return (
+            <TooltipPrimitive.Trigger
+                data-slot='tooltip-trigger'
+                nativeButton={false}
+                render={(renderProps) => {
+                    const { nativeButton: _, ...safeProps } = renderProps;
+                    return React.cloneElement(children, safeProps);
+                }}
+                {...props}
+            />
+        );
+    }
+    return (
+        <TooltipPrimitive.Trigger data-slot='tooltip-trigger' {...props}>
+            {children}
+        </TooltipPrimitive.Trigger>
+    );
 }
 
 function TooltipContent({ className, sideOffset = 0, side = 'top', children, ...props }) {

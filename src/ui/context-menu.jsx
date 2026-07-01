@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { ContextMenu } from '@base-ui/react';
 import { CheckIcon, ChevronRightIcon, CircleIcon } from 'lucide-react';
 
@@ -7,8 +8,21 @@ function ContextMenuRoot({ ...props }) {
     return <ContextMenu.Root data-slot='context-menu' {...props} />;
 }
 
-function ContextMenuTrigger({ ...props }) {
-    return <ContextMenu.Trigger data-slot='context-menu-trigger' {...props} />;
+function ContextMenuTrigger({ asChild, children, ...props }) {
+    if (asChild && React.isValidElement(children)) {
+        return (
+            <ContextMenu.Trigger
+                data-slot='context-menu-trigger'
+                nativeButton={false}
+                render={(renderProps) => {
+                    const { nativeButton: _, ...safeProps } = renderProps;
+                    return React.cloneElement(children, safeProps);
+                }}
+                {...props}
+            />
+        );
+    }
+    return <ContextMenu.Trigger data-slot='context-menu-trigger' {...props}>{children}</ContextMenu.Trigger>;
 }
 
 function ContextMenuGroup({ ...props }) {
@@ -139,7 +153,7 @@ function ContextMenuRadioItem({ className, children, ...props }) {
 
 function ContextMenuLabel({ className, inset, ...props }) {
     return (
-        <ContextMenu.GroupLabel
+        <div
             data-slot='context-menu-label'
             data-inset={inset}
             className={cn('text-foreground px-2 py-1.5 text-sm font-medium data-[inset]:pl-8', className)}

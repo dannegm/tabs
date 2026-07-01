@@ -21,4 +21,7 @@ export default defineConfig(({ mode }) => ({
         __APP_VERSION__: JSON.stringify(pkg.version),
         __CHANGELOGS__: JSON.stringify(changelogs),
     },
+    build: {
+        chunkSizeWarningLimit: 700,
+    },
 }));

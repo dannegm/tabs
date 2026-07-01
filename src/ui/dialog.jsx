@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { Dialog as DialogPrimitive } from '@base-ui/react';
 import { useTranslation } from 'react-i18next';
 import { XIcon } from 'lucide-react';
@@ -8,16 +9,42 @@ function Dialog({ ...props }) {
     return <DialogPrimitive.Root data-slot='dialog' {...props} />;
 }
 
-function DialogTrigger({ ...props }) {
-    return <DialogPrimitive.Trigger data-slot='dialog-trigger' {...props} />;
+function DialogTrigger({ asChild, children, ...props }) {
+    if (asChild && React.isValidElement(children)) {
+        return (
+            <DialogPrimitive.Trigger
+                data-slot='dialog-trigger'
+                nativeButton={false}
+                render={(renderProps) => {
+                    const { nativeButton: _, ...safeProps } = renderProps;
+                    return React.cloneElement(children, safeProps);
+                }}
+                {...props}
+            />
+        );
+    }
+    return <DialogPrimitive.Trigger data-slot='dialog-trigger' {...props}>{children}</DialogPrimitive.Trigger>;
 }
 
 function DialogPortal({ ...props }) {
     return <DialogPrimitive.Portal data-slot='dialog-portal' {...props} />;
 }
 
-function DialogClose({ ...props }) {
-    return <DialogPrimitive.Close data-slot='dialog-close' {...props} />;
+function DialogClose({ asChild, children, ...props }) {
+    if (asChild && React.isValidElement(children)) {
+        return (
+            <DialogPrimitive.Close
+                data-slot='dialog-close'
+                nativeButton={false}
+                render={(renderProps) => {
+                    const { nativeButton: _, ...safeProps } = renderProps;
+                    return React.cloneElement(children, safeProps);
+                }}
+                {...props}
+            />
+        );
+    }
+    return <DialogPrimitive.Close data-slot='dialog-close' {...props}>{children}</DialogPrimitive.Close>;
 }
 
 function DialogOverlay({ className, ...props }) {

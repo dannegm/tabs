@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { Menu } from '@base-ui/react';
 import { CheckIcon, ChevronRightIcon, CircleIcon } from 'lucide-react';
 
@@ -11,8 +12,21 @@ function DropdownMenuPortal({ ...props }) {
     return <Menu.Portal data-slot='dropdown-menu-portal' {...props} />;
 }
 
-function DropdownMenuTrigger({ ...props }) {
-    return <Menu.Trigger data-slot='dropdown-menu-trigger' {...props} />;
+function DropdownMenuTrigger({ asChild, children, ...props }) {
+    if (asChild && React.isValidElement(children)) {
+        return (
+            <Menu.Trigger
+                data-slot='dropdown-menu-trigger'
+                nativeButton={false}
+                render={(renderProps) => {
+                    const { nativeButton: _, ...safeProps } = renderProps;
+                    return React.cloneElement(children, safeProps);
+                }}
+                {...props}
+            />
+        );
+    }
+    return <Menu.Trigger data-slot='dropdown-menu-trigger' {...props}>{children}</Menu.Trigger>;
 }
 
 function DropdownMenuContent({ className, sideOffset = 4, ...props }) {
@@ -100,7 +114,7 @@ function DropdownMenuRadioItem({ className, children, ...props }) {
 
 function DropdownMenuLabel({ className, inset, ...props }) {
     return (
-        <Menu.GroupLabel
+        <div
             data-slot='dropdown-menu-label'
             data-inset={inset}
             className={cn(

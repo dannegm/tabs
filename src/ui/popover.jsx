@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { Popover as PopoverPrimitive } from '@base-ui/react';
 
 import { cn } from '@/helpers/utils';
@@ -6,8 +7,21 @@ function Popover({ ...props }) {
     return <PopoverPrimitive.Root data-slot='popover' {...props} />;
 }
 
-function PopoverTrigger({ ...props }) {
-    return <PopoverPrimitive.Trigger data-slot='popover-trigger' {...props} />;
+function PopoverTrigger({ asChild, children, ...props }) {
+    if (asChild && React.isValidElement(children)) {
+        return (
+            <PopoverPrimitive.Trigger
+                data-slot='popover-trigger'
+                nativeButton={false}
+                render={(renderProps) => {
+                    const { nativeButton: _, ...safeProps } = renderProps;
+                    return React.cloneElement(children, safeProps);
+                }}
+                {...props}
+            />
+        );
+    }
+    return <PopoverPrimitive.Trigger data-slot='popover-trigger' {...props}>{children}</PopoverPrimitive.Trigger>;
 }
 
 function PopoverContent({ className, align = 'center', sideOffset = 4, ...props }) {

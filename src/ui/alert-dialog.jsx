@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { AlertDialog as AlertDialogPrimitive } from '@base-ui/react';
 
 import { cn } from '@/helpers/utils';
@@ -7,8 +8,21 @@ function AlertDialog({ ...props }) {
     return <AlertDialogPrimitive.Root data-slot='alert-dialog' {...props} />;
 }
 
-function AlertDialogTrigger({ ...props }) {
-    return <AlertDialogPrimitive.Trigger data-slot='alert-dialog-trigger' {...props} />;
+function AlertDialogTrigger({ asChild, children, ...props }) {
+    if (asChild && React.isValidElement(children)) {
+        return (
+            <AlertDialogPrimitive.Trigger
+                data-slot='alert-dialog-trigger'
+                nativeButton={false}
+                render={(renderProps) => {
+                    const { nativeButton: _, ...safeProps } = renderProps;
+                    return React.cloneElement(children, safeProps);
+                }}
+                {...props}
+            />
+        );
+    }
+    return <AlertDialogPrimitive.Trigger data-slot='alert-dialog-trigger' {...props}>{children}</AlertDialogPrimitive.Trigger>;
 }
 
 function AlertDialogPortal({ ...props }) {
