@@ -204,6 +204,15 @@
                     "copy-link-success": "Link in die Zwischenablage kopiert."
                 }
             }
+        },
+        "toolbar": {
+            "search": {
+                "placeholder": "Suchen..."
+            },
+            "view": {
+                "cards": "Kartenansicht",
+                "list": "Listenansicht"
+            }
         }
     }
 }

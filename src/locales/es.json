@@ -204,6 +204,15 @@
                     "copy-link-success": "Enlace copiado al portapapeles."
                 }
             }
+        },
+        "toolbar": {
+            "search": {
+                "placeholder": "Buscar..."
+            },
+            "view": {
+                "cards": "Vista de tarjetas",
+                "list": "Vista de lista"
+            }
         }
     }
 }

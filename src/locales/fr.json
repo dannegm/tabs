@@ -204,6 +204,15 @@
                     "copy-link-success": "Lien copié dans le presse-papiers."
                 }
             }
+        },
+        "toolbar": {
+            "search": {
+                "placeholder": "Rechercher..."
+            },
+            "view": {
+                "cards": "Vue en cartes",
+                "list": "Vue en liste"
+            }
         }
     }
 }

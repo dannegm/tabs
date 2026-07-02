@@ -2,6 +2,7 @@ import { cn } from '@/helpers/utils';
 import { Collections } from '@/components/collections/collections';
 
 import { Header } from './header';
+import { Toolbar } from './toolbar';
 import { Debugger } from './debugger';
 import { Modals } from './modals';
 
@@ -17,6 +18,7 @@ export const Main = ({ className }) => {
         >
             <Modals />
             <Header />
+            <Toolbar />
             <Debugger />
             <Collections />
         </section>

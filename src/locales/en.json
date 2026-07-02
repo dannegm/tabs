@@ -177,6 +177,15 @@
                 }
             }
         },
+        "toolbar": {
+            "search": {
+                "placeholder": "Search..."
+            },
+            "view": {
+                "cards": "Card view",
+                "list": "List view"
+            }
+        },
         "tabs": {
             "title": "Open tabs",
             "group": {

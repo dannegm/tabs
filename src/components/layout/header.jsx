@@ -25,7 +25,7 @@ export const Header = () => {
 
     const collections = useCollections();
     const collectionsCount = Object.keys(collections).length;
-    const { addCollection, expandAllCollections, collapseAllCollections } = useCollectionsActions();
+    const { addCollection } = useCollectionsActions();
     const { open: openCreateCollection } = useModal('create-collection');
 
     const handleAddCollection = ({ name }) => addCollection({ name, expanded: true });
@@ -56,23 +56,6 @@ export const Header = () => {
             </div>
 
             <div data-layer='toolbar' className='flex flex-row gap-1 items-center'>
-                <Button
-                    className='dark:text-neutral-200 dark:hover:bg-neutral-700'
-                    size='sm'
-                    variant='ghost'
-                    onClick={expandAllCollections}
-                >
-                    {t('header.labels.expand')}
-                </Button>
-                <Button
-                    className='dark:text-neutral-200 dark:hover:bg-neutral-700'
-                    size='sm'
-                    variant='ghost'
-                    onClick={collapseAllCollections}
-                >
-                    {t('header.labels.collapse')}
-                </Button>
-
                 <LangSelector />
 
                 <DebugModeToggle />

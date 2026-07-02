@@ -1,11 +1,14 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Plus } from 'lucide-react';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import Fuse from 'fuse.js';
+import { useQueryState, parseAsString } from 'nuqs';
 
 import { useCollections, useCollectionsActions } from '@/services/collections';
 import { useListener } from '@/providers/bus-provider';
 import { useModal } from '@/hooks/use-modal';
+import { useSettings } from '@/hooks/use-settings';
 
 import { sortBy } from '@/helpers/arrays';
 import { newItem } from '@/helpers/mappers';
@@ -35,8 +38,38 @@ export const Collections = () => {
         sortItems,
     } = useCollectionsActions();
 
+    const [searchQuery] = useQueryState('q', parseAsString.withDefault(''));
+    const [viewMode] = useSettings('viewMode', 'cards');
+
     const sortedCollections = sortBy(Object.values(collections), 'index', 'desc');
     const { open: openCreateCollection } = useModal('create-collection');
+
+    const fuse = useMemo(() => {
+        const allItems = sortedCollections.flatMap(c =>
+            Object.values(c.items).map(item => ({ ...item, _collectionId: c.id })),
+        );
+        return new Fuse(allItems, {
+            keys: ['title', 'customTitle', 'customDescription', 'url'],
+            threshold: 0.4,
+        });
+    }, [collections]);
+
+    const matchingItemIds = useMemo(() => {
+        if (!searchQuery) return null;
+        const results = fuse.search(searchQuery);
+        return new Set(results.map(r => r.item.id));
+    }, [fuse, searchQuery]);
+
+    const getFilteredItems = collection => {
+        if (!matchingItemIds) return collection.items;
+        return Object.fromEntries(
+            Object.entries(collection.items).filter(([id]) => matchingItemIds.has(id)),
+        );
+    };
+
+    const visibleCollections = matchingItemIds
+        ? sortedCollections.filter(c => Object.keys(getFilteredItems(c)).length > 0)
+        : sortedCollections;
 
     useListener('collections:sort', useCallback(({ items }) => sortCollections({ items }), [sortCollections]));
     useListener('items:sort', useCallback(({ collectionId, items }) => sortItems({ collectionId, items }), [sortItems]));
@@ -82,13 +115,15 @@ export const Collections = () => {
             )}
 
             <SortableContext
-                items={sortedCollections.map(c => c.id)}
+                items={visibleCollections.map(c => c.id)}
                 strategy={verticalListSortingStrategy}
             >
-                {sortedCollections.map(collection => (
+                {visibleCollections.map(collection => (
                     <CollectionItem
                         {...collection}
                         key={collection.id}
+                        items={getFilteredItems(collection)}
+                        viewMode={viewMode}
                         onUpdateItem={handleUpdateItem}
                         onRemoveItem={handleRemoveItem}
                         onEdit={({ id, name }) => editCollection({ id, name })}

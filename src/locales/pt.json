@@ -204,6 +204,15 @@
                     "copy-link-success": "Link copiado para a área de transferência."
                 }
             }
+        },
+        "toolbar": {
+            "search": {
+                "placeholder": "Pesquisar..."
+            },
+            "view": {
+                "cards": "Vista em cartões",
+                "list": "Vista em lista"
+            }
         }
     }
 }

@@ -208,6 +208,15 @@
                     "copy-link-success": "تم نسخ الرابط إلى الحافظة."
                 }
             }
+        },
+        "toolbar": {
+            "search": {
+                "placeholder": "بحث..."
+            },
+            "view": {
+                "cards": "عرض البطاقات",
+                "list": "عرض القائمة"
+            }
         }
     }
 }

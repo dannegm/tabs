@@ -204,6 +204,15 @@
                     "copy-link-success": "链接已复制到剪贴板。"
                 }
             }
+        },
+        "toolbar": {
+            "search": {
+                "placeholder": "搜索..."
+            },
+            "view": {
+                "cards": "卡片视图",
+                "list": "列表视图"
+            }
         }
     }
 }

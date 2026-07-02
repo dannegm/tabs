@@ -204,6 +204,15 @@
                     "copy-link-success": "リンクがクリップボードにコピーされました。"
                 }
             }
+        },
+        "toolbar": {
+            "search": {
+                "placeholder": "検索..."
+            },
+            "view": {
+                "cards": "カード表示",
+                "list": "リスト表示"
+            }
         }
     }
 }

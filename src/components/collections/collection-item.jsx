@@ -8,6 +8,7 @@ import { useDarkMode } from '@/hooks/use-dark-mode';
 
 import { CollectionHeader } from './collection-header';
 import { CollectionCardList } from './collection-card-list';
+import { CollectionList } from './collection-list';
 
 export const CollectionItem = ({
     className,
@@ -16,6 +17,7 @@ export const CollectionItem = ({
     expanded,
     bgColor,
     items,
+    viewMode,
     onUpdateItem,
     onRemoveItem,
     onEdit,
@@ -112,16 +114,28 @@ export const CollectionItem = ({
                 onBgColorChange={onBgColorChange}
             />
 
-            <CollectionCardList
-                collectionId={id}
-                items={items}
-                expanded={expanded}
-                dark={dark}
-                bgColor={internalBgColor}
-                isDropTarget={dragState.isExternalDrop && !dragState.isOverCardInThis}
-                onRemoveItem={item => onRemoveItem?.(id, item)}
-                onUpdateItem={item => onUpdateItem?.(id, item)}
-            />
+            {viewMode === 'list' ? (
+                <CollectionList
+                    collectionId={id}
+                    items={items}
+                    expanded={expanded}
+                    dark={dark}
+                    bgColor={internalBgColor}
+                    onRemoveItem={item => onRemoveItem?.(id, item)}
+                    onUpdateItem={item => onUpdateItem?.(id, item)}
+                />
+            ) : (
+                <CollectionCardList
+                    collectionId={id}
+                    items={items}
+                    expanded={expanded}
+                    dark={dark}
+                    bgColor={internalBgColor}
+                    isDropTarget={dragState.isExternalDrop && !dragState.isOverCardInThis}
+                    onRemoveItem={item => onRemoveItem?.(id, item)}
+                    onUpdateItem={item => onUpdateItem?.(id, item)}
+                />
+            )}
         </div>
     );
 };

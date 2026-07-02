@@ -204,6 +204,15 @@
                     "copy-link-success": "링크가 클립보드에 복사되었습니다."
                 }
             }
+        },
+        "toolbar": {
+            "search": {
+                "placeholder": "검색..."
+            },
+            "view": {
+                "cards": "카드 보기",
+                "list": "목록 보기"
+            }
         }
     }
 }

@@ -204,6 +204,15 @@
                     "copy-link-success": "Link copiato negli appunti."
                 }
             }
+        },
+        "toolbar": {
+            "search": {
+                "placeholder": "Cerca..."
+            },
+            "view": {
+                "cards": "Vista a schede",
+                "list": "Vista a elenco"
+            }
         }
     }
 }

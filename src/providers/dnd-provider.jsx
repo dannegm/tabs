@@ -19,6 +19,7 @@ import { sanitizeItem } from '@/helpers/mappers';
 import { closeTab } from '@/helpers/chrome';
 import { useCollections } from '@/services/collections';
 import { useEvents } from '@/providers/bus-provider';
+import { useSettings } from '@/hooks/use-settings';
 
 const CollectionDragGhost = ({ collection }) => {
     if (!collection) return null;
@@ -44,6 +45,14 @@ const CollectionDragGhost = ({ collection }) => {
     );
 };
 
+const getHostname = url => {
+    try {
+        return new URL(url).hostname;
+    } catch {
+        return url;
+    }
+};
+
 const CardDragGhost = ({ item }) => {
     if (!item) return null;
     return (
@@ -61,6 +70,27 @@ const CardDragGhost = ({ item }) => {
             <div className='px-2 py-1.5 bg-neutral-100 text-xs text-ellipsis truncate text-neutral-500'>
                 {item?.url}
             </div>
+        </div>
+    );
+};
+
+const ListItemDragGhost = ({ item }) => {
+    if (!item) return null;
+    const title = item?.customTitle || item?.title;
+    return (
+        <div
+            className='flex flex-row items-center gap-3 h-10 px-3 bg-white border border-neutral-200 rounded-sm shadow-2xl opacity-90 cursor-grabbing select-none'
+            style={{ minWidth: '20rem' }}
+        >
+            {item?.favIconUrl ? (
+                <img className='size-4 flex-none' src={item.favIconUrl} />
+            ) : (
+                <File className='size-4 flex-none text-neutral-400' />
+            )}
+            <span className='flex-1 text-sm truncate text-neutral-950'>{title}</span>
+            <span className='flex-none text-xs text-neutral-400 truncate max-w-32'>
+                {getHostname(item?.url)}
+            </span>
         </div>
     );
 };
@@ -89,7 +119,7 @@ const TabDragGhost = ({ item }) => {
     );
 };
 
-const ActiveDragOverlay = ({ collections }) => {
+const ActiveDragOverlay = ({ collections, viewMode }) => {
     const { active } = useDndContext();
     if (!active) return null;
 
@@ -108,7 +138,11 @@ const ActiveDragOverlay = ({ collections }) => {
         const item = collections[collectionId]?.items?.[id];
         return (
             <DragOverlay adjustScale={false} dropAnimation={null}>
-                <CardDragGhost item={item} />
+                {viewMode === 'list' ? (
+                    <ListItemDragGhost item={item} />
+                ) : (
+                    <CardDragGhost item={item} />
+                )}
             </DragOverlay>
         );
     }
@@ -152,6 +186,7 @@ const cardAwareCollisionDetection = (args) => {
 export const DndProvider = ({ children }) => {
     const { emit } = useEvents();
     const collections = useCollections();
+    const [viewMode] = useSettings('viewMode', 'cards');
 
     const sensors = useSensors(
         useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
@@ -269,7 +304,7 @@ export const DndProvider = ({ children }) => {
                 acceleration: 6,
             }}
         >
-            <ActiveDragOverlay collections={collections} />
+            <ActiveDragOverlay collections={collections} viewMode={viewMode} />
             {children}
         </DndContext>
     );
