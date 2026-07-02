@@ -34,7 +34,7 @@ export const ListItem = ({ className, collectionId, item, index, dark, bgColor, 
             ref={setNodeRef}
             className={cn(
                 { dark },
-                'group relative flex flex-row items-center h-10',
+                'group flex flex-row items-center h-10',
                 'border border-neutral-200 dark:border-neutral-700 rounded-sm',
                 'bg-white dark:bg-neutral-800',
                 { 'text-white': dark, 'text-neutral-950': !dark },
@@ -43,8 +43,9 @@ export const ListItem = ({ className, collectionId, item, index, dark, bgColor, 
             )}
             style={{ backgroundColor: bgColor && bgColor !== 'transparent' ? bgColor : undefined }}
         >
+            {/* Drag + content area */}
             <div
-                className='flex-1 flex flex-row rtl:flex-row-reverse items-center gap-3 min-w-0 h-full px-3 cursor-grab active:cursor-grabbing select-none'
+                className='flex-1 w-0 flex flex-row rtl:flex-row-reverse items-center gap-2 h-full px-3 cursor-grab active:cursor-grabbing select-none'
                 {...attributes}
                 {...listeners}
             >
@@ -56,17 +57,23 @@ export const ListItem = ({ className, collectionId, item, index, dark, bgColor, 
                     )}
                 </div>
 
-                <Zelda className='flex-1 min-w-0' href={item?.url}>
+                {/* flex-1 w-0: base 0 + grow = ancho definido → truncate funciona */}
+                <div className='flex-1 w-0 overflow-hidden'>
                     <Tooltip content={title}>
-                        <span className='text-sm truncate block w-full'>{title}</span>
+                        <Zelda href={item?.url} className='block truncate text-sm'>
+                            {title}
+                        </Zelda>
                     </Tooltip>
-                </Zelda>
+                </div>
 
-                <span className='pointer-events-none flex-none text-xs truncate max-w-32 opacity-70'>
-                    {getHostname(item?.url)}
-                </span>
+                <div className='flex-none w-28 overflow-hidden pointer-events-none'>
+                    <span className='block truncate text-xs opacity-70'>
+                        {getHostname(item?.url)}
+                    </span>
+                </div>
             </div>
 
+            {/* Actions */}
             <div className='flex-none flex flex-row-reverse rtl:flex-row gap-1 pr-2 rtl:pl-2 rtl:pr-0'>
                 <ConfirmPopover
                     title={t('card.dialogs.remove-card.title')}
