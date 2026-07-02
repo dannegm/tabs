@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A Chrome/Edge browser extension (Manifest V3) that replaces the new tab page with a tab manager. Built with React + Vite using `@crxjs/vite-plugin`.
 
+This project was built as a personal replacement for Toby — a tab manager that moved to a paid subscription and added features the author never needed. The goal was a focused tool for bookmarking and organizing tabs, with only the features that actually get used. **No feature-creep.** Every addition should justify itself by real use. The author is the primary user.
+
 ## Commands
 
 ```sh
